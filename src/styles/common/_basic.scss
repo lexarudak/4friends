@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+html {
+  width: calc(100% - 5px);
+  display: flex;
+  justify-content: center;
+  min-height: calc(100% - 5px);
+  line-height: 1.3;
+  min-width: 320px;
+  font-family: 'Fira Sans', sans-serif;
+  color: $clr-text-01;
+  // font-size: $font-desktop;
+  background-color: $clr-primary-01;
+
+  &::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $clr-primary-02;
+    border-radius: 2px;
+  }
+
+  // @include mediaMax('m') {
+  //   font-size: $font-mobile;
+  // };
+}
+
+.body {
+  position: relative;
+  flex-grow: 1;
+  // max-width: $body-container;
+  display: flex;
+}
+
+#root {
+  flex-grow: 1;
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    scrollbar-width: none;
+}
