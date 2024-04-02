@@ -1,0 +1,10 @@
+.header {
+  display: none;
+
+  @include mediaMax('l') {
+    display: block;
+    position: fixed;
+    right: 70px;
+    top: 70px;
+  }
+}

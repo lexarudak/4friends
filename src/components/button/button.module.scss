@@ -1,0 +1,22 @@
+.button {
+  height: 70px;
+  transition: .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondary {
+  background-color: $clr-background;
+  color: $clr-primary-03;
+
+  &:hover {
+    background-color: $clr-ui-00;
+    color: $clr-primary-01;
+  }
+}
+
+button.round {
+  width: 70px;
+  border-radius: 100%;
+}
