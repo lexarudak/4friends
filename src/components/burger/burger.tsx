@@ -1,20 +1,20 @@
 import classNames from "classnames";
-import {
-  BUTTON_COLOR,
-  BUTTON_VARIANT,
-  Button,
-} from "../../../../components/button/button";
+import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../button/button";
 import styles from "./burger.module.scss";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { isMenuOpenSelector } from "../../store/app/app.selector";
+import { toggleMenu } from "../../store/app/app.slice";
 
 export const Burger = (): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const isMenuOpen = useSelector(isMenuOpenSelector);
+
   const onClick = () => {
-    setIsOpen((prev) => !prev);
+    dispatch(toggleMenu());
   };
 
   const mods: Record<string, boolean> = {
-    [styles.isOpen]: isOpen,
+    [styles.isOpen]: isMenuOpen,
   };
 
   return (

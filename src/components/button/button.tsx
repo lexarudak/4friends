@@ -3,7 +3,7 @@ import styles from "./button.module.scss";
 import classNames from "classnames";
 
 export enum BUTTON_VARIANT {
-  classic = "classis",
+  fill = "fill",
   round = "round",
   contour = "contour",
 }
@@ -11,7 +11,6 @@ export enum BUTTON_VARIANT {
 export enum BUTTON_COLOR {
   primary = "primary",
   secondary = "secondary",
-  transparent = "transparent",
 }
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {

@@ -1,0 +1,19 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  padding-bottom: 40px;
+  padding-top: 80px;
+  color: $clr-primary-01;
+  font-size: $font-size-xl;
+
+  a {
+    transition: .1s;
+
+    &:hover {
+      color: $clr-primary-03;
+      
+    }
+  }
+}

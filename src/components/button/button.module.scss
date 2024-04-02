@@ -4,6 +4,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 20px;
+}
+
+.primary {
+  &.fill {
+    border: 2px solid $clr-primary-01;
+    background-color: $clr-primary-01;
+    color: $clr-text-01;
+
+    &:hover{
+      border: 2px solid $clr-primary-03;
+       background-color: $clr-primary-03;
+    }
+  }
+
+  &.contour {
+    border: 2px solid $clr-primary-01;
+    background-color: transparent;
+    color: $clr-primary-01;
+
+    &:hover{
+      border: 2px solid $clr-primary-03;
+      color: $clr-primary-03;
+    }
+  }
+ 
+
+ 
 }
 
 .secondary {
@@ -16,7 +44,16 @@
   }
 }
 
-button.round {
+.contour {
+
+}
+
+.transparent {
+ 
+}
+
+.round {
+  padding: 0;
   width: 70px;
   border-radius: 100%;
 }

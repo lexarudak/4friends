@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
 * {
   box-sizing: border-box;
@@ -11,25 +11,24 @@ li {
 }
 
 html {
-  width: calc(100% - 5px);
+  // width: 100%;
   display: flex;
+  flex-grow: 1;
   justify-content: center;
-  min-height: calc(100% - 5px);
+  min-height: 100%;
   line-height: 1.3;
   min-width: 320px;
-  font-family: 'Fira Sans', sans-serif;
   color: $clr-text-01;
-  // font-size: $font-desktop;
+  font-size: $font-size-m;
   background-color: $clr-primary-01;
 
-  &::-webkit-scrollbar {
-    height: 5px;
-    width: 5px;
-  }
+  font-family: "Share Tech Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
 
-  &::-webkit-scrollbar-thumb {
-    background-color: $clr-primary-02;
-    border-radius: 2px;
+  &::-webkit-scrollbar {
+    height: 0px;
+    width: 0px;
   }
 
   // @include mediaMax('m') {
@@ -37,31 +36,32 @@ html {
   // };
 }
 
-.body {
-  position: relative;
-  flex-grow: 1;
-  // max-width: $body-container;
-  display: flex;
-}
-
 #root {
   flex-grow: 1;
   position: relative;
-  width: 100%;
-  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+body {
+  position: relative;
+  flex-grow: 1;
+  // max-width: $body-container;
+  display: flex;
 
-::-webkit-scrollbar {
-    display: none;
 }
 
-html {
-    scrollbar-width: none;
-}
+
+
+
+// ::-webkit-scrollbar {
+//     display: none;
+// }
+
+// html {
+//     scrollbar-width: none;
+// }
 
 button {
   background: none;
@@ -71,4 +71,10 @@ button {
   font: inherit;
   cursor: pointer;
   outline: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
