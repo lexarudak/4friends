@@ -37,7 +37,7 @@ export const Timer: FC<Props> = ({ className }): JSX.Element => {
 
   return (
     <div className={classNames(styles.container, className)}>
-      <h2 className={styles.title}>Next match</h2>
+      <h2 className={styles.title}>Countdown</h2>
       <div className={styles.timers}>
         {Object.entries(timeLeft).map(([name, time]) => (
           <TimeBlock name={name} time={time} key={name} />

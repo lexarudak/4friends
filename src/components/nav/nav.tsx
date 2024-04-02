@@ -7,8 +7,8 @@ import { closeMenu } from "../../store/app/app.slice";
 
 const NAV_LIST = {
   Home: ROUTE_LIST.home,
-  MATCHDAY: ROUTE_LIST.matchday,
-  Table: ROUTE_LIST.table,
+  MATCHDAYS: ROUTE_LIST.matchdays,
+  Stats: ROUTE_LIST.statistic,
 };
 
 export const Nav = (): JSX.Element => {

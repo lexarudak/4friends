@@ -1,0 +1,14 @@
+.card {
+  background-color: $clr-text-01;
+  color: $clr-primary-01;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

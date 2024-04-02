@@ -8,8 +8,8 @@ export const AppRouter = (): JSX.Element => {
     <Routes>
       <Route path={ROUTE_LIST.home} element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path={ROUTE_LIST.matchday} element={<HomePage />} />
-        <Route path={ROUTE_LIST.table} element={<HomePage />} />
+        <Route path={ROUTE_LIST.matchdays} element={<HomePage />} />
+        <Route path={ROUTE_LIST.statistic} element={<HomePage />} />
       </Route>
       <Route path={ROUTE_LIST.login} element={<HomePage />} />
     </Routes>
