@@ -6,12 +6,21 @@ import { NextMatch } from "../../../store/next-matches/next-matches.slice";
 import { OneMatchForm } from "../one-match-form/one-match-form";
 import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../../button/button";
 import { validator } from "./validator";
+import { useState } from "react";
 
 export const NMForm = (): JSX.Element => {
   const nextMatches = useSelector(nextMatchesSelector);
+  const [firstTry, setFirstTry] = useState(false);
 
   const submit = (values: NextMatch[]) => {
     console.log("submit", JSON.stringify(values, null, 2));
+  };
+
+  const onClick = (
+    submitForm: (() => Promise<void>) & (() => Promise<unknown>),
+  ) => {
+    setFirstTry(true);
+    submitForm();
   };
   return (
     <Formik
@@ -19,9 +28,9 @@ export const NMForm = (): JSX.Element => {
       onSubmit={submit}
       validate={validator}
       validateOnBlur={false}
-      validateOnChange={false}
+      validateOnChange={firstTry}
     >
-      {({ values, dirty }) => (
+      {({ values, dirty, isValid, submitForm }) => (
         <Form className={styles.form}>
           {values.map((nm, ind) => (
             <OneMatchForm nm={nm} order={ind} key={nm.id} />
@@ -30,8 +39,9 @@ export const NMForm = (): JSX.Element => {
             variant={BUTTON_VARIANT.fill}
             color={BUTTON_COLOR.active}
             type="submit"
+            onClick={() => onClick(submitForm)}
             className={styles.button}
-            disabled={!dirty}
+            disabled={!dirty || !isValid}
           >
             Save
           </Button>

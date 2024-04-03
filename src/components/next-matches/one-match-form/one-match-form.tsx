@@ -20,7 +20,12 @@ export const OneMatchForm: FC<Props> = ({
 
   return (
     <div className={styles.oneMatch}>
-      <MatchInfoSection info={info} time={time} isSaved={isSaved} />
+      <MatchInfoSection
+        info={info}
+        time={time}
+        isSaved={isSaved}
+        order={order}
+      />
       <div className={styles.container}>
         <FTSection team1={team1} team2={team2} order={order} />
         {extra ? (
