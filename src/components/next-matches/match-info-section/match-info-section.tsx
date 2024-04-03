@@ -2,6 +2,7 @@ import { FC } from "react";
 import styles from "./match-info-section.module.scss";
 import { getDate, getTime } from "../../../helpers";
 import classNames from "classnames";
+import { useFormikContext } from "formik";
 
 type Props = {
   time: number;
@@ -14,6 +15,8 @@ export const MatchInfoSection: FC<Props> = ({
   time,
   isSaved,
 }): JSX.Element => {
+  const { errors } = useFormikContext();
+  console.log(errors);
   const cn = { [styles.container]: true, [styles.saved]: isSaved };
 
   return (

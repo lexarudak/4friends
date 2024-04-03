@@ -18,8 +18,6 @@ export const OneMatchForm: FC<Props> = ({
     return team1.score === "" || team1.score !== team2.score;
   };
 
-  console.log(team1.score, team2.score);
-
   return (
     <div className={styles.oneMatch}>
       <MatchInfoSection info={info} time={time} isSaved={isSaved} />

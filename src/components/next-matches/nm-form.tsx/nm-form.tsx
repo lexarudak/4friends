@@ -5,6 +5,7 @@ import { nextMatchesSelector } from "../../../store/next-matches/next-matches.se
 import { NextMatch } from "../../../store/next-matches/next-matches.slice";
 import { OneMatchForm } from "../one-match-form/one-match-form";
 import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../../button/button";
+import { validator } from "./validator";
 
 export const NMForm = (): JSX.Element => {
   const nextMatches = useSelector(nextMatchesSelector);
@@ -13,8 +14,14 @@ export const NMForm = (): JSX.Element => {
     console.log("submit", JSON.stringify(values, null, 2));
   };
   return (
-    <Formik initialValues={nextMatches} onSubmit={submit}>
-      {({ values }) => (
+    <Formik
+      initialValues={nextMatches}
+      onSubmit={submit}
+      validate={validator}
+      validateOnBlur={false}
+      validateOnChange={false}
+    >
+      {({ values, dirty }) => (
         <Form className={styles.form}>
           {values.map((nm, ind) => (
             <OneMatchForm nm={nm} order={ind} key={nm.id} />
@@ -24,7 +31,7 @@ export const NMForm = (): JSX.Element => {
             color={BUTTON_COLOR.active}
             type="submit"
             className={styles.button}
-            disabled
+            disabled={!dirty}
           >
             Save
           </Button>
