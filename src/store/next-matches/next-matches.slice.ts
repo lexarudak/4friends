@@ -1,49 +1,69 @@
 import { createSlice } from "@reduxjs/toolkit";
+import countries from "../../const/countries";
 
-const mockedNextMatches = [
+export type Team = {
+  code: keyof typeof countries;
+  score: number | "";
+};
+
+export type NextMatch = {
+  id: number;
+  extra: boolean;
+  winner: number;
+  info: string;
+  time: number;
+  isSaved: boolean;
+  team1: Team;
+  team2: Team;
+};
+
+const mockedNextMatches: NextMatch[] = [
   {
     id: 1,
     extra: true,
-    penalty: 0,
+    winner: 0,
+    info: "Group A",
+    time: 1718388000000,
+    isSaved: true,
     team1: {
-      code: "al",
-      score: null,
-      extra: null,
+      code: "ALB",
+      score: 1,
     },
     team2: {
-      code: "ad",
-      score: null,
-      extra: null,
+      code: "AND",
+      score: 0,
     },
   },
   {
     id: 2,
     extra: true,
-    penalty: 0,
+    winner: 0,
+    info: "Group B",
+    time: 1718398800000,
+    isSaved: false,
     team1: {
-      code: "be",
-      score: null,
-      extra: null,
+      code: "BEL",
+      score: "",
     },
     team2: {
-      code: "ba",
-      score: null,
-      extra: null,
+      code: "BGR",
+      score: "",
     },
   },
   {
     id: 3,
-    extra: true,
-    penalty: 0,
+    extra: false,
+    winner: 0,
+    info: "Group C",
+    time: 1718409600000,
+    isSaved: false,
     team1: {
-      code: "cz",
-      score: null,
-      extra: null,
+      code: "ITA",
+      score: "",
     },
     team2: {
-      code: "kz",
-      score: null,
-      extra: null,
+      code: "KAZ",
+      score: "",
     },
   },
 ];

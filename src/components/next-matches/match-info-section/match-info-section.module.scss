@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: $clr-ui-02;
+
+  &.saved {
+    background-color: $clr-secondary-02;
+  }
+}
+
+.item {
+  width: 100px;
+  text-align: center;
+}

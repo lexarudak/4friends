@@ -5,6 +5,8 @@
   align-items: center;
   justify-content: center;
   padding: 0 20px;
+
+
 }
 
 .primary {
@@ -29,9 +31,41 @@
       color: $clr-primary-03;
     }
   }
- 
+}
 
- 
+.active {
+  &.fill {
+    border: 2px solid $clr-secondary-02;
+    background-color: $clr-secondary-02;
+    color: $clr-primary-03;
+
+    &:hover{
+      border: 2px solid $clr-secondary-01;
+       background-color: $clr-secondary-01;
+    }
+    
+    &:disabled {
+      border: 2px solid $clr-ui-02;
+      background-color: $clr-ui-02;
+      cursor: default;
+
+      &:hover{
+        border: 2px solid $clr-ui-02;
+        background-color: $clr-ui-02;
+      }
+    }
+  }
+
+  &.contour {
+    border: 2px solid $clr-secondary-02;
+    background-color: transparent;
+    color: $clr-secondary-02;
+
+    &:hover{
+      border: 2px solid $clr-secondary-01;
+      color: $clr-secondary-01;
+    }
+  }
 }
 
 .secondary {
@@ -44,13 +78,6 @@
   }
 }
 
-.contour {
-
-}
-
-.transparent {
- 
-}
 
 .round {
   padding: 0;

@@ -11,6 +11,7 @@ export enum BUTTON_VARIANT {
 export enum BUTTON_COLOR {
   primary = "primary",
   secondary = "secondary",
+  active = "active",
 }
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {

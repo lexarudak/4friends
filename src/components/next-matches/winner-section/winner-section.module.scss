@@ -1,0 +1,36 @@
+.fieldset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  gap: 21px;
+
+  &:disabled {
+    span {
+      color: $clr-ui-03;
+    }
+  }
+}
+
+.button {
+  width: 15px;
+  height: 15px;
+  border: 2px solid $clr-primary-03;
+  border-radius: 100%;
+  transition: .2s;
+
+  &:hover {
+    border: 2px solid $clr-primary-01;
+  }
+
+  &.active {
+    border: 2px solid $clr-primary-01;
+    background-color: $clr-accent-03;
+  }
+
+  &:disabled {
+    cursor: default;
+    border-color: $clr-ui-03;
+    background-color: transparent;
+  }
+}
