@@ -13,7 +13,6 @@ export const Timer: FC<Props> = ({ className }): JSX.Element => {
   const nextMatch = useSelector(nextMatchSelector);
   const calculateTimeLeft = () => {
     const difference = +new Date(nextMatch) - +new Date();
-    console.log(difference);
 
     return difference > 0
       ? {

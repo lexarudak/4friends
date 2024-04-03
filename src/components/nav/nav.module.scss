@@ -13,7 +13,11 @@
 
     &:hover {
       color: $clr-primary-03;
-      
+    }
+
+    &.active {
+      color: $clr-support-03;
+      cursor: default;
     }
   }
 }

@@ -9,9 +9,6 @@ export const HomePage = (): JSX.Element => {
       <Timer className={styles.timer} />
       {/* <NextMatches /> */}
       <Table />
-      <Table />
-      <Table />
-      <Table />
     </section>
   );
 };

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ROUTE_LIST } from "../../router/route-list";
 import styles from "./nav.module.scss";
 import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../button/button";
@@ -9,10 +9,12 @@ const NAV_LIST = {
   Home: ROUTE_LIST.home,
   MATCHDAYS: ROUTE_LIST.matchdays,
   Stats: ROUTE_LIST.statistic,
+  Rules: ROUTE_LIST.rules,
 };
 
 export const Nav = (): JSX.Element => {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const close = () => {
     dispatch(closeMenu());
   };
@@ -25,7 +27,13 @@ export const Nav = (): JSX.Element => {
   return (
     <nav className={styles.nav}>
       {Object.entries(NAV_LIST).map(([name, link]) => (
-        <Link title={name} to={link} onClick={close} key={name}>
+        <Link
+          title={name}
+          to={link}
+          onClick={close}
+          className={link === pathname ? styles.active : ""}
+          key={name}
+        >
           {name}
         </Link>
       ))}

@@ -50,6 +50,9 @@ body {
   // max-width: $body-container;
   display: flex;
 
+  &.hold {
+    overflow: hidden;
+  }
 }
 
 
