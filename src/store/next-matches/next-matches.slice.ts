@@ -1,9 +1,51 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const mockedNextMatches = [
-  { id: 1, team1: "GER", team2: "ITA" },
-  { id: 2, team1: "CAN", team2: "DEN" },
-  { id: 3, team1: "BLR", team2: "SPA" },
+  {
+    id: 1,
+    extra: true,
+    penalty: 0,
+    team1: {
+      code: "al",
+      score: null,
+      extra: null,
+    },
+    team2: {
+      code: "ad",
+      score: null,
+      extra: null,
+    },
+  },
+  {
+    id: 2,
+    extra: true,
+    penalty: 0,
+    team1: {
+      code: "be",
+      score: null,
+      extra: null,
+    },
+    team2: {
+      code: "ba",
+      score: null,
+      extra: null,
+    },
+  },
+  {
+    id: 3,
+    extra: true,
+    penalty: 0,
+    team1: {
+      code: "cz",
+      score: null,
+      extra: null,
+    },
+    team2: {
+      code: "kz",
+      score: null,
+      extra: null,
+    },
+  },
 ];
 
 const initialState = {
