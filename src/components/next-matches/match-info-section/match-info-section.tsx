@@ -10,7 +10,7 @@ type Props = {
   info: string;
   isSaved: boolean;
   order: number;
-  handleErrors: boolean;
+  handleErrors?: boolean;
 };
 
 export const MatchInfoSection: FC<Props> = ({
