@@ -26,11 +26,14 @@
   &.active {
     border: 2px solid $clr-primary-01;
     background-color: $clr-accent-03;
+
+    &:disabled {
+       background-color: $clr-ui-03;
+    }
   }
 
   &:disabled {
     cursor: default;
     border-color: $clr-ui-03;
-    background-color: transparent;
   }
 }

@@ -19,11 +19,9 @@ export const MatchInfoSection: FC<Props> = ({
   order,
 }): JSX.Element => {
   const { errors } = useFormikContext<ValidateErrors>();
-  console.log(errors);
   const emptyError = errors[`[${order}].score`];
   const winnerError = errors[`[${order}].winner`];
 
-  console.log({ winnerError, emptyError });
   const cn = {
     [styles.container]: true,
     [styles.saved]: isSaved,

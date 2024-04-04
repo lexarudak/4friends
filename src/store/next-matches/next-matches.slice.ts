@@ -12,7 +12,7 @@ export type NextMatch = {
   winner: number;
   info: string;
   time: number;
-  isSaved: boolean;
+  savedScore: [number, number] | [];
   team1: Team;
   team2: Team;
 };
@@ -24,7 +24,7 @@ const mockedNextMatches: NextMatch[] = [
     winner: 0,
     info: "Group A",
     time: 1718388000000,
-    isSaved: true,
+    savedScore: [1, 0],
     team1: {
       code: "ALB",
       score: 1,
@@ -40,7 +40,7 @@ const mockedNextMatches: NextMatch[] = [
     winner: 0,
     info: "Group B",
     time: 1718398800000,
-    isSaved: false,
+    savedScore: [],
     team1: {
       code: "BEL",
       score: "",
@@ -56,7 +56,7 @@ const mockedNextMatches: NextMatch[] = [
     winner: 0,
     info: "Group C",
     time: 1718409600000,
-    isSaved: false,
+    savedScore: [],
     team1: {
       code: "ITA",
       score: "",

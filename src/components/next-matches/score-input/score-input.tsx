@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC } from "react";
 import styles from "./score-input.module.scss";
 import { Field, useFormikContext } from "formik";
@@ -8,24 +9,43 @@ type Props = {
 
 const MAX_VALUE = 99;
 const MIN_VALUE = 0;
+const symbols = [
+  "+",
+  "=",
+  ":",
+  ";",
+  "'",
+  "/",
+  "",
+  "|",
+  "[",
+  "]",
+  "{",
+  "}",
+  "-",
+];
 
 export const ScoreInput: FC<Props> = ({ name }): JSX.Element => {
   const { setFieldValue } = useFormikContext();
 
   const handleChange = (event: { target: { value: string; name: string } }) => {
+    console.log(event.target);
     const value = parseInt(event.target.value);
     if (value > MAX_VALUE) {
       setFieldValue(event.target.name, Number(event.target.value.slice(0, 2)));
+      console.log("A");
       return;
     }
 
     if (value < MIN_VALUE) {
       setFieldValue(event.target.name, MIN_VALUE);
+      console.log("S");
       return;
     }
 
     if (event.target.value.length > 1 && event.target.value[0] === "0") {
       setFieldValue(event.target.name, MIN_VALUE);
+      console.log("M");
       return;
     }
 
@@ -34,7 +54,17 @@ export const ScoreInput: FC<Props> = ({ name }): JSX.Element => {
         ? ""
         : Number(event.target.value.replace(/\D/g, ""));
 
+    console.log({ validValue });
     setFieldValue(event.target.name, validValue);
+  };
+
+  const handleKeyPress = (event: {
+    key: string;
+    preventDefault: () => void;
+  }) => {
+    if (symbols.includes(event.key)) {
+      event.preventDefault();
+    }
   };
   return (
     <Field
@@ -45,6 +75,7 @@ export const ScoreInput: FC<Props> = ({ name }): JSX.Element => {
       min={MIN_VALUE}
       max={MAX_VALUE}
       onChange={handleChange}
+      onKeyPress={handleKeyPress}
     />
   );
 };
