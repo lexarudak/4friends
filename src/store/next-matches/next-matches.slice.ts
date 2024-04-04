@@ -26,11 +26,11 @@ const mockedNextMatches: NextMatch[] = [
     time: 1718388000000,
     savedScore: [1, 0],
     team1: {
-      code: "ALB",
+      code: "CZE",
       score: 1,
     },
     team2: {
-      code: "AND",
+      code: "SCO",
       score: 0,
     },
   },
@@ -42,27 +42,27 @@ const mockedNextMatches: NextMatch[] = [
     time: 1718398800000,
     savedScore: [],
     team1: {
-      code: "BEL",
+      code: "SUI",
       score: "",
     },
     team2: {
-      code: "BGR",
+      code: "NED",
       score: "",
     },
   },
   {
     id: 3,
-    extra: false,
+    extra: true,
     winner: 0,
     info: "Group C",
     time: 1718409600000,
     savedScore: [],
     team1: {
-      code: "ITA",
+      code: "HUN",
       score: "",
     },
     team2: {
-      code: "KAZ",
+      code: "GER",
       score: "",
     },
   },

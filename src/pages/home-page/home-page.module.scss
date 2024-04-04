@@ -4,8 +4,4 @@
   flex-direction: column;
   padding-top: 80px;
   gap: 80px;
-
-  @include mediaMax('m') {
-    max-width: 340px;
-  }
 }
