@@ -5,3 +5,6 @@ export const matchdaysDateSelector = createSelector(
   (state: RootState) => state.matchdaysSlice,
   ({ from, to }) => ({ from, to }),
 );
+
+export const matchdaysMatchesSelector = (state: RootState) =>
+  state.matchdaysSlice.matches;

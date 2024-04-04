@@ -1,13 +1,107 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Team } from "../next-matches/next-matches.slice";
+
+export type UserBet = {
+  name: string;
+  score: [number, number] | [];
+  winner: 0 | 1 | 2;
+  points: number | null;
+};
+
+export type OldMatchInfo = {
+  id: number;
+  extra: boolean;
+  winner: number;
+  info: string;
+  time: number;
+  team1: Team;
+  team2: Team;
+  usersBets: UserBet[];
+};
+
+const mockedMatches: OldMatchInfo[] = [
+  {
+    id: 1,
+    extra: true,
+    winner: 1,
+    info: "1/4 Final",
+    time: 1718388000000,
+    team1: {
+      code: "CZE",
+      score: 1,
+    },
+    team2: {
+      code: "SCO",
+      score: 0,
+    },
+    usersBets: [
+      {
+        name: "val",
+        score: [1, 0],
+        winner: 1,
+        points: 4,
+      },
+      {
+        name: "kam",
+        score: [2, 0],
+        winner: 1,
+        points: 2,
+      },
+      {
+        name: "valera",
+        score: [1, 1],
+        winner: 2,
+        points: 0,
+      },
+    ],
+  },
+  {
+    id: 2,
+    extra: false,
+    winner: 0,
+    info: "Group B",
+    time: 1718398800000,
+    team1: {
+      code: "SUI",
+      score: "",
+    },
+    team2: {
+      code: "NED",
+      score: "",
+    },
+    usersBets: [
+      {
+        name: "val",
+        score: [],
+        winner: 0,
+        points: null,
+      },
+      {
+        name: "kam",
+        score: [],
+        winner: 0,
+        points: null,
+      },
+      {
+        name: "valera",
+        score: [],
+        winner: 0,
+        points: null,
+      },
+    ],
+  },
+];
 
 type InitialState = {
   from: number;
   to: number;
+  matches: OldMatchInfo[];
 };
 
 const initialState: InitialState = {
   from: Date.now().valueOf(),
   to: Date.now().valueOf(),
+  matches: mockedMatches,
 };
 
 const matchdaysSlice = createSlice({

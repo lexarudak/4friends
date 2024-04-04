@@ -10,6 +10,7 @@ type Props = {
   info: string;
   isSaved: boolean;
   order: number;
+  handleErrors: boolean;
 };
 
 export const MatchInfoSection: FC<Props> = ({
@@ -17,6 +18,7 @@ export const MatchInfoSection: FC<Props> = ({
   time,
   isSaved,
   order,
+  handleErrors = true,
 }): JSX.Element => {
   const { errors } = useFormikContext<ValidateErrors>();
   const emptyError = errors[`[${order}].score`];
@@ -25,10 +27,10 @@ export const MatchInfoSection: FC<Props> = ({
   const cn = {
     [styles.container]: true,
     [styles.saved]: isSaved,
-    [styles.error]: emptyError || winnerError,
+    [styles.error]: (emptyError || winnerError) && handleErrors,
   };
 
-  if (emptyError) {
+  if (emptyError && handleErrors) {
     return (
       <div className={classNames(cn)}>
         <span>{emptyError}</span>
@@ -36,7 +38,7 @@ export const MatchInfoSection: FC<Props> = ({
     );
   }
 
-  if (winnerError) {
+  if (winnerError && handleErrors) {
     return (
       <div className={classNames(cn)}>
         <span>{winnerError}</span>
