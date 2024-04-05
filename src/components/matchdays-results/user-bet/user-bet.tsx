@@ -18,7 +18,7 @@ export const UserBet: FC<Props> = ({
           [styles.hide]: winner !== 1,
         })}
       >
-        {"*"}
+        &#x2022;
       </span>
       <span className={styles.score}>{score.length ? score[0] : "-"}</span>
       <span className={styles.score}>:</span>
@@ -29,7 +29,7 @@ export const UserBet: FC<Props> = ({
           [styles.hide]: winner !== 2,
         })}
       >
-        {"*"}
+        &#x2022;
       </span>
       <span className={styles.name}>{name}</span>
       <span className={styles.points}>{points}</span>

@@ -27,9 +27,11 @@ export const OldFTSection: FC<Props> = ({
         <span
           className={classNames({
             [styles.code]: true,
-            [styles.active1]: winner === 1,
+            [styles.rp]: true,
+            [styles.active]: winner === 1,
           })}
         >
+          {winner === 1 ? "• " : null}
           {getName(team1.code, BP)}
         </span>
       </div>
@@ -44,10 +46,12 @@ export const OldFTSection: FC<Props> = ({
         <span
           className={classNames({
             [styles.code]: true,
-            [styles.active2]: winner === 2,
+            [styles.lp]: true,
+            [styles.active]: winner === 2,
           })}
         >
           {getName(team2.code, BP)}
+          {winner === 2 ? " •" : null}
         </span>
         <span
           className={classNames(`fi fi-${getFlag(team2.code)}`, styles.flag)}
