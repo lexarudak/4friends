@@ -1,0 +1,28 @@
+.card {
+  display: flex;
+  align-items: flex-start;
+  background-color: $clr-background;
+  color: $clr-primary-03;
+  padding: 10px 20px;
+}
+
+.score {
+  font-weight: 600;
+  margin-right: 5px;
+
+  &.hide {
+    color: transparent;
+  }
+}
+
+.points {
+  margin-left: auto;
+}
+
+.name {
+  padding-left: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 10px;
+}

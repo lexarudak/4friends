@@ -1,0 +1,64 @@
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  padding-top: 4px;
+  padding: 10px 20px;
+  background-color: $clr-background;
+  color: $clr-primary-03;
+}
+
+.score, .center {
+  font-size: $font-size-xl;
+  font-weight: 600;
+}
+
+.score {
+  display: block;
+  width: 20px;
+  text-align: center;
+}
+
+.center {
+  width: 40px;
+  text-align: center;
+}
+
+.half {
+  display: flex;
+  flex-grow: 1;
+  width: calc(100% / 2 - 20px);
+  align-items: center;
+}
+
+.code {
+  padding: 0 23px;
+
+  &.active1 {
+    font-weight: 600;
+
+    &::before {
+      content: '* ';
+    }
+  }
+
+  &.active2 {
+    font-weight: 600;
+
+    &::after {
+      content: ' *';
+    }
+  }
+}
+
+.flag {
+  &:first-child {
+    margin-inline-end: auto;
+  }
+
+  &:last-child {
+     margin-inline-start: auto;
+  }
+}

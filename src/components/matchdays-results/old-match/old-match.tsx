@@ -3,13 +3,14 @@ import { OldMatchInfo } from "../../../store/matchdays/matchdays.slice";
 import styles from "./old-match.module.scss";
 import { MatchInfoSection } from "../../next-matches/match-info-section/match-info-section";
 import { OldFTSection } from "../old-ft-section/old-ft-section";
+import { UserBet } from "../user-bet/user-bet";
 
 type Props = {
   matchInfo: OldMatchInfo;
 };
 
 export const OldMatch: FC<Props> = ({
-  matchInfo: { info, time, team1, team2, winner },
+  matchInfo: { info, time, team1, team2, winner, usersBets },
 }): JSX.Element => {
   return (
     <div className={styles.container}>
@@ -22,6 +23,9 @@ export const OldMatch: FC<Props> = ({
         />
         <OldFTSection team1={team1} team2={team2} winner={winner} />
       </div>
+      {usersBets.map((bet) => (
+        <UserBet bet={bet} key={bet.name} />
+      ))}
     </div>
   );
 };

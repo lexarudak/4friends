@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Team } from "../next-matches/next-matches.slice";
 
-export type UserBet = {
+export type UserBetInfo = {
   name: string;
   score: [number, number] | [];
   winner: 0 | 1 | 2;
@@ -16,7 +16,7 @@ export type OldMatchInfo = {
   time: number;
   team1: Team;
   team2: Team;
-  usersBets: UserBet[];
+  usersBets: UserBetInfo[];
 };
 
 const mockedMatches: OldMatchInfo[] = [
@@ -25,7 +25,7 @@ const mockedMatches: OldMatchInfo[] = [
     extra: true,
     winner: 1,
     info: "1/4 Final",
-    time: 1718388000000,
+    time: new Date("04/03/2024").valueOf(),
     team1: {
       code: "CZE",
       score: 1,
@@ -36,7 +36,7 @@ const mockedMatches: OldMatchInfo[] = [
     },
     usersBets: [
       {
-        name: "val",
+        name: "Val",
         score: [1, 0],
         winner: 1,
         points: 4,
@@ -49,6 +49,12 @@ const mockedMatches: OldMatchInfo[] = [
       },
       {
         name: "valera",
+        score: [1, 1],
+        winner: 2,
+        points: 0,
+      },
+      {
+        name: "Man with real long username username username username",
         score: [1, 1],
         winner: 2,
         points: 0,
@@ -71,7 +77,7 @@ const mockedMatches: OldMatchInfo[] = [
     },
     usersBets: [
       {
-        name: "val",
+        name: "Val",
         score: [],
         winner: 0,
         points: null,
@@ -84,6 +90,12 @@ const mockedMatches: OldMatchInfo[] = [
       },
       {
         name: "valera",
+        score: [],
+        winner: 0,
+        points: null,
+      },
+      {
+        name: "Man with real long username username username username",
         score: [],
         winner: 0,
         points: null,
