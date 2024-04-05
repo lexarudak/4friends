@@ -11,7 +11,7 @@ export type UserBet = {
 export type OldMatchInfo = {
   id: number;
   extra: boolean;
-  winner: number;
+  winner: 0 | 1 | 2;
   info: string;
   time: number;
   team1: Team;

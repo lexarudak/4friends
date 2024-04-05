@@ -2,7 +2,7 @@ import { FC } from "react";
 import styles from "./match-info-section.module.scss";
 import { getDate, getTime } from "../../../helpers";
 import classNames from "classnames";
-import { useFormikContext } from "formik";
+import { FormikErrors } from "formik";
 import { ValidateErrors } from "../nm-form.tsx/validator";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
   info: string;
   isSaved: boolean;
   order: number;
-  handleErrors?: boolean;
+  errors?: FormikErrors<ValidateErrors>;
 };
 
 export const MatchInfoSection: FC<Props> = ({
@@ -18,19 +18,18 @@ export const MatchInfoSection: FC<Props> = ({
   time,
   isSaved,
   order,
-  handleErrors = true,
+  errors,
 }): JSX.Element => {
-  const { errors } = useFormikContext<ValidateErrors>();
-  const emptyError = errors[`[${order}].score`];
-  const winnerError = errors[`[${order}].winner`];
+  const emptyError = errors?.[`[${order}].score`];
+  const winnerError = errors?.[`[${order}].winner`];
 
   const cn = {
     [styles.container]: true,
     [styles.saved]: isSaved,
-    [styles.error]: (emptyError || winnerError) && handleErrors,
+    [styles.error]: (emptyError || winnerError) && errors,
   };
 
-  if (emptyError && handleErrors) {
+  if (emptyError && errors) {
     return (
       <div className={classNames(cn)}>
         <span>{emptyError}</span>
@@ -38,7 +37,7 @@ export const MatchInfoSection: FC<Props> = ({
     );
   }
 
-  if (winnerError && handleErrors) {
+  if (winnerError && errors) {
     return (
       <div className={classNames(cn)}>
         <span>{winnerError}</span>

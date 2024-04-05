@@ -1,4 +1,6 @@
 import { MAX_DATE, MIN_DATE } from "./const/const";
+import countries from "./const/countries";
+import { BREAKPOINTS } from "./hooks";
 
 export const getTime = (timestamp: number) => {
   const date = new Date(timestamp);
@@ -25,3 +27,13 @@ export const validateDate = (from: number, to: number) => {
     new Date(value) <= new Date(MAX_DATE);
   return isValid(from) && isValid(to);
 };
+
+export const getFlag = (code: keyof typeof countries) =>
+  code in countries ? countries[code].code2 : "---";
+
+export const getName = (code: keyof typeof countries, BP: number) =>
+  code in countries
+    ? BP === BREAKPOINTS.xl
+      ? countries[code].name
+      : code
+    : code;

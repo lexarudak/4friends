@@ -20,7 +20,7 @@ export const OneMatchForm: FC<Props> = ({
   const { score: score2 } = team2;
   const winnerName = `[${order}].winner`;
   const [isSaved, setIsSaved] = useState(!!savedScore.length);
-  const { setFieldValue } = useFormikContext();
+  const { setFieldValue, errors } = useFormikContext();
   const isWinnerDisabled = () => score1 === "" || score1 !== score2;
 
   useEffect(() => {
@@ -44,6 +44,7 @@ export const OneMatchForm: FC<Props> = ({
         time={time}
         isSaved={isSaved}
         order={order}
+        errors={errors}
       />
       <div className={styles.container}>
         <FTSection team1={team1} team2={team2} order={order} />
