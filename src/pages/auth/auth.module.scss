@@ -1,0 +1,47 @@
+.title {
+  padding-top: 150px;
+  padding-bottom: 40px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 535px;
+
+   @include mediaMax('l') {
+    width: 340px;
+    margin-left: 0px;
+  }
+
+  @include mediaMin('xl') {
+    margin-left: 0px;
+  }
+}
+
+.text {
+  padding-top: 20px;
+}
+
+.error {
+  color: $clr-support-03A;
+}
+
+.placeholder {
+  color: transparent;
+}
+
+.register {
+  padding: 20px 0 40px;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.field {
+  padding: 10px 20px;
+  width: 250px;
+  border-radius: 0;
+  border: none;
+  outline: none;
+}
+

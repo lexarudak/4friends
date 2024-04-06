@@ -4,4 +4,5 @@ export enum ROUTE_LIST {
   statistic = "/statistic",
   rules = "/rules",
   login = "/login",
+  register = "/register",
 }
