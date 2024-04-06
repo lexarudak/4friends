@@ -23,7 +23,7 @@ export type RegisterValues = {
 };
 
 const POLICY_TEXT =
-  "I have read and agree to the Terms of Service and Privacy Policy.";
+  "I have read and agree to the Terms of Service and Privacy Policy";
 
 const initialValues: RegisterValues = {
   login: "",
@@ -116,7 +116,7 @@ export const RegisterPage = (): JSX.Element => {
                 {POLICY_TEXT}
               </button>
             </div>
-            <FieldError message={getError(errors.password)} />
+            <FieldError message={getError(errors.checkbox)} />
 
             <Button
               type="submit"

@@ -34,6 +34,7 @@ export const registerValidator = ({
   password2,
   room,
   login,
+  checkbox,
 }: RegisterValues) => {
   const errors: ValidateErrors = { ...loginValidator({ email, password }) };
 
@@ -47,6 +48,10 @@ export const registerValidator = ({
 
   if (room.length < 1) {
     errors.room = "Room should not be empty";
+  }
+
+  if (!checkbox) {
+    errors.checkbox = "Should be accepted to proceed";
   }
 
   return errors;
