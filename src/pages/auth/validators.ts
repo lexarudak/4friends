@@ -1,4 +1,5 @@
 import { LoginValues } from "./login-page";
+import { RegisterValues } from "./register-page";
 
 export type ValidateErrors = {
   [key: string]: string;
@@ -22,6 +23,25 @@ export const loginValidator = ({ email, password }: LoginValues) => {
 
   if (password.length < 4) {
     errors.password = "Password needs 4+ characters";
+  }
+
+  return errors;
+};
+
+export const registerValidator = ({
+  email,
+  password,
+  password2,
+  room,
+}: RegisterValues) => {
+  const errors: ValidateErrors = { ...loginValidator({ email, password }) };
+
+  if (password2 !== password) {
+    errors.password2 = "Passwords do not match";
+  }
+
+  if (room.length < 1) {
+    errors.room = "Room should not be empty";
   }
 
   return errors;
