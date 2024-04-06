@@ -62,18 +62,20 @@ export const LoginPage = (): JSX.Element => {
             <p className={styles.text}>Password</p>
             <Field type="password" className={styles.field} name="password" />
             <FieldError message={getError(errors.password)} />
-            <Link to={ROUTE_LIST.register} className={styles.register}>
-              Register
-            </Link>
+
             <Button
               type="submit"
               color={BUTTON_COLOR.active}
               variant={BUTTON_VARIANT.fill}
               disabled={!isValid}
               onClick={onClick}
+              className={styles.button}
             >
               Login
             </Button>
+            <Link to={ROUTE_LIST.register} className={styles.link}>
+              Register
+            </Link>
           </Form>
         </>
       )}

@@ -33,11 +33,16 @@ export const registerValidator = ({
   password,
   password2,
   room,
+  login,
 }: RegisterValues) => {
   const errors: ValidateErrors = { ...loginValidator({ email, password }) };
 
+  if (login.length < 1) {
+    errors.login = "Login should not be empty";
+  }
+
   if (password2 !== password) {
-    errors.password2 = "Passwords do not match";
+    errors.password = "Passwords do not match";
   }
 
   if (room.length < 1) {
