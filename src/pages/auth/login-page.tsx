@@ -8,7 +8,7 @@ import {
   Button,
 } from "../../components/button/button";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { closeMenu } from "../../store/app/app.slice";
 import { FieldError } from "./field-error";
 import { loginValidator } from "./validators";
@@ -26,11 +26,19 @@ const initialValues: LoginValues = {
 export const LoginPage = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [shouldValidate, setShouldValidate] = useState(false);
   const submit = async (values: LoginValues) => {
     console.log(values);
+
     navigate(ROUTE_LIST.home);
   };
+
+  const onClick = () => {
+    setShouldValidate(true);
+  };
+
+  const getError = (validateError?: string, serverError?: string) =>
+    validateError || serverError;
 
   useEffect(() => {
     dispatch(closeMenu());
@@ -41,6 +49,8 @@ export const LoginPage = (): JSX.Element => {
       initialValues={initialValues}
       onSubmit={submit}
       validate={loginValidator}
+      validateOnChange={shouldValidate}
+      validateOnBlur={shouldValidate}
     >
       {({ errors, isValid }) => (
         <>
@@ -48,10 +58,10 @@ export const LoginPage = (): JSX.Element => {
           <Form className={styles.form}>
             <p className={styles.text}>Email</p>
             <Field type="email" className={styles.field} name="email" />
-            <FieldError message={errors.email} />
+            <FieldError message={getError(errors.email)} />
             <p className={styles.text}>Password</p>
             <Field type="password" className={styles.field} name="password" />
-            <FieldError message={errors.password} />
+            <FieldError message={getError(errors.password)} />
             <Link to={ROUTE_LIST.register} className={styles.register}>
               Register
             </Link>
@@ -60,6 +70,7 @@ export const LoginPage = (): JSX.Element => {
               color={BUTTON_COLOR.active}
               variant={BUTTON_VARIANT.fill}
               disabled={!isValid}
+              onClick={onClick}
             >
               Login
             </Button>
