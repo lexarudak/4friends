@@ -8,13 +8,10 @@ import { toggleMenu } from "../../store/app/app.slice";
 export const Burger = (): JSX.Element => {
   const dispatch = useDispatch();
   const isMenuOpen = useSelector(isMenuOpenSelector);
-  const body = document.getElementById("body");
 
   const onClick = () => {
     dispatch(toggleMenu());
   };
-
-  isMenuOpen ? body?.classList.add("hold") : body?.classList.remove("hold");
 
   const mods: Record<string, boolean> = {
     [styles.isOpen]: isMenuOpen,

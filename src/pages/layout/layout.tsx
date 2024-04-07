@@ -4,12 +4,28 @@ import { Header } from "./header/header";
 import { Footer } from "./footer/footer";
 import { Menu } from "../../components/menu/menu";
 import { ROUTE_LIST } from "../../router/route-list";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import {
+  isMenuOpenSelector,
+  isModalOpenSelector,
+} from "../../store/app/app.selector";
 
 const noMenuList: string[] = [ROUTE_LIST.login, ROUTE_LIST.register];
 
 export const Layout = (): JSX.Element => {
   const { pathname } = useLocation();
   const showMenu = !noMenuList.includes(pathname);
+  const isMenuOpen = useSelector(isMenuOpenSelector);
+  const isModalOpen = useSelector(isModalOpenSelector);
+
+  useEffect(() => {
+    const body = document.getElementById("body");
+    isMenuOpen || isModalOpen
+      ? body?.classList.add("hold")
+      : body?.classList.remove("hold");
+  });
+
   return (
     <>
       {showMenu && <Header />}
