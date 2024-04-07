@@ -20,30 +20,38 @@ export const RoomSelector = (): JSX.Element => {
     dispatch(setActiveRoom(name));
   };
 
+  const body = document.getElementById("body");
+  isMenuOpen ? body?.classList.add("hold") : body?.classList.remove("hold");
+
   const cn = {
     [styles.container]: true,
     [styles.active]: isMenuOpen,
   };
 
   return (
-    <div className={classNames(cn)}>
-      {isMenuOpen
-        ? rooms.map((room) =>
-            room === activeRoom ? null : (
-              <button
-                onClick={onClick}
-                className={styles.btn}
-                key={room}
-                name={room}
-              >
-                {room}
-              </button>
-            ),
-          )
-        : null}
-      <button onClick={onClick} className={styles.btn} name={activeRoom}>
-        {activeRoom}
-      </button>
-    </div>
+    <>
+      <div className={classNames(cn)}>
+        {isMenuOpen
+          ? rooms.map((room) =>
+              room === activeRoom ? null : (
+                <button
+                  onClick={onClick}
+                  className={styles.btn}
+                  key={room}
+                  name={room}
+                >
+                  {room}
+                </button>
+              ),
+            )
+          : null}
+        <button onClick={onClick} className={styles.btn} name={activeRoom}>
+          {activeRoom}
+        </button>
+      </div>
+      {isMenuOpen ? (
+        <div className={styles.bg} onClick={() => setIsMenuOpen(false)} />
+      ) : null}
+    </>
   );
 };
