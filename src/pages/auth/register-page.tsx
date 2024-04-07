@@ -15,6 +15,7 @@ import { registerValidator } from "./validators";
 import { InfoModal } from "../../components/info-modal/info-modal";
 import { isModalOpenSelector } from "../../store/app/app.selector";
 import { MOCKED_TEXT } from "./text";
+import { useLazyRegisterQuery } from "../../store/api";
 
 export type RegisterValues = {
   login: string;
@@ -41,22 +42,14 @@ export const RegisterPage = (): JSX.Element => {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   const [shouldValidate, setShouldValidate] = useState(false);
+  const [fetch, { data, isError, isFetching }] = useLazyRegisterQuery();
   const isModalOpen = useSelector(isModalOpenSelector);
   const submit = async ({ login, email, password, room }: RegisterValues) => {
     try {
-      console.log("start");
-      const res = await fetch(
-        "http://176.57.70.40:8080/rest4friends/cfc/registerUser.cfc?method=registerUser",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ login, email, password, room }),
-        },
-      );
-      const data = await res.json();
+      await fetch({ login, email, password, room });
       console.log({ data });
+      console.log({ isError });
+      console.log({ isFetching });
     } catch (error) {
       console.log({ error });
     }

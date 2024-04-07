@@ -4,6 +4,7 @@ import statisticSlice from "./statistic/statistic.slice";
 import nextMatchesSlice from "./next-matches/next-matches.slice";
 import matchdaysSlice from "./matchdays/matchdays.slice";
 import userSlice from "./user/user.slice";
+import { apiSlice } from "./api";
 
 const store = configureStore({
   reducer: {
@@ -12,7 +13,10 @@ const store = configureStore({
     statisticSlice,
     matchdaysSlice,
     userSlice,
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
 });
 
 export default store;
