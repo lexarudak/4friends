@@ -10,6 +10,7 @@ import {
   isMenuOpenSelector,
   isModalOpenSelector,
 } from "../../store/app/app.selector";
+import { RoomSelector } from "../../components/room-selector/room-selector";
 
 const noMenuList: string[] = [ROUTE_LIST.login, ROUTE_LIST.register];
 
@@ -30,6 +31,7 @@ export const Layout = (): JSX.Element => {
     <>
       {showMenu && <Header />}
       {showMenu && <Menu />}
+      {showMenu && <RoomSelector />}
       <main className={styles.main}>
         <Outlet />
       </main>
