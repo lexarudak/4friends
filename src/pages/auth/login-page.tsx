@@ -54,7 +54,17 @@ export const LoginPage = (): JSX.Element => {
     >
       {({ errors, isValid }) => (
         <>
-          <h2 className={styles.title}>Login</h2>
+          <h2 className={styles.title}>
+            Login
+            <span className={styles.subtitle}>
+              {" | "}
+              {
+                <Link to={ROUTE_LIST.register} className={styles.link}>
+                  Register
+                </Link>
+              }
+            </span>
+          </h2>
           <Form className={styles.form}>
             <p className={styles.text}>Email</p>
             <Field type="email" className={styles.field} name="email" />
@@ -73,9 +83,6 @@ export const LoginPage = (): JSX.Element => {
             >
               Login
             </Button>
-            <Link to={ROUTE_LIST.register} className={styles.link}>
-              Register
-            </Link>
           </Form>
         </>
       )}

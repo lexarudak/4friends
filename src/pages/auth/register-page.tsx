@@ -89,7 +89,17 @@ export const RegisterPage = (): JSX.Element => {
       >
         {({ errors, isValid, setFieldValue }) => (
           <>
-            <h2 className={styles.title2}>Register</h2>
+            <h2 className={styles.title}>
+              Register
+              <span className={styles.subtitle}>
+                {" | "}
+                {
+                  <Link to={ROUTE_LIST.login} className={styles.link}>
+                    Login
+                  </Link>
+                }
+              </span>
+            </h2>
             <Form className={styles.form}>
               <p className={styles.text}>Login</p>
               <Field type="text" className={styles.field} name="login" />
@@ -147,9 +157,6 @@ export const RegisterPage = (): JSX.Element => {
               >
                 Register
               </Button>
-              <Link to={ROUTE_LIST.login} className={styles.link}>
-                Login
-              </Link>
               {isModalOpen ? (
                 <InfoModal onApply={() => setFieldValue("checkbox", true)}>
                   {<p>{MOCKED_TEXT}</p>}
