@@ -15,7 +15,7 @@ import { registerValidator } from "./validators";
 import { InfoModal } from "../../components/info-modal/info-modal";
 import { isModalOpenSelector } from "../../store/app/app.selector";
 import { MOCKED_TEXT } from "./text";
-// import { useLazyRegisterQuery } from "../../store/api";
+import { useLazyRegisterQuery } from "../../store/api";
 
 export type RegisterValues = {
   login: string;
@@ -40,31 +40,29 @@ const initialValues: RegisterValues = {
 
 export const RegisterPage = (): JSX.Element => {
   const dispatch = useDispatch();
+  const [serverErrors, setServerErrors] = useState<{
+    [key: string]: string;
+  }>({});
   // const navigate = useNavigate();
   const [shouldValidate, setShouldValidate] = useState(false);
-  // const [register, { data, isError, isFetching }] = useLazyRegisterQuery();
-  // await register({ login, email, password, room });
+  const [register, { isFetching, currentData }] = useLazyRegisterQuery();
+
   // navigate(ROUTE_LIST.home);
   const isModalOpen = useSelector(isModalOpenSelector);
 
   const submit = async ({ login, email, password, room }: RegisterValues) => {
-    try {
-      const res = await fetch(
-        " http://176.57.70.40:8080/rest4friends/cfc/registerUser.cfc?method=registerUser",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ login, email, password, room }),
-        },
-      );
-      const data = await res.json();
-      console.log({ data });
-    } catch (error) {
-      console.log({ error });
-    }
+    register({ login, email, password, room });
   };
+
+  useEffect(() => {
+    if (currentData?.ERRORFIELD) {
+      setServerErrors({
+        [currentData.ERRORFIELD]: currentData.MESSAGE,
+      });
+    } else {
+      setServerErrors({});
+    }
+  }, [currentData, isFetching]);
 
   const onClick = () => {
     setShouldValidate(true);
@@ -80,6 +78,14 @@ export const RegisterPage = (): JSX.Element => {
   useEffect(() => {
     dispatch(closeMenu());
   }, []);
+
+  const onFocus = (
+    { target: { name } }: { target: { name: string } },
+    otherName?: string,
+  ) => {
+    if (name in serverErrors) setServerErrors({});
+    if (otherName && otherName in serverErrors) setServerErrors({});
+  };
 
   return (
     <>
@@ -104,12 +110,26 @@ export const RegisterPage = (): JSX.Element => {
               </span>
             </h2>
             <Form className={styles.form}>
-              <p className={styles.text}>Login</p>
-              <Field type="text" className={styles.field} name="login" />
-              <FieldError message={getError(errors.login)} />
+              <p className={styles.text}>Username</p>
+              <Field
+                type="text"
+                className={styles.field}
+                name="login"
+                onFocus={onFocus}
+              />
+              <FieldError
+                message={getError(errors.login, serverErrors?.login)}
+              />
               <p className={styles.text}>Email</p>
-              <Field type="email" className={styles.field} name="email" />
-              <FieldError message={getError(errors.email)} />
+              <Field
+                type="email"
+                className={styles.field}
+                name="email"
+                onFocus={(e) => onFocus(e, "login")}
+              />
+              <FieldError
+                message={getError(errors.email, serverErrors?.login)}
+              />
 
               <div className={styles.block}>
                 <div className={styles.subBlock}>
@@ -132,8 +152,13 @@ export const RegisterPage = (): JSX.Element => {
               <FieldError message={getError(errors.password)} />
 
               <p className={styles.text}>Room</p>
-              <Field type="text" className={styles.field} name="room" />
-              <FieldError message={getError(errors.room)} />
+              <Field
+                type="text"
+                className={styles.field}
+                name="room"
+                onFocus={onFocus}
+              />
+              <FieldError message={getError(errors.room, serverErrors?.room)} />
               <div className={styles.policy}>
                 <Field
                   type="checkbox"
@@ -154,7 +179,7 @@ export const RegisterPage = (): JSX.Element => {
                 type="submit"
                 color={BUTTON_COLOR.active}
                 variant={BUTTON_VARIANT.fill}
-                disabled={!isValid}
+                disabled={!isValid || !!Object.keys(serverErrors).length}
                 onClick={onClick}
                 className={styles.button}
               >

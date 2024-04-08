@@ -39,7 +39,7 @@ export const registerValidator = ({
   const errors: ValidateErrors = { ...loginValidator({ email, password }) };
 
   if (login.length < 1) {
-    errors.login = "Login should not be empty";
+    errors.login = "Username should not be empty";
   }
 
   if (password2 !== password) {
