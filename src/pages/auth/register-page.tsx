@@ -125,7 +125,9 @@ export const RegisterPage = (): JSX.Element => {
                 type="email"
                 className={styles.field}
                 name="email"
-                onFocus={(e) => onFocus(e, "login")}
+                onFocus={(e: { target: { name: string } }) =>
+                  onFocus(e, "login")
+                }
               />
               <FieldError
                 message={getError(errors.email, serverErrors?.login)}
