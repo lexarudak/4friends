@@ -8,6 +8,7 @@ import { MouseEvent, useState } from "react";
 import classNames from "classnames";
 import { setActiveRoom } from "../../store/user/user.slice";
 import { CSSTransition } from "react-transition-group";
+import { AddRoom } from "./add-room/add-room";
 
 export const RoomSelector = (): JSX.Element => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,8 +22,9 @@ export const RoomSelector = (): JSX.Element => {
     dispatch(setActiveRoom(name));
   };
 
-  const body = document.getElementById("body");
-  isMenuOpen ? body?.classList.add("hold") : body?.classList.remove("hold");
+  isMenuOpen
+    ? document.documentElement.classList.add("hold")
+    : document.documentElement.classList.remove("hold");
 
   const cn = {
     [styles.container]: true,
@@ -32,8 +34,10 @@ export const RoomSelector = (): JSX.Element => {
   return (
     <>
       <div className={classNames(cn)}>
-        {isMenuOpen
-          ? rooms.map((room) =>
+        {isMenuOpen ? (
+          <>
+            <AddRoom />
+            {rooms.map((room) =>
               room === activeRoom ? null : (
                 <button
                   onClick={onClick}
@@ -44,8 +48,9 @@ export const RoomSelector = (): JSX.Element => {
                   {room}
                 </button>
               ),
-            )
-          : null}
+            )}
+          </>
+        ) : null}
         <button onClick={onClick} className={styles.btn} name={activeRoom}>
           {activeRoom}
         </button>

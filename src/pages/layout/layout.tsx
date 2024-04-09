@@ -21,10 +21,9 @@ export const Layout = (): JSX.Element => {
   const isModalOpen = useSelector(isModalOpenSelector);
 
   useEffect(() => {
-    const body = document.getElementById("body");
     isMenuOpen || isModalOpen
-      ? body?.classList.add("hold")
-      : body?.classList.remove("hold");
+      ? document.documentElement.classList.add("hold")
+      : document.documentElement.classList.remove("hold");
   });
 
   return (
