@@ -20,7 +20,7 @@ export const apiSlice = createApi({
     }),
     login: query({
       query: (loginData) => ({
-        url: "/loginUser.cfc?method=loginUser",
+        url: "/loginUserMain.cfc?method=loginUser",
         method: "POST",
         headers,
         body: JSON.stringify(loginData),
