@@ -11,12 +11,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { closeMenu, openModal } from "../../store/app/app.slice";
 import { FieldError } from "./field-error";
-import { registerValidator } from "./validators";
+import { getError, registerValidator } from "./validators";
 import { InfoModal } from "../../components/info-modal/info-modal";
 import { isModalOpenSelector } from "../../store/app/app.selector";
 import { MOCKED_TEXT } from "./text";
 import { useLazyRegisterQuery } from "../../store/api";
 import { Loading } from "../../components/loading/loading";
+import { CSSTransition } from "react-transition-group";
 
 export type RegisterValues = {
   login: string;
@@ -46,16 +47,16 @@ export const RegisterPage = (): JSX.Element => {
   }>({});
   const navigate = useNavigate();
   const [shouldValidate, setShouldValidate] = useState(false);
-  const [register, { isFetching, currentData }] = useLazyRegisterQuery();
+  const [register, { isFetching, currentData, isError }] =
+    useLazyRegisterQuery();
 
   const isModalOpen = useSelector(isModalOpenSelector);
 
-  const submit = async ({ login, email, password, room }: RegisterValues) => {
-    register({ login, email, password, room });
+  const submit = async (values: RegisterValues) => {
+    register(values);
   };
 
   useEffect(() => {
-    console.log(currentData);
     if (currentData?.SUCCESS) {
       navigate(ROUTE_LIST.home);
       return;
@@ -68,7 +69,7 @@ export const RegisterPage = (): JSX.Element => {
     } else {
       setServerErrors({});
     }
-  }, [currentData, isFetching]);
+  }, [currentData, isFetching, navigate]);
 
   const onClick = () => {
     setShouldValidate(true);
@@ -77,9 +78,6 @@ export const RegisterPage = (): JSX.Element => {
   const showModal = () => {
     dispatch(openModal());
   };
-
-  const getError = (validateError?: string, serverError?: string) =>
-    validateError || serverError;
 
   useEffect(() => {
     dispatch(closeMenu());
@@ -201,12 +199,17 @@ export const RegisterPage = (): JSX.Element => {
               >
                 Register
               </Button>
-
-              {isModalOpen ? (
+              <FieldError message={isError ? "Server error" : undefined} />
+              <CSSTransition
+                in={isModalOpen}
+                timeout={200}
+                classNames="popup"
+                unmountOnExit
+              >
                 <InfoModal onApply={() => setFieldValue("checkbox", true)}>
                   {<p>{MOCKED_TEXT}</p>}
                 </InfoModal>
-              ) : null}
+              </CSSTransition>
             </Form>
           </>
         )}

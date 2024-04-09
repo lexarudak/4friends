@@ -1,0 +1,43 @@
+// fade //
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+// popup //
+
+.popup-enter {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+.popup-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: 200ms;
+}
+
+.popup-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.popup-exit-active {
+  opacity: 0;
+  transform: scale(0.7);
+  transition: 200ms;
+}

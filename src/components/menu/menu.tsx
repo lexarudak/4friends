@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { isMenuOpenSelector } from "../../store/app/app.selector";
 import { closeMenu } from "../../store/app/app.slice";
 import { Nav } from "../nav/nav";
+import { CSSTransition } from "react-transition-group";
 
 export const Menu = (): JSX.Element => {
   const isOpen = useSelector(isMenuOpenSelector);
@@ -23,7 +24,9 @@ export const Menu = (): JSX.Element => {
       <aside className={classNames(cn)}>
         <Nav />
       </aside>
-      {isOpen ? <div className={styles.hover} onClick={close} /> : null}
+      <CSSTransition in={isOpen} timeout={200} classNames="fade" unmountOnExit>
+        <div className={styles.hover} onClick={close} />
+      </CSSTransition>
     </>
   );
 };

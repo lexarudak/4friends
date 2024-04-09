@@ -7,6 +7,7 @@ import {
 import { MouseEvent, useState } from "react";
 import classNames from "classnames";
 import { setActiveRoom } from "../../store/user/user.slice";
+import { CSSTransition } from "react-transition-group";
 
 export const RoomSelector = (): JSX.Element => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,9 +50,15 @@ export const RoomSelector = (): JSX.Element => {
           {activeRoom}
         </button>
       </div>
-      {isMenuOpen ? (
+
+      <CSSTransition
+        in={isMenuOpen}
+        timeout={200}
+        classNames="fade"
+        unmountOnExit
+      >
         <div className={styles.bg} onClick={() => setIsMenuOpen(false)} />
-      ) : null}
+      </CSSTransition>
     </>
   );
 };

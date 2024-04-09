@@ -5,6 +5,9 @@ export type ValidateErrors = {
   [key: string]: string;
 };
 
+export const getError = (validateError?: string, serverError?: string) =>
+  validateError || serverError;
+
 function isEmail(email: string) {
   const pattern = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
   return pattern.test(email);

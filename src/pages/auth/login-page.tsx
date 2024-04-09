@@ -11,8 +11,9 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { closeMenu } from "../../store/app/app.slice";
 import { FieldError } from "./field-error";
-import { loginValidator } from "./validators";
+import { getError, loginValidator } from "./validators";
 import { Loading } from "../../components/loading/loading";
+import { useLazyLoginQuery } from "../../store/api";
 
 export type LoginValues = {
   email: string;
@@ -28,22 +29,44 @@ export const LoginPage = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [shouldValidate, setShouldValidate] = useState(false);
+  const [serverErrors, setServerErrors] = useState<{
+    [key: string]: string;
+  }>({});
+  const [login, { isFetching, currentData, isError }] = useLazyLoginQuery();
   const submit = async (values: LoginValues) => {
-    console.log(values);
-
-    navigate(ROUTE_LIST.home);
+    login(values);
   };
+
+  useEffect(() => {
+    if (currentData?.SUCCESS) {
+      navigate(ROUTE_LIST.home);
+      return;
+    }
+
+    if (currentData?.ERRORFIELD) {
+      setServerErrors({
+        [currentData.ERRORFIELD]: currentData.MESSAGE,
+      });
+    } else {
+      setServerErrors({});
+    }
+  }, [currentData, isFetching, navigate]);
 
   const onClick = () => {
     setShouldValidate(true);
   };
 
-  const getError = (validateError?: string, serverError?: string) =>
-    validateError || serverError;
-
   useEffect(() => {
     dispatch(closeMenu());
   }, []);
+
+  const onFocus = (
+    { target: { name } }: { target: { name: string } },
+    otherName?: string,
+  ) => {
+    if (name in serverErrors) setServerErrors({});
+    if (otherName && otherName in serverErrors) setServerErrors({});
+  };
 
   return (
     <Formik
@@ -67,22 +90,39 @@ export const LoginPage = (): JSX.Element => {
           </h2>
           <Form className={styles.form}>
             <p className={styles.text}>Email</p>
-            <Field type="email" className={styles.field} name="email" />
-            <FieldError message={getError(errors.email)} />
+            <Field
+              type="email"
+              className={styles.field}
+              name="email"
+              onFocus={onFocus}
+              disabled={isFetching}
+            />
+            <FieldError message={getError(errors.email, serverErrors?.email)} />
             <p className={styles.text}>Password</p>
-            <Field type="password" className={styles.field} name="password" />
-            <FieldError message={getError(errors.password)} />
+            <Field
+              type="password"
+              className={styles.field}
+              name="password"
+              onFocus={onFocus}
+              disabled={isFetching}
+            />
+            <FieldError
+              message={getError(errors.password, serverErrors?.password)}
+            />
 
             <Button
               type="submit"
               color={BUTTON_COLOR.active}
               variant={BUTTON_VARIANT.fill}
-              disabled={!isValid}
+              disabled={
+                !isValid || !!Object.keys(serverErrors).length || isFetching
+              }
               onClick={onClick}
               className={styles.button}
             >
               Login
             </Button>
+            <FieldError message={isError ? "Server error" : undefined} />
           </Form>
         </>
       )}

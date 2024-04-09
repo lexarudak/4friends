@@ -18,7 +18,15 @@ export const apiSlice = createApi({
         body: JSON.stringify(regData),
       }),
     }),
+    login: query({
+      query: (loginData) => ({
+        url: "/loginUser.cfc?method=loginUser",
+        method: "POST",
+        headers,
+        body: JSON.stringify(loginData),
+      }),
+    }),
   }),
 });
 
-export const { useLazyRegisterQuery } = apiSlice;
+export const { useLazyRegisterQuery, useLazyLoginQuery } = apiSlice;
