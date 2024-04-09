@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { closeMenu } from "../../store/app/app.slice";
 import { FieldError } from "./field-error";
 import { loginValidator } from "./validators";
+import { Loading } from "../../components/loading/loading";
 
 export type LoginValues = {
   email: string;
@@ -56,14 +57,13 @@ export const LoginPage = (): JSX.Element => {
         <>
           <h2 className={styles.title}>
             Login
-            <span className={styles.subtitle}>
-              {" | "}
-              {
-                <Link to={ROUTE_LIST.register} className={styles.link}>
-                  Register
-                </Link>
-              }
-            </span>
+            <span className={styles.subtitle}>{" | "}</span>
+            {
+              <Link to={ROUTE_LIST.register} className={styles.link}>
+                Register
+              </Link>
+            }
+            <Loading loading={false} />
           </h2>
           <Form className={styles.form}>
             <p className={styles.text}>Email</p>

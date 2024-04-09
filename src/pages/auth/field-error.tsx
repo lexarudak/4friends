@@ -9,5 +9,5 @@ export const FieldError: FC<Props> = ({ message }): JSX.Element => {
   if (message) {
     return <p className={styles.error}>{message}</p>;
   }
-  return <p className={styles.placeholder}>placeholder</p>;
+  return <p className={styles.placeholder}>.</p>;
 };

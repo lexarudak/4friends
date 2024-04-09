@@ -44,13 +44,13 @@
     }
     
     &:disabled {
-      border: 2px solid $clr-ui-02;
-      background-color: $clr-ui-02;
       cursor: default;
+      background-color: light-dark(rgba(239, 239, 239, 0.3), rgba(59, 59, 59, 0.3));
+      border-color: rgba(157, 157, 157, 0.152);
 
       &:hover{
-        border: 2px solid $clr-ui-02;
-        background-color: $clr-ui-02;
+        background-color: light-dark(rgba(239, 239, 239, 0.3), rgba(59, 59, 59, 0.3));
+        border-color: rgba(157, 157, 157, 0.152);
       }
     }
   }

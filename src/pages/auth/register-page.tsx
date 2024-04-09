@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import styles from "./auth.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ROUTE_LIST } from "../../router/route-list";
 import {
   BUTTON_COLOR,
@@ -16,6 +16,7 @@ import { InfoModal } from "../../components/info-modal/info-modal";
 import { isModalOpenSelector } from "../../store/app/app.selector";
 import { MOCKED_TEXT } from "./text";
 import { useLazyRegisterQuery } from "../../store/api";
+import { Loading } from "../../components/loading/loading";
 
 export type RegisterValues = {
   login: string;
@@ -43,11 +44,10 @@ export const RegisterPage = (): JSX.Element => {
   const [serverErrors, setServerErrors] = useState<{
     [key: string]: string;
   }>({});
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [shouldValidate, setShouldValidate] = useState(false);
   const [register, { isFetching, currentData }] = useLazyRegisterQuery();
 
-  // navigate(ROUTE_LIST.home);
   const isModalOpen = useSelector(isModalOpenSelector);
 
   const submit = async ({ login, email, password, room }: RegisterValues) => {
@@ -55,6 +55,12 @@ export const RegisterPage = (): JSX.Element => {
   };
 
   useEffect(() => {
+    console.log(currentData);
+    if (currentData?.SUCCESS) {
+      navigate(ROUTE_LIST.home);
+      return;
+    }
+
     if (currentData?.ERRORFIELD) {
       setServerErrors({
         [currentData.ERRORFIELD]: currentData.MESSAGE,
@@ -100,14 +106,13 @@ export const RegisterPage = (): JSX.Element => {
           <>
             <h2 className={styles.title}>
               Register
-              <span className={styles.subtitle}>
-                {" | "}
-                {
-                  <Link to={ROUTE_LIST.login} className={styles.link}>
-                    Login
-                  </Link>
-                }
-              </span>
+              <span className={styles.subtitle}>{" | "}</span>
+              {
+                <Link to={ROUTE_LIST.login} className={styles.link}>
+                  Login
+                </Link>
+              }
+              <Loading loading={isFetching} />
             </h2>
             <Form className={styles.form}>
               <p className={styles.text}>Username</p>
@@ -116,6 +121,7 @@ export const RegisterPage = (): JSX.Element => {
                 className={styles.field}
                 name="login"
                 onFocus={onFocus}
+                disabled={isFetching}
               />
               <FieldError
                 message={getError(errors.login, serverErrors?.login)}
@@ -128,6 +134,7 @@ export const RegisterPage = (): JSX.Element => {
                 onFocus={(e: { target: { name: string } }) =>
                   onFocus(e, "login")
                 }
+                disabled={isFetching}
               />
               <FieldError
                 message={getError(errors.email, serverErrors?.login)}
@@ -140,6 +147,7 @@ export const RegisterPage = (): JSX.Element => {
                     type="password"
                     className={styles.field}
                     name="password"
+                    disabled={isFetching}
                   />
                 </div>
                 <div className={styles.subBlock}>
@@ -148,6 +156,7 @@ export const RegisterPage = (): JSX.Element => {
                     type="password"
                     className={styles.field}
                     name="password2"
+                    disabled={isFetching}
                   />
                 </div>
               </div>
@@ -159,6 +168,7 @@ export const RegisterPage = (): JSX.Element => {
                 className={styles.field}
                 name="room"
                 onFocus={onFocus}
+                disabled={isFetching}
               />
               <FieldError message={getError(errors.room, serverErrors?.room)} />
               <div className={styles.policy}>
@@ -166,11 +176,13 @@ export const RegisterPage = (): JSX.Element => {
                   type="checkbox"
                   className={styles.checkbox}
                   name="checkbox"
+                  disabled={isFetching}
                 />
                 <button
                   type="button"
                   onClick={showModal}
                   className={styles.policyText}
+                  disabled={isFetching}
                 >
                   {POLICY_TEXT}
                 </button>
@@ -181,12 +193,15 @@ export const RegisterPage = (): JSX.Element => {
                 type="submit"
                 color={BUTTON_COLOR.active}
                 variant={BUTTON_VARIANT.fill}
-                disabled={!isValid || !!Object.keys(serverErrors).length}
+                disabled={
+                  !isValid || !!Object.keys(serverErrors).length || isFetching
+                }
                 onClick={onClick}
                 className={styles.button}
               >
                 Register
               </Button>
+
               {isModalOpen ? (
                 <InfoModal onApply={() => setFieldValue("checkbox", true)}>
                   {<p>{MOCKED_TEXT}</p>}

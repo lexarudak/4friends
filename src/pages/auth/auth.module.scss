@@ -1,11 +1,20 @@
 .title {
   padding-top: 80px;
   padding-bottom: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .subtitle {
+  padding-left: 10px;
   color: $clr-secondary-02;
-  font-weight: 400;
+}
+
+.link {
+  color: $clr-secondary-02;
+  font-weight: 600;
+  text-decoration: underline;
+  padding: 0 20px 0 10px;
 }
 
 
@@ -42,11 +51,7 @@
   color: transparent;
 }
 
-.link {
-  padding-top: 40px;
-  text-decoration: underline;
-  font-weight: 600;
-}
+
 
 .field {
   padding: 10px 20px;
@@ -82,9 +87,16 @@
 .checkbox {
   margin-top: 3px;
   cursor: pointer;
+  &:disabled {
+    cursor: default;
+  }
 }
 
 .policyText {
   text-align: start;
   text-decoration: underline;
+  &:disabled {
+    color: rgba(255, 255, 255, 0.541);
+    cursor: default;
+  }
 }

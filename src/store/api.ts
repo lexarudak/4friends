@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const ORIGIN = "http://176.57.70.40:8080/rest4friends/cfc";
+const ORIGIN = "https://api.4friends.live/rest4friends/cfc";
 
 const headers = {
   "Content-Type": "application/json",

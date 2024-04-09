@@ -98,3 +98,60 @@ fieldset {
   padding: 0;
   min-width: 0;
 }
+
+$size: 35vh;
+
+.cube {
+	animation: rotate infinite normal 3s linear;
+	height: $size;
+	transform-style: preserve-3d;
+	width: $size;
+	position: absolute;
+	top: calc(50% - #{$size/2});
+	left: calc(50% - #{$size/2});
+	perspective: 0;
+	backface-visibility: visible;
+	perspective-origin: 50% 50%;
+	transform-style: preserve-3d;
+	
+	&__side {
+		background: #ff006688;
+		border: 2px solid #111;
+		height: 100%;
+		position: absolute;
+		width: 100%;
+		
+		&--top {
+			transform: rotateX(90deg) translateZ($size/2);
+		}
+		
+		&--bottom {
+		 	transform: rotateX(-90deg) translateZ($size/2);
+		}
+		
+		&--left {
+    		transform: rotateY(-90deg) translateZ($size/2);
+		}
+		
+		&--right {
+    		transform: rotateY(90deg) translateZ($size/2);
+		}
+		
+		&--front {
+    		transform: translateZ($size/2);
+		}
+		
+		&--back {
+    		transform: rotateY(180deg) translateZ($size/2);
+		}
+	}
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate3d(1, 1, 1, 360deg);
+	}
+	to {
+		transform: rotate3d(1, 0, 0, 0);
+	}
+}
