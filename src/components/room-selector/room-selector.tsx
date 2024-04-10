@@ -34,23 +34,20 @@ export const RoomSelector = (): JSX.Element => {
   return (
     <>
       <div className={classNames(cn)}>
-        {isMenuOpen ? (
-          <>
-            <AddRoom />
-            {rooms.map((room) =>
-              room === activeRoom ? null : (
-                <button
-                  onClick={onClick}
-                  className={styles.btn}
-                  key={room}
-                  name={room}
-                >
-                  {room}
-                </button>
-              ),
-            )}
-          </>
-        ) : null}
+        <AddRoom />
+        {rooms.map((room) =>
+          room === activeRoom ? null : (
+            <button
+              onClick={onClick}
+              className={styles.btn}
+              key={room}
+              name={room}
+            >
+              {room}
+            </button>
+          ),
+        )}
+
         <button
           onClick={onClick}
           className={classNames(styles.btn, isMenuOpen ? styles.active : "")}
