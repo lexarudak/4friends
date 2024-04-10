@@ -16,8 +16,8 @@ export const Table: FC<Props> = ({ cn }): JSX.Element => {
     <section className={classNames(styles.container, cn)}>
       <h2 className={styles.title}>Table</h2>
       <ul className={styles.list}>
-        {users.map(({ name, points }, ind) => (
-          <UserCard name={name} points={points} key={ind} />
+        {users.map(({ username, points }, ind) => (
+          <UserCard name={username} points={points} key={ind} />
         ))}
       </ul>
     </section>

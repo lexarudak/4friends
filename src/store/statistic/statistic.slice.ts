@@ -1,15 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export type User = {
-  name: string;
+export type UserPoints = {
+  username: string;
   points: number;
 };
 
-const mockedTable: User[] = [
-  { name: "Val", points: 101 },
-  { name: "kam", points: 94 },
-  { name: "valera", points: 5 },
-  { name: "Man with real long username username username username", points: 0 },
+const mockedTable: UserPoints[] = [
+  { username: "Val", points: 101 },
+  { username: "kam", points: 94 },
+  { username: "valera", points: 5 },
+  {
+    username: "Man with real long username username username username",
+    points: 0,
+  },
 ];
 
 const initialState = {

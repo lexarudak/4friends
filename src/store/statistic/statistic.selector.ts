@@ -1,5 +1,5 @@
 import { RootState } from "../store";
-import { User } from "./statistic.slice";
+import { UserPoints } from "./statistic.slice";
 
-export const tableSelector = (state: RootState): User[] =>
+export const tableSelector = (state: RootState): UserPoints[] =>
   state.statisticSlice.table;
