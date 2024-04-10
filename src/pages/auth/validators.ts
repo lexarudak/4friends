@@ -13,6 +13,16 @@ function isEmail(email: string) {
   return pattern.test(email);
 }
 
+export const roomValidator = ({ room }: { room: string }) => {
+  const errors: ValidateErrors = {};
+
+  if (room.length < 1) {
+    errors.room = "Room should not be empty";
+  }
+
+  return errors;
+};
+
 export const loginValidator = ({ email, password }: LoginValues) => {
   const errors: ValidateErrors = {};
 
@@ -39,7 +49,10 @@ export const registerValidator = ({
   login,
   checkbox,
 }: RegisterValues) => {
-  const errors: ValidateErrors = { ...loginValidator({ email, password }) };
+  const errors: ValidateErrors = {
+    ...loginValidator({ email, password }),
+    ...roomValidator({ room }),
+  };
 
   if (login.length < 1) {
     errors.login = "Username should not be empty";
@@ -47,10 +60,6 @@ export const registerValidator = ({
 
   if (password2 !== password) {
     errors.password = "Passwords do not match";
-  }
-
-  if (room.length < 1) {
-    errors.room = "Room should not be empty";
   }
 
   if (!checkbox) {

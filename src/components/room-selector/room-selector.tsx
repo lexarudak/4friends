@@ -51,7 +51,11 @@ export const RoomSelector = (): JSX.Element => {
             )}
           </>
         ) : null}
-        <button onClick={onClick} className={styles.btn} name={activeRoom}>
+        <button
+          onClick={onClick}
+          className={classNames(styles.btn, isMenuOpen ? styles.active : "")}
+          name={activeRoom}
+        >
           {activeRoom}
         </button>
       </div>

@@ -1,6 +1,18 @@
 .container {
   width: 100%;
   position: relative;
+
+  .success {
+    color: $clr-secondary-02;
+  }
+}
+
+.status {
+  background-color: white;
+  padding: 0 9px 5px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .input {

@@ -11,9 +11,9 @@
   color: $clr-text-01;
   width: 535px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  gap: 20px;
   transition: .2s;
   flex-grow: 1;
+  gap: 20px;
   
   &.active {
     padding: 50px 20px 20px;
@@ -30,9 +30,21 @@
 }
 
 .btn {
-  display: flex;
-  flex-direction: column;
   width: 100%;
+  text-align: start;
+
+  &.active {
+    &::after {
+      content: "";
+      display: inline-block;
+      background-color: white;
+      border-radius: 100%;
+      width: 5px;
+      height: 5px;
+      margin-left: 10px;
+      margin-bottom: 2px;
+    }
+  }
 }
 
 .bg {
