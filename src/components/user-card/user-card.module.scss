@@ -3,8 +3,8 @@
   color: $clr-primary-01;
   padding: 10px 20px;
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  // justify-content: space-between;
+  gap: 10px;
 
   &:first-child {
     background-color: $clr-data-02;
@@ -17,4 +17,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 85%;
+  min-width: 18px;
+
+  &:last-child {
+    margin-left: auto;
+  }
 }

@@ -23,8 +23,8 @@ export const RoomSelector = (): JSX.Element => {
   };
 
   isMenuOpen
-    ? document.documentElement.classList.add("hold")
-    : document.documentElement.classList.remove("hold");
+    ? document.body.classList.add("hold")
+    : document.body.classList.remove("hold");
 
   const cn = {
     [styles.container]: true,
