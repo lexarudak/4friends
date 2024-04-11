@@ -18,6 +18,7 @@ import { MOCKED_TEXT } from "./text";
 import { useLazyRegisterQuery } from "../../store/api";
 import { Loading } from "../../components/loading/loading";
 import { CSSTransition } from "react-transition-group";
+import Cookies from "js-cookie";
 
 export type RegisterValues = {
   login: string;
@@ -58,6 +59,7 @@ export const RegisterPage = (): JSX.Element => {
 
   useEffect(() => {
     if (currentData?.SUCCESS) {
+      Cookies.set("TOKEN", currentData.login?.TOKEN);
       navigate(ROUTE_LIST.home);
       return;
     }

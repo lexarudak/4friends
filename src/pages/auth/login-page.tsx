@@ -14,6 +14,7 @@ import { FieldError } from "./field-error";
 import { getError, loginValidator } from "./validators";
 import { Loading } from "../../components/loading/loading";
 import { useLazyLoginQuery } from "../../store/api";
+import Cookies from "js-cookie";
 
 export type LoginValues = {
   email: string;
@@ -39,6 +40,7 @@ export const LoginPage = (): JSX.Element => {
 
   useEffect(() => {
     if (currentData?.SUCCESS) {
+      Cookies.set("TOKEN", currentData.TOKEN);
       navigate(ROUTE_LIST.home);
       return;
     }
