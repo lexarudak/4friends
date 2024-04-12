@@ -21,5 +21,7 @@
 
   &:last-child {
     margin-left: auto;
+    text-align: end;
+    min-width: 40px;
   }
 }
