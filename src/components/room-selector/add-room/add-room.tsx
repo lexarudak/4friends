@@ -69,6 +69,7 @@ export const AddRoom: FC<Props> = ({
         if (!isOpen && (values.room || errors.room)) {
           resetForm();
           setServerErrors({});
+          setSuccessMessage("");
         }
 
         return (
