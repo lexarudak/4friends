@@ -49,12 +49,16 @@ export const RoomSelector = (): JSX.Element => {
     <>
       <div className={styles.mobileDeco} />
       <div className={classNames(cn)}>
-        <AddRoom isLoading={isFetching} isOpen={isMenuOpen} />
+        <AddRoom
+          isLoading={isFetching}
+          isOpen={isMenuOpen}
+          className={isMenuOpen ? styles.active : ""}
+        />
         {Object.entries(rooms).map(([key, room]) =>
           key === activeRoom ? null : (
             <button
               onClick={onClick}
-              className={styles.btn}
+              className={classNames(styles.btn, isMenuOpen ? "" : styles.hide)}
               key={key}
               name={room}
               id={key}

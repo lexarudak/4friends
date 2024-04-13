@@ -7,6 +7,7 @@ import { FC, useState } from "react";
 import { useLazyAddRoomQuery, useLazyUserQuery } from "../../../store/api";
 import { useSelector } from "react-redux";
 import { userIdSelector } from "../../../store/user/user.selector";
+import classNames from "classnames";
 
 const DEFAULT_SUCCESS = "Room successfully added!";
 
@@ -17,9 +18,14 @@ type ServerError = {
 type Props = {
   isOpen: boolean;
   isLoading?: boolean;
+  className?: string;
 };
 
-export const AddRoom: FC<Props> = ({ isOpen, isLoading }): JSX.Element => {
+export const AddRoom: FC<Props> = ({
+  isOpen,
+  isLoading,
+  className,
+}): JSX.Element => {
   const [serverErrors, setServerErrors] = useState<ServerError>({});
   const [successMessage, setSuccessMessage] = useState("");
   const userid = useSelector(userIdSelector);
@@ -66,7 +72,7 @@ export const AddRoom: FC<Props> = ({ isOpen, isLoading }): JSX.Element => {
         }
 
         return (
-          <Form className={styles.container}>
+          <Form className={classNames(styles.container, className)}>
             <Field
               type="text"
               className={styles.input}

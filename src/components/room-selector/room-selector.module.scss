@@ -1,8 +1,8 @@
 .mobileDeco {
   position: fixed;
-  height: 100px;
+  height: 101px;
   top: -100px;
-  z-index: 201;
+  z-index: 203;
   background-color: $clr-data-02;
   width: 535px;
 
@@ -14,7 +14,7 @@
 .container {
   transform: translateY(calc(-100% + 25px));
   position: fixed;
-  z-index: 201;
+  z-index: 202;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -39,9 +39,15 @@
 
 .btn {
   transition: .3s;
+  color: white;
   width: 100%;
   text-align: start;
   transform: translateX(-26px);
+
+  &.hide {
+    color: transparent;
+  }
+
   &::before {
       transition: .3s;
       content: ">> ";
@@ -50,7 +56,8 @@
     }
 
   &.active {
-  transform: translateX(0);
+    transform: translateX(0);
+
     &::before {
       color: white;
       transform: translateX(0);
@@ -67,4 +74,8 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba($clr-support-02, 0.7);
+}
+
+form.active {
+  opacity: 1;
 }
