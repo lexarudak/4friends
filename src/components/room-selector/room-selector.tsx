@@ -47,8 +47,9 @@ export const RoomSelector = (): JSX.Element => {
 
   return (
     <>
+      <div className={styles.mobileDeco} />
       <div className={classNames(cn)}>
-        <AddRoom isLoading={isFetching} />
+        <AddRoom isLoading={isFetching} isOpen={isMenuOpen} />
         {Object.entries(rooms).map(([key, room]) =>
           key === activeRoom ? null : (
             <button

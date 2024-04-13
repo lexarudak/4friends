@@ -15,12 +15,12 @@ type ServerError = {
 };
 
 type Props = {
-  severError?: ServerError;
+  isOpen: boolean;
   isLoading?: boolean;
 };
 
-export const AddRoom: FC<Props> = ({ severError, isLoading }): JSX.Element => {
-  const [serverErrors, setServerErrors] = useState(severError || {});
+export const AddRoom: FC<Props> = ({ isOpen, isLoading }): JSX.Element => {
+  const [serverErrors, setServerErrors] = useState<ServerError>({});
   const [successMessage, setSuccessMessage] = useState("");
   const userid = useSelector(userIdSelector);
 
@@ -56,37 +56,45 @@ export const AddRoom: FC<Props> = ({ severError, isLoading }): JSX.Element => {
       initialValues={{ room: "" }}
       onSubmit={submit}
       validateOnMount={false}
+      validateOnBlur={false}
       validate={roomValidator}
     >
-      {({ errors, submitForm }) => (
-        <Form className={styles.container}>
-          <Field
-            type="text"
-            className={styles.input}
-            name="room"
-            placeholder="Add room"
-            onFocus={onFocus}
-            disabled={false}
-          />
+      {({ errors, submitForm, resetForm, values }) => {
+        if (!isOpen && (values.room || errors.room)) {
+          resetForm();
+          setServerErrors({});
+        }
 
-          <div className={styles.status}>
-            <FieldError
-              message={
-                successMessage || getError(errors.room, serverErrors?.room)
-              }
-              className={successMessage ? styles.success : ""}
+        return (
+          <Form className={styles.container}>
+            <Field
+              type="text"
+              className={styles.input}
+              name="room"
+              placeholder="Add room"
+              onFocus={onFocus}
+              disabled={false}
             />
-            <Loading
-              size={20}
-              loading={isLoading || isFetching || updateFetching}
-            />
-          </div>
 
-          <button className={styles.btn} type="submit" onClick={submitForm}>
-            +
-          </button>
-        </Form>
-      )}
+            <div className={styles.status}>
+              <FieldError
+                message={
+                  successMessage || getError(errors.room, serverErrors?.room)
+                }
+                className={successMessage ? styles.success : ""}
+              />
+              <Loading
+                size={20}
+                loading={isLoading || isFetching || updateFetching}
+              />
+            </div>
+
+            <button className={styles.btn} type="submit" onClick={submitForm}>
+              +
+            </button>
+          </Form>
+        );
+      }}
     </Formik>
   );
 };
