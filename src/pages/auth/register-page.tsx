@@ -9,13 +9,17 @@ import {
 } from "../../components/button/button";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { closeMenu, openModal } from "../../store/app/app.slice";
+import {
+  closeMenu,
+  openModal,
+  removeServerError,
+} from "../../store/app/app.slice";
 import { FieldError } from "./field-error";
 import { getError, registerValidator } from "./validators";
 import { InfoModal } from "../../components/info-modal/info-modal";
 import { isModalOpenSelector } from "../../store/app/app.selector";
 import { MOCKED_TEXT } from "./text";
-import { useLazyRegisterQuery } from "../../store/api";
+import { useLazyRegisterQuery, useLazyUserQuery } from "../../store/api";
 import { Loading } from "../../components/loading/loading";
 import { CSSTransition } from "react-transition-group";
 
@@ -49,19 +53,22 @@ export const RegisterPage = (): JSX.Element => {
   const [shouldValidate, setShouldValidate] = useState(false);
   const [register, { isFetching, currentData, isError }] =
     useLazyRegisterQuery();
+  const [user] = useLazyUserQuery();
 
   const isModalOpen = useSelector(isModalOpenSelector);
 
   const submit = async (values: RegisterValues) => {
-    register(values);
+    const { data } = await register(values);
+    if (data && data.SUCCESS) {
+      const { data: userData } = await user({});
+      if (userData && userData.SUCCESS) {
+        dispatch(removeServerError());
+        navigate(ROUTE_LIST.home);
+      }
+    }
   };
 
   useEffect(() => {
-    if (currentData?.SUCCESS) {
-      navigate(ROUTE_LIST.home);
-      return;
-    }
-
     if (currentData?.ERRORFIELD) {
       setServerErrors({
         [currentData.ERRORFIELD]: currentData.MESSAGE,

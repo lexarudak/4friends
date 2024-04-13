@@ -45,11 +45,9 @@ export const LoginPage = (): JSX.Element => {
     const { data } = await login(values);
     if (data && data.SUCCESS) {
       const { data: userData } = await user({});
-      console.log("SUCCESS LOGIN", { data });
       if (userData && userData.SUCCESS) {
         dispatch(removeServerError());
         navigate(ROUTE_LIST.home);
-        console.log("SUCCESS USER", { userData });
       }
     }
   };
