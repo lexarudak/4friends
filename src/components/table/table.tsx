@@ -21,16 +21,16 @@ export const Table: FC<Props> = ({
   title,
   moreStatistic,
 }): JSX.Element => {
-  const sortedUsers = [...users].sort((a, b) => b.points - a.points);
+  const sortedUsers = [...users].sort((a, b) => b.POINTS - a.POINTS);
 
   return users.length ? (
     <section className={classNames(styles.container, cn)}>
       <h2 className={styles.title}>{title}</h2>
       <ul className={styles.list}>
-        {sortedUsers.map(({ username, points }, ind) => (
+        {sortedUsers.map(({ USERNAME, POINTS }, ind) => (
           <UserCard
-            name={username}
-            points={points}
+            name={USERNAME}
+            points={POINTS}
             key={ind}
             position={usePositions ? ind + 1 : null}
           />

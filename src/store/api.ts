@@ -9,7 +9,6 @@ const headers = {
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: ORIGIN, credentials: "include" }),
-  // baseQuery: fetchBaseQuery({ baseUrl: ORIGIN }),
   endpoints: ({ query }) => ({
     register: query({
       query: (regData) => ({
@@ -44,6 +43,9 @@ export const apiSlice = createApi({
         body: JSON.stringify(roomData),
       }),
     }),
+    totalScore: query({
+      query: () => "cfc/getTotalPoints.cfc?method=getTotalPoints",
+    }),
   }),
 });
 
@@ -54,4 +56,5 @@ export const {
   useLazyUserQuery,
   useLazyAddRoomQuery,
   useLazySetRoomQuery,
+  useTotalScoreQuery,
 } = apiSlice;
