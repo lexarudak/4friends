@@ -8,3 +8,6 @@ export const nextMatchSelector = (state: RootState): number =>
 
 export const isModalOpenSelector = (state: RootState): boolean =>
   state.appSlice.isModalOpen;
+
+export const isServerErrorSelector = (state: RootState) =>
+  state.appSlice.serverError;

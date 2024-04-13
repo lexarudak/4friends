@@ -1,15 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { apiSlice } from "../api";
+
+export type Rooms = {
+  [key: string]: string;
+};
 
 type UserInfo = {
   username: string;
   activeRoom: string;
-  rooms: string[];
+  rooms: Rooms;
+  userId: number;
 };
 
 const initialState: UserInfo = {
-  username: "User",
-  activeRoom: "Test room",
-  rooms: ["Test room", "Second room", "One more room"],
+  username: "",
+  activeRoom: "",
+  rooms: {},
+  userId: 0,
 };
 
 const userSlice = createSlice({
@@ -19,6 +26,19 @@ const userSlice = createSlice({
     setActiveRoom(state, action) {
       state.activeRoom = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      apiSlice.endpoints.user.matchFulfilled,
+      (state, { payload }) => {
+        if (payload.SUCCESS) {
+          state.activeRoom = payload.DATA.ACTIVEROOM.toString();
+          state.rooms = payload.DATA.ROOMS;
+          console.log("success", payload, state);
+        }
+        console.log("other fail", payload);
+      },
+    );
   },
 });
 

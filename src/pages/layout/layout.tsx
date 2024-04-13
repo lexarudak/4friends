@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import styles from "./layout.module.scss";
 import { Header } from "./header/header";
 import { Footer } from "./footer/footer";
@@ -9,22 +9,41 @@ import { useSelector } from "react-redux";
 import {
   isMenuOpenSelector,
   isModalOpenSelector,
+  isServerErrorSelector,
 } from "../../store/app/app.selector";
 import { RoomSelector } from "../../components/room-selector/room-selector";
+import { useUserQuery } from "../../store/api";
+import { FirstLoading } from "../../components/loading/first-loading";
 
-const noMenuList: string[] = [ROUTE_LIST.login, ROUTE_LIST.register];
+const regPages: string[] = [ROUTE_LIST.login, ROUTE_LIST.register];
 
 export const Layout = (): JSX.Element => {
+  const { isFetching } = useUserQuery({});
   const { pathname } = useLocation();
-  const showMenu = !noMenuList.includes(pathname);
+  const showMenu = !regPages.includes(pathname);
   const isMenuOpen = useSelector(isMenuOpenSelector);
   const isModalOpen = useSelector(isModalOpenSelector);
+  const severError = useSelector(isServerErrorSelector);
+  const showMainLoading =
+    (isFetching || severError.isError) && !regPages.includes(pathname);
+  const navigate = useNavigate();
 
   useEffect(() => {
     isMenuOpen || isModalOpen
       ? document.body.classList.add("hold")
       : document.body.classList.remove("hold");
   });
+
+  useEffect(() => {
+    console.log({ isFetching });
+  }, [isFetching]);
+
+  useEffect(() => {
+    if (severError.isError && !regPages.includes(pathname)) {
+      console.log(severError.message);
+      navigate(ROUTE_LIST.login);
+    }
+  }, [severError, navigate, pathname]);
 
   return (
     <>
@@ -35,6 +54,7 @@ export const Layout = (): JSX.Element => {
         <Outlet />
       </main>
       <Footer />
+      {showMainLoading && <FirstLoading />}
     </>
   );
 };

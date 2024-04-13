@@ -4,6 +4,9 @@ import { Loading } from "../../loading/loading";
 import styles from "./add-room.module.scss";
 import { getError, roomValidator } from "../../../pages/auth/validators";
 import { useState } from "react";
+import { useLazyAddRoomQuery, useLazyUserQuery } from "../../../store/api";
+import { useSelector } from "react-redux";
+import { userIdSelector } from "../../../store/user/user.selector";
 
 const DEFAULT_SUCCESS = "Room successfully added!";
 
@@ -12,9 +15,25 @@ export const AddRoom = (): JSX.Element => {
     [key: string]: string;
   }>({});
   const [successMessage, setSuccessMessage] = useState("");
-  const submit = ({ room }: { room: string }) => {
-    console.log({ room });
-    setSuccessMessage(DEFAULT_SUCCESS);
+  const userid = useSelector(userIdSelector);
+
+  const [send, { isFetching }] = useLazyAddRoomQuery();
+  const [updateUser, { isFetching: updateFetching }] = useLazyUserQuery({});
+
+  const submit = async ({ room }: { room: string }) => {
+    const { data } = await send({
+      userid,
+      roomname: room,
+    });
+
+    if (data.SUCCESS) {
+      setSuccessMessage(DEFAULT_SUCCESS);
+      updateUser({});
+    }
+
+    if (!data.SUCCESS) {
+      setServerErrors({ room: data.MESSAGE || "Server error" });
+    }
   };
   const onFocus = (
     { target: { name } }: { target: { name: string } },
@@ -50,7 +69,7 @@ export const AddRoom = (): JSX.Element => {
               }
               className={successMessage ? styles.success : ""}
             />
-            <Loading size={20} loading={false} />
+            <Loading size={20} loading={isFetching || updateFetching} />
           </div>
 
           <button className={styles.btn} type="submit" onClick={submitForm}>

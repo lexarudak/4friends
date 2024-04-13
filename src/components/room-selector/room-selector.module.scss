@@ -1,5 +1,5 @@
 .container {
-  top: -165px;
+  transform: translateY(calc(-100% + 25px));
   position: fixed;
   z-index: 201;
   display: flex;
@@ -16,7 +16,7 @@
   
   &.active {
     padding: 20px;
-    top: 0px;
+    transform: translateY(0);
   }
 
   @include mediaMax('l') {

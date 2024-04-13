@@ -16,10 +16,9 @@ export const RoomSelector = (): JSX.Element => {
   const dispatch = useDispatch();
   const rooms = useSelector(roomsSelector);
   const onClick = (e: MouseEvent) => {
-    const { name } = e.target as HTMLButtonElement;
-    console.log({ name, activeRoom });
+    const { id } = e.target as HTMLButtonElement;
     setIsMenuOpen((prev) => !prev);
-    dispatch(setActiveRoom(name));
+    dispatch(setActiveRoom(id));
   };
 
   isMenuOpen
@@ -35,13 +34,14 @@ export const RoomSelector = (): JSX.Element => {
     <>
       <div className={classNames(cn)}>
         <AddRoom />
-        {rooms.map((room) =>
-          room === activeRoom ? null : (
+        {Object.entries(rooms).map(([key, room]) =>
+          key === activeRoom ? null : (
             <button
               onClick={onClick}
               className={styles.btn}
-              key={room}
+              key={key}
               name={room}
+              id={key}
             >
               {room}
             </button>
@@ -51,9 +51,10 @@ export const RoomSelector = (): JSX.Element => {
         <button
           onClick={onClick}
           className={classNames(styles.btn, isMenuOpen ? styles.active : "")}
-          name={activeRoom}
+          name={rooms[activeRoom]}
+          id={activeRoom}
         >
-          {activeRoom}
+          {rooms[activeRoom]}
         </button>
       </div>
 

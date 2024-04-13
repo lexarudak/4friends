@@ -4,6 +4,7 @@ import styles from "./nav.module.scss";
 import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../button/button";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../../store/app/app.slice";
+import Cookies from "js-cookie";
 
 const NAV_LIST = {
   Home: ROUTE_LIST.home,
@@ -20,8 +21,9 @@ export const Nav = (): JSX.Element => {
   };
 
   const logout = () => {
+    Cookies.remove("TOKEN", { path: "/", domain: ".4friends.live" });
     close();
-    console.log("LOG OUT");
+    console.log(" 2 LOG OUT");
   };
 
   return (

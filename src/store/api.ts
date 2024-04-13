@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const ORIGIN = "https://api.4friends.live/rest4friends/cfc";
+const ORIGIN = "https://api.4friends.live/rest4friends";
 
 const headers = {
   "Content-Type": "application/json",
@@ -8,11 +8,12 @@ const headers = {
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: ORIGIN }),
+  baseQuery: fetchBaseQuery({ baseUrl: ORIGIN, credentials: "include" }),
+  // baseQuery: fetchBaseQuery({ baseUrl: ORIGIN }),
   endpoints: ({ query }) => ({
     register: query({
       query: (regData) => ({
-        url: "/registerUser.cfc?method=registerUser",
+        url: "/cfc/registerUser.cfc?method=registerUser",
         method: "POST",
         headers,
         body: JSON.stringify(regData),
@@ -20,13 +21,28 @@ export const apiSlice = createApi({
     }),
     login: query({
       query: (loginData) => ({
-        url: "/loginUserMain.cfc?method=loginUser",
+        url: "cfc/loginUserMain.cfc?method=loginUser",
         method: "POST",
         headers,
         body: JSON.stringify(loginData),
       }),
     }),
+    user: query({ query: () => "/getUserInfo.cfc?method=getUserInfo" }),
+    addRoom: query({
+      query: (roomData) => ({
+        url: "cfc/suggest.cfc?method=addRoomUser",
+        method: "POST",
+        headers,
+        body: JSON.stringify(roomData),
+      }),
+    }),
   }),
 });
 
-export const { useLazyRegisterQuery, useLazyLoginQuery } = apiSlice;
+export const {
+  useLazyRegisterQuery,
+  useLazyLoginQuery,
+  useUserQuery,
+  useLazyUserQuery,
+  useLazyAddRoomQuery,
+} = apiSlice;

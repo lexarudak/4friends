@@ -7,14 +7,18 @@ import {
   BUTTON_VARIANT,
   Button,
 } from "../../components/button/button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { closeMenu } from "../../store/app/app.slice";
+import {
+  closeMenu,
+  removeServerError,
+  setServerError,
+} from "../../store/app/app.slice";
 import { FieldError } from "./field-error";
 import { getError, loginValidator } from "./validators";
 import { Loading } from "../../components/loading/loading";
-import { useLazyLoginQuery } from "../../store/api";
-import Cookies from "js-cookie";
+import { useLazyLoginQuery, useLazyUserQuery } from "../../store/api";
+import { isServerErrorSelector } from "../../store/app/app.selector";
 
 export type LoginValues = {
   email: string;
@@ -30,19 +34,29 @@ export const LoginPage = (): JSX.Element => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [shouldValidate, setShouldValidate] = useState(false);
+  const severError = useSelector(isServerErrorSelector);
   const [serverErrors, setServerErrors] = useState<{
     [key: string]: string;
   }>({});
   const [login, { isFetching, currentData, isError }] = useLazyLoginQuery();
+  const [user] = useLazyUserQuery();
+
   const submit = async (values: LoginValues) => {
-    login(values);
+    const { data } = await login(values);
+    if (data && data.SUCCESS) {
+      const { data: userData } = await user({});
+      console.log("SUCCESS LOGIN", { data });
+      if (userData && userData.SUCCESS) {
+        dispatch(removeServerError());
+        navigate(ROUTE_LIST.home);
+        console.log("SUCCESS USER", { userData });
+      }
+    }
   };
 
   useEffect(() => {
-    if (currentData?.SUCCESS) {
-      Cookies.set("TOKEN", currentData.TOKEN);
-      navigate(ROUTE_LIST.home);
-      return;
+    if (isError) {
+      dispatch(setServerError({ isError: true, message: "Login error" }));
     }
 
     if (currentData?.ERRORFIELD) {
@@ -52,7 +66,7 @@ export const LoginPage = (): JSX.Element => {
     } else {
       setServerErrors({});
     }
-  }, [currentData, isFetching, navigate]);
+  }, [currentData, isFetching, navigate, isError, dispatch]);
 
   const onClick = () => {
     setShouldValidate(true);
@@ -124,7 +138,7 @@ export const LoginPage = (): JSX.Element => {
             >
               Login
             </Button>
-            <FieldError message={isError ? "Server error" : undefined} />
+            <FieldError message={severError.message} />
           </Form>
         </>
       )}
