@@ -18,14 +18,14 @@ import { FirstLoading } from "../../components/loading/first-loading";
 const regPages: string[] = [ROUTE_LIST.login, ROUTE_LIST.register];
 
 export const Layout = (): JSX.Element => {
-  const { isFetching } = useUserQuery({});
+  const { isLoading, isFetching } = useUserQuery({});
   const { pathname } = useLocation();
   const showMenu = !regPages.includes(pathname);
   const isMenuOpen = useSelector(isMenuOpenSelector);
   const isModalOpen = useSelector(isModalOpenSelector);
   const severError = useSelector(isServerErrorSelector);
   const showMainLoading =
-    (isFetching || severError.isError) && !regPages.includes(pathname);
+    (isLoading || severError.isError) && !regPages.includes(pathname);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,8 +35,8 @@ export const Layout = (): JSX.Element => {
   });
 
   useEffect(() => {
-    console.log({ isFetching });
-  }, [isFetching]);
+    console.log({ isLoading, isFetching });
+  }, [isFetching, isLoading]);
 
   useEffect(() => {
     if (severError.isError && !regPages.includes(pathname)) {

@@ -20,8 +20,8 @@ export const RoomSelector = (): JSX.Element => {
   const [updateUser] = useLazyUserQuery({});
 
   const onClick = async (e: MouseEvent) => {
-    if (isMenuOpen) {
-      const { id } = e.target as HTMLButtonElement;
+    const { id } = e.target as HTMLButtonElement;
+    if (isMenuOpen && id !== activeRoom) {
       const { data } = await send({
         userid,
         roomid: id,

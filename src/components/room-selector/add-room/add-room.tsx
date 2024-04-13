@@ -1,4 +1,4 @@
-import { Field, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import { FieldError } from "../../../pages/auth/field-error";
 import { Loading } from "../../loading/loading";
 import styles from "./add-room.module.scss";
@@ -59,7 +59,7 @@ export const AddRoom: FC<Props> = ({ severError, isLoading }): JSX.Element => {
       validate={roomValidator}
     >
       {({ errors, submitForm }) => (
-        <div className={styles.container}>
+        <Form className={styles.container}>
           <Field
             type="text"
             className={styles.input}
@@ -85,7 +85,7 @@ export const AddRoom: FC<Props> = ({ severError, isLoading }): JSX.Element => {
           <button className={styles.btn} type="submit" onClick={submitForm}>
             +
           </button>
-        </div>
+        </Form>
       )}
     </Formik>
   );
