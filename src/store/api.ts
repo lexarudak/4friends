@@ -36,6 +36,14 @@ export const apiSlice = createApi({
         body: JSON.stringify(roomData),
       }),
     }),
+    setRoom: query({
+      query: (roomData) => ({
+        url: "cfc/suggest.cfc?method=changeActiveRoom",
+        method: "POST",
+        headers,
+        body: JSON.stringify(roomData),
+      }),
+    }),
   }),
 });
 
@@ -45,4 +53,5 @@ export const {
   useUserQuery,
   useLazyUserQuery,
   useLazyAddRoomQuery,
+  useLazySetRoomQuery,
 } = apiSlice;

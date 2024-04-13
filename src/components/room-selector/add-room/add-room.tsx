@@ -3,17 +3,24 @@ import { FieldError } from "../../../pages/auth/field-error";
 import { Loading } from "../../loading/loading";
 import styles from "./add-room.module.scss";
 import { getError, roomValidator } from "../../../pages/auth/validators";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useLazyAddRoomQuery, useLazyUserQuery } from "../../../store/api";
 import { useSelector } from "react-redux";
 import { userIdSelector } from "../../../store/user/user.selector";
 
 const DEFAULT_SUCCESS = "Room successfully added!";
 
-export const AddRoom = (): JSX.Element => {
-  const [serverErrors, setServerErrors] = useState<{
-    [key: string]: string;
-  }>({});
+type ServerError = {
+  [key: string]: string;
+};
+
+type Props = {
+  severError?: ServerError;
+  isLoading?: boolean;
+};
+
+export const AddRoom: FC<Props> = ({ severError, isLoading }): JSX.Element => {
+  const [serverErrors, setServerErrors] = useState(severError || {});
   const [successMessage, setSuccessMessage] = useState("");
   const userid = useSelector(userIdSelector);
 
@@ -69,7 +76,10 @@ export const AddRoom = (): JSX.Element => {
               }
               className={successMessage ? styles.success : ""}
             />
-            <Loading size={20} loading={isFetching || updateFetching} />
+            <Loading
+              size={20}
+              loading={isLoading || isFetching || updateFetching}
+            />
           </div>
 
           <button className={styles.btn} type="submit" onClick={submitForm}>

@@ -34,6 +34,7 @@ const userSlice = createSlice({
         if (payload.SUCCESS) {
           state.activeRoom = payload.DATA.ACTIVEROOM.toString();
           state.rooms = payload.DATA.ROOMS;
+          state.userId = payload.USERID;
           console.log("success", payload, state);
         }
         console.log("other fail", payload);

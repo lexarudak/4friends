@@ -1,24 +1,39 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styles from "./room-selector.module.scss";
 import {
   activeRoomSelector,
   roomsSelector,
+  userIdSelector,
 } from "../../store/user/user.selector";
 import { MouseEvent, useState } from "react";
 import classNames from "classnames";
-import { setActiveRoom } from "../../store/user/user.slice";
 import { CSSTransition } from "react-transition-group";
 import { AddRoom } from "./add-room/add-room";
+import { useLazySetRoomQuery, useLazyUserQuery } from "../../store/api";
 
 export const RoomSelector = (): JSX.Element => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const activeRoom = useSelector(activeRoomSelector);
-  const dispatch = useDispatch();
   const rooms = useSelector(roomsSelector);
-  const onClick = (e: MouseEvent) => {
-    const { id } = e.target as HTMLButtonElement;
-    setIsMenuOpen((prev) => !prev);
-    dispatch(setActiveRoom(id));
+  const userid = useSelector(userIdSelector);
+  const [send, { isFetching }] = useLazySetRoomQuery();
+  const [updateUser] = useLazyUserQuery({});
+
+  const onClick = async (e: MouseEvent) => {
+    if (isMenuOpen) {
+      const { id } = e.target as HTMLButtonElement;
+      const { data } = await send({
+        userid,
+        roomid: id,
+      });
+
+      if (data.SUCCESS) {
+        setIsMenuOpen((prev) => !prev);
+        updateUser({});
+      }
+    } else {
+      setIsMenuOpen((prev) => !prev);
+    }
   };
 
   isMenuOpen
@@ -33,7 +48,7 @@ export const RoomSelector = (): JSX.Element => {
   return (
     <>
       <div className={classNames(cn)}>
-        <AddRoom />
+        <AddRoom isLoading={isFetching} />
         {Object.entries(rooms).map(([key, room]) =>
           key === activeRoom ? null : (
             <button
