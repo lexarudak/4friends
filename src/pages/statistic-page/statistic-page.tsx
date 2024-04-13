@@ -2,20 +2,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { Table } from "../../components/table/table";
 import styles from "./statistic-page.module.scss";
 import { statisticSelector } from "../../store/statistic/statistic.selector";
-import { useTotalScoreQuery } from "../../store/api";
+import { useLazyTotalScoreQuery } from "../../store/api";
 import { useEffect } from "react";
 import { setTable } from "../../store/statistic/statistic.slice";
+import { activeRoomSelector } from "../../store/user/user.selector";
 
 export const StatisticPage = (): JSX.Element => {
   const { table, exact, wins, average } = useSelector(statisticSelector);
   const dispatch = useDispatch();
-  const { data } = useTotalScoreQuery({});
+  const activeRoom = useSelector(activeRoomSelector);
+  const [fetchTable, { data }] = useLazyTotalScoreQuery();
 
   useEffect(() => {
+    fetchTable({});
+    console.log(data);
     if (data && data.SUCCESS) {
       dispatch(setTable(data.DATA));
     }
-  }, [data, dispatch]);
+  }, [data, dispatch, fetchTable, activeRoom]);
 
   return (
     <section className={styles.page}>

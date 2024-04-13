@@ -56,5 +56,5 @@ export const {
   useLazyUserQuery,
   useLazyAddRoomQuery,
   useLazySetRoomQuery,
-  useTotalScoreQuery,
+  useLazyTotalScoreQuery,
 } = apiSlice;

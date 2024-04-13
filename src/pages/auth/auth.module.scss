@@ -26,11 +26,6 @@
 
    @include mediaMax('l') {
     width: 340px;
-    margin-left: 0px;
-  }
-
-  @include mediaMin('xl') {
-    margin-left: 0px;
   }
 }
 
