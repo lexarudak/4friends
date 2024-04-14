@@ -14,7 +14,7 @@ export const AppRouter = (): JSX.Element => {
         <Route index element={<HomePage />} />
         <Route path={ROUTE_LIST.matchdays} element={<MatchdaysPage />} />
         <Route path={ROUTE_LIST.statistic} element={<StatisticPage />} />
-        <Route path={ROUTE_LIST.rules} element={<HomePage />} />
+        <Route path={ROUTE_LIST.rules} element={<></>} />
         <Route path={ROUTE_LIST.login} element={<LoginPage />} />
         <Route path={ROUTE_LIST.register} element={<RegisterPage />} />
       </Route>

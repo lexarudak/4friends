@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 const NAV_LIST = {
   Home: ROUTE_LIST.home,
   MATCHDAYS: ROUTE_LIST.matchdays,
-  Stats: ROUTE_LIST.statistic,
+  Statistic: ROUTE_LIST.statistic,
   Rules: ROUTE_LIST.rules,
 };
 
@@ -23,7 +23,6 @@ export const Nav = (): JSX.Element => {
   const logout = () => {
     Cookies.remove("TOKEN", { path: "/", domain: ".4friends.live" });
     close();
-    console.log(" 2 LOG OUT");
   };
 
   return (
