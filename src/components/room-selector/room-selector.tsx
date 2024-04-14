@@ -1,10 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./room-selector.module.scss";
-import {
-  activeRoomSelector,
-  roomsSelector,
-  userIdSelector,
-} from "../../store/user/user.selector";
+import { userSelector } from "../../store/user/user.selector";
 import { MouseEvent } from "react";
 import classNames from "classnames";
 import { CSSTransition } from "react-transition-group";
@@ -19,9 +15,7 @@ import {
 export const RoomSelector = (): JSX.Element => {
   const dispatch = useDispatch();
   const isRoomSelectorOpen = useSelector(isRoomSelectorOpenSelector);
-  const activeRoom = useSelector(activeRoomSelector);
-  const rooms = useSelector(roomsSelector);
-  const userid = useSelector(userIdSelector);
+  const { activeRoom, rooms, userId } = useSelector(userSelector);
   const [send, { isFetching }] = useLazySetRoomQuery();
   const [updateUser] = useLazyUserQuery({});
 
@@ -31,7 +25,7 @@ export const RoomSelector = (): JSX.Element => {
     const { id } = e.target as HTMLButtonElement;
     if (isRoomSelectorOpen && id !== activeRoom) {
       const { data } = await send({
-        userid,
+        userid: userId,
         roomid: id,
       });
 

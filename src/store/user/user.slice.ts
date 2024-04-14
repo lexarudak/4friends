@@ -35,9 +35,11 @@ const userSlice = createSlice({
           state.activeRoom = payload.DATA.ACTIVEROOM.toString();
           state.rooms = payload.DATA.ROOMS;
           state.userId = payload.USERID;
+          state.username = payload.DATA.USERNAME;
           console.log("success", payload);
+        } else {
+          console.log("other fail", payload);
         }
-        console.log("other fail", payload);
       },
     );
   },

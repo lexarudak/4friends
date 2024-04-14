@@ -5,16 +5,21 @@ import classNames from "classnames";
 
 type Props = {
   bet: UserBetInfo;
+  myBet?: boolean;
 };
 
 export const UserBet: FC<Props> = ({
   bet: { name, score, winner, points },
+  myBet,
 }): JSX.Element => {
   return (
-    <div className={styles.card}>
+    <div
+      className={classNames(styles.card, {
+        [styles.myBet]: myBet,
+      })}
+    >
       <span
-        className={classNames({
-          [styles.score]: true,
+        className={classNames(styles.score, {
           [styles.hide]: winner !== 1,
         })}
       >

@@ -5,6 +5,8 @@ import { UserCard } from "../user-card/user-card";
 import { UserPoints } from "../../store/statistic/statistic.slice";
 import { Link } from "react-router-dom";
 import { ROUTE_LIST } from "../../router/route-list";
+import { useSelector } from "react-redux";
+import { userNameSelector } from "../../store/user/user.selector";
 
 type Props = {
   cn?: string;
@@ -22,6 +24,7 @@ export const Table: FC<Props> = ({
   moreStatistic,
 }): JSX.Element => {
   const sortedUsers = [...users].sort((a, b) => b.POINTS - a.POINTS);
+  const username = useSelector(userNameSelector);
 
   return users.length ? (
     <section className={classNames(styles.container, cn)}>
@@ -33,6 +36,7 @@ export const Table: FC<Props> = ({
             points={POINTS}
             key={ind}
             position={usePositions ? ind + 1 : null}
+            myCard={username === USERNAME}
           />
         ))}
       </ul>

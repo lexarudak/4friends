@@ -57,7 +57,14 @@ export const Layout = (): JSX.Element => {
     if (shouldRedirectFromLogin) {
       navigate(ROUTE_LIST.home);
     }
-  }, [shouldRedirectFromLogin, pathname, navigate, shouldRedirectToLogin]);
+  }, [
+    shouldRedirectFromLogin,
+    pathname,
+    navigate,
+    shouldRedirectToLogin,
+    dispatch,
+    data?.MESSAGE,
+  ]);
 
   return (
     <>

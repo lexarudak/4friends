@@ -7,6 +7,7 @@ type Props = {
   name: string;
   points: number;
   position: number | null;
+  myCard?: boolean;
 };
 
 export const UserCard: FC<Props> = ({
@@ -14,9 +15,16 @@ export const UserCard: FC<Props> = ({
   name,
   points,
   position,
+  myCard,
 }): JSX.Element => {
+  const mode = {
+    [styles.card]: true,
+    [styles.myCard]: myCard,
+  };
+
   return (
-    <div className={classNames(styles.card, cn)}>
+    <div className={classNames(mode, cn)}>
+      {<div className={styles.firstItem} />}
       {position && <span className={styles.item}>{position}</span>}
       <span className={styles.item}>{name}</span>
       <span className={styles.item}>{points}</span>

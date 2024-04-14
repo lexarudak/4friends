@@ -5,8 +5,24 @@
   display: flex;
   // justify-content: space-between;
   gap: 10px;
+  position: relative;
+
+  .firstItem {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    background-color: transparent;
+  }
 
   &:first-child {
+    .firstItem {
+      background-color: $clr-data-03;
+    }
+  }
+
+  &.myCard {
     background-color: $clr-data-02;
     color: $clr-text-01;
   }
