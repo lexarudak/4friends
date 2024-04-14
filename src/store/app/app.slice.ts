@@ -15,6 +15,7 @@ const DEFAULT_ERROR: ServerError = {
 const initialState = {
   isMenuOpen: false,
   isModalOpen: false,
+  isRoomSelectorOpen: false,
   nextMatch: 1718388000000,
   serverError: DEFAULT_ERROR,
 };
@@ -31,7 +32,7 @@ const redirectHandle = (
   if (payload.ERRORFIELD === "TOKEN") {
     state.serverError = {
       isError: true,
-      message: payload.MESSAGE || "Access token error",
+      message: "",
     };
   }
 };
@@ -63,6 +64,12 @@ const appSlice = createSlice({
     openModal(state) {
       state.isModalOpen = true;
     },
+    toggleRoomSelector(state) {
+      state.isRoomSelectorOpen = !state.isRoomSelectorOpen;
+    },
+    closeRoomSelector(state) {
+      state.isRoomSelectorOpen = false;
+    },
     removeServerError(state) {
       state.serverError = DEFAULT_ERROR;
     },
@@ -73,6 +80,14 @@ const appSlice = createSlice({
   extraReducers: (builder) => {
     builder.addMatcher(apiSlice.endpoints.user.matchFulfilled, redirectHandle);
     builder.addMatcher(apiSlice.endpoints.user.matchRejected, serverErrHandle);
+    builder.addMatcher(
+      apiSlice.endpoints.totalScore.matchFulfilled,
+      redirectHandle,
+    );
+    builder.addMatcher(
+      apiSlice.endpoints.totalScore.matchRejected,
+      serverErrHandle,
+    );
   },
 });
 
@@ -83,6 +98,8 @@ export const {
   openModal,
   setServerError,
   removeServerError,
+  toggleRoomSelector,
+  closeRoomSelector,
 } = appSlice.actions;
 
 export default appSlice.reducer;

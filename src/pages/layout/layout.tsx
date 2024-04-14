@@ -5,53 +5,75 @@ import { Footer } from "./footer/footer";
 import { Menu } from "../../components/menu/menu";
 import { ROUTE_LIST } from "../../router/route-list";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  isMenuOpenSelector,
-  isModalOpenSelector,
+  appSelector,
   isServerErrorSelector,
 } from "../../store/app/app.selector";
 import { RoomSelector } from "../../components/room-selector/room-selector";
 import { useUserQuery } from "../../store/api";
 import { FirstLoading } from "../../components/loading/first-loading";
 import Cookies from "js-cookie";
+import { setServerError } from "../../store/app/app.slice";
 
 const regPages: string[] = [ROUTE_LIST.login, ROUTE_LIST.register];
 
 export const Layout = (): JSX.Element => {
-  const { isLoading } = useUserQuery({});
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isLoading, data } = useUserQuery({});
   const { pathname } = useLocation();
-  const showMenu = !regPages.includes(pathname);
-  const isMenuOpen = useSelector(isMenuOpenSelector);
-  const isModalOpen = useSelector(isModalOpenSelector);
+  const { isMenuOpen, isModalOpen, isRoomSelectorOpen } =
+    useSelector(appSelector);
   const severError = useSelector(isServerErrorSelector);
+
   const showMainLoading =
     (isLoading || severError.isError) && !regPages.includes(pathname);
-  const navigate = useNavigate();
+  const shouldRedirectFromLogin =
+    !severError.isError && regPages.includes(pathname) && Cookies.get("TOKEN");
+  const shouldRedirectToLogin =
+    severError.isError && !regPages.includes(pathname);
+  const shouldHoldBody = isMenuOpen || isModalOpen || isRoomSelectorOpen;
+  const shouldShowMenu = !regPages.includes(pathname);
 
   useEffect(() => {
-    isMenuOpen || isModalOpen
+    shouldHoldBody
       ? document.body.classList.add("hold")
       : document.body.classList.remove("hold");
   });
 
   useEffect(() => {
-    if (severError.isError && !regPages.includes(pathname)) {
-      console.log(severError.message);
+    if (shouldRedirectToLogin) {
       Cookies.remove("TOKEN", { path: "/", domain: ".4friends.live" });
+      dispatch(
+        setServerError({
+          isError: true,
+          message: data.MESSAGE || "Access token error",
+        }),
+      );
       navigate(ROUTE_LIST.login);
     }
-  }, [severError, navigate, pathname]);
+
+    if (shouldRedirectFromLogin) {
+      navigate(ROUTE_LIST.home);
+    }
+  }, [shouldRedirectFromLogin, pathname, navigate, shouldRedirectToLogin]);
 
   return (
     <>
-      {showMenu && <Header />}
-      {showMenu && <Menu />}
-      {showMenu && <RoomSelector />}
+      {shouldShowMenu && (
+        <>
+          <Header />
+          <Menu />
+          <RoomSelector />
+        </>
+      )}
+
       <main className={styles.main}>
         <Outlet />
       </main>
       <Footer />
+
       {showMainLoading && <FirstLoading />}
     </>
   );
