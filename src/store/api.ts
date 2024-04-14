@@ -26,7 +26,12 @@ export const apiSlice = createApi({
         body: JSON.stringify(loginData),
       }),
     }),
-    user: query({ query: () => "/getUserInfo.cfc?method=getUserInfo" }),
+    user: query({
+      query: () => ({
+        url: "/getUserInfo.cfc?method=getUserInfo",
+        method: "GET",
+      }),
+    }),
     addRoom: query({
       query: (roomData) => ({
         url: "cfc/suggest.cfc?method=addRoomUser",

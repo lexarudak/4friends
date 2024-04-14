@@ -14,11 +14,12 @@ import {
 import { RoomSelector } from "../../components/room-selector/room-selector";
 import { useUserQuery } from "../../store/api";
 import { FirstLoading } from "../../components/loading/first-loading";
+import Cookies from "js-cookie";
 
 const regPages: string[] = [ROUTE_LIST.login, ROUTE_LIST.register];
 
 export const Layout = (): JSX.Element => {
-  const { isLoading, isFetching } = useUserQuery({});
+  const { isLoading } = useUserQuery({});
   const { pathname } = useLocation();
   const showMenu = !regPages.includes(pathname);
   const isMenuOpen = useSelector(isMenuOpenSelector);
@@ -35,12 +36,9 @@ export const Layout = (): JSX.Element => {
   });
 
   useEffect(() => {
-    console.log({ isLoading, isFetching });
-  }, [isFetching, isLoading]);
-
-  useEffect(() => {
     if (severError.isError && !regPages.includes(pathname)) {
       console.log(severError.message);
+      Cookies.remove("TOKEN", { path: "/", domain: ".4friends.live" });
       navigate(ROUTE_LIST.login);
     }
   }, [severError, navigate, pathname]);

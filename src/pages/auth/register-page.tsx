@@ -17,7 +17,10 @@ import {
 import { FieldError } from "./field-error";
 import { getError, registerValidator } from "./validators";
 import { InfoModal } from "../../components/info-modal/info-modal";
-import { isModalOpenSelector } from "../../store/app/app.selector";
+import {
+  isModalOpenSelector,
+  isServerErrorSelector,
+} from "../../store/app/app.selector";
 import { MOCKED_TEXT } from "./text";
 import { useLazyRegisterQuery, useLazyUserQuery } from "../../store/api";
 import { Loading } from "../../components/loading/loading";
@@ -51,18 +54,18 @@ export const RegisterPage = (): JSX.Element => {
   }>({});
   const navigate = useNavigate();
   const [shouldValidate, setShouldValidate] = useState(false);
-  const [register, { isFetching, currentData, isError }] =
-    useLazyRegisterQuery();
+  const [register, { isFetching, currentData }] = useLazyRegisterQuery();
   const [user] = useLazyUserQuery();
+  const severError = useSelector(isServerErrorSelector);
 
   const isModalOpen = useSelector(isModalOpenSelector);
 
   const submit = async (values: RegisterValues) => {
+    dispatch(removeServerError());
     const { data } = await register(values);
     if (data && data.SUCCESS) {
       const { data: userData } = await user({});
       if (userData && userData.SUCCESS) {
-        dispatch(removeServerError());
         navigate(ROUTE_LIST.home);
       }
     }
@@ -206,7 +209,7 @@ export const RegisterPage = (): JSX.Element => {
               >
                 Register
               </Button>
-              <FieldError message={isError ? "Server error" : undefined} />
+              <FieldError message={severError.message} />
               <CSSTransition
                 in={isModalOpen}
                 timeout={200}

@@ -42,11 +42,11 @@ export const LoginPage = (): JSX.Element => {
   const [user] = useLazyUserQuery();
 
   const submit = async (values: LoginValues) => {
+    dispatch(removeServerError());
     const { data } = await login(values);
     if (data && data.SUCCESS) {
       const { data: userData } = await user({});
       if (userData && userData.SUCCESS) {
-        dispatch(removeServerError());
         navigate(ROUTE_LIST.home);
       }
     }

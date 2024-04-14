@@ -20,6 +20,7 @@ const initialState = {
 };
 
 interface Payload {
+  MESSAGE: string;
   ERRORFIELD?: string;
 }
 
@@ -30,7 +31,7 @@ const redirectHandle = (
   if (payload.ERRORFIELD === "TOKEN") {
     state.serverError = {
       isError: true,
-      message: "Access token error",
+      message: payload.MESSAGE || "Access token error",
     };
   }
 };

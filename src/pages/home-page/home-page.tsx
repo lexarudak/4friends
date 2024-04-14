@@ -16,12 +16,18 @@ export const HomePage = (): JSX.Element => {
   const [fetchTable, { data }] = useLazyTotalScoreQuery();
 
   useEffect(() => {
-    fetchTable({});
-    console.log(data);
-    if (data && data.SUCCESS) {
+    if (activeRoom) {
+      fetchTable({});
+      console.log("FETCH");
+    }
+  }, [activeRoom, fetchTable]);
+
+  useEffect(() => {
+    if (data && data.SUCCESS && data.DATA) {
+      console.log("SET", data.DATA);
       dispatch(setTable(data.DATA));
     }
-  }, [data, dispatch, fetchTable, activeRoom]);
+  }, [data, dispatch]);
 
   return (
     <section className={styles.page}>
