@@ -48,7 +48,7 @@ export const Layout = (): JSX.Element => {
       dispatch(
         setServerError({
           isError: true,
-          message: data.MESSAGE || "Access token error",
+          message: data?.MESSAGE || "Access token error",
         }),
       );
       navigate(ROUTE_LIST.login);

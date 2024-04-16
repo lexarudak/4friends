@@ -25,14 +25,14 @@ export const NMForm = (): JSX.Element => {
   };
   return nextMatches.length ? (
     <Formik
+      key={JSON.stringify(nextMatches)}
       initialValues={nextMatches}
       onSubmit={submit}
       validate={validator}
       validateOnBlur={false}
       validateOnChange={firstTry}
     >
-      {({ values, dirty, isValid, submitForm }) => {
-        console.log({ dirty });
+      {({ values, isValid, submitForm }) => {
         return (
           <Form className={styles.form}>
             {values.map((nm, ind) => (

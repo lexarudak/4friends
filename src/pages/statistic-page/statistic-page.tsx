@@ -14,10 +14,11 @@ export const StatisticPage = (): JSX.Element => {
   const [fetchTable, { data }] = useLazyTotalScoreQuery();
 
   useEffect(() => {
-    fetchTable({});
-    console.log(data);
-    if (data && data.SUCCESS) {
-      dispatch(setTable(data.DATA));
+    if (activeRoom) {
+      fetchTable({});
+      if (data && data.SUCCESS) {
+        dispatch(setTable(data.DATA));
+      }
     }
   }, [data, dispatch, fetchTable, activeRoom]);
 

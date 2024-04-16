@@ -24,7 +24,7 @@ export const HomePage = (): JSX.Element => {
     if (activeRoom) {
       fetchTable({});
       fetchNextMatches({});
-      console.log("FETCH");
+      console.log("FETCH", activeRoom);
     }
   }, [activeRoom, fetchNextMatches, fetchTable]);
 
