@@ -81,6 +81,14 @@ const appSlice = createSlice({
     builder.addMatcher(apiSlice.endpoints.user.matchFulfilled, redirectHandle);
     builder.addMatcher(apiSlice.endpoints.user.matchRejected, serverErrHandle);
     builder.addMatcher(
+      apiSlice.endpoints.getNextMatches.matchFulfilled,
+      redirectHandle,
+    );
+    builder.addMatcher(
+      apiSlice.endpoints.getNextMatches.matchRejected,
+      serverErrHandle,
+    );
+    builder.addMatcher(
       apiSlice.endpoints.totalScore.matchFulfilled,
       redirectHandle,
     );

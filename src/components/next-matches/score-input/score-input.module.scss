@@ -14,4 +14,13 @@
   &::placeholder {
     color: $clr-text-01;
   }
+
+  &:disabled {
+    background-color: $clr-ui-01;
+    color: $clr-primary-03;
+
+    &::placeholder {
+      color: $clr-primary-03;
+    }
+  }
 }

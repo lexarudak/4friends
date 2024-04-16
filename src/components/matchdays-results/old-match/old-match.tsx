@@ -31,7 +31,7 @@ export const OldMatch: FC<Props> = ({
         />
         <OldFTSection team1={team1} team2={team2} winner={winner} />
       </div>
-      {team1.score !== "" &&
+      {team1.SCORE !== "" &&
         sortedBets.map((bet) => (
           <UserBet bet={bet} key={bet.name} myBet={username === bet.name} />
         ))}

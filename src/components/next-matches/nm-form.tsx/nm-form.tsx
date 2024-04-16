@@ -1,16 +1,25 @@
 import { useSelector } from "react-redux";
 import styles from "./nm-form.module.scss";
 import { Formik, Form } from "formik";
-import { nextMatchesSelector } from "../../../store/next-matches/next-matches.selector";
+import {
+  isNMFetchingSelector,
+  nextMatchesSelector,
+} from "../../../store/next-matches/next-matches.selector";
 import { NextMatch } from "../../../store/next-matches/next-matches.slice";
 import { OneMatchForm } from "../one-match-form/one-match-form";
 import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../../button/button";
 import { validator } from "./validator";
-import { useState } from "react";
+import { FC, useState } from "react";
+import classNames from "classnames";
 
-export const NMForm = (): JSX.Element => {
+type Props = {
+  className?: string;
+};
+
+export const NMForm: FC<Props> = ({ className }): JSX.Element => {
   const nextMatches = useSelector(nextMatchesSelector);
   const [firstTry, setFirstTry] = useState(false);
+  const isFetching = useSelector(isNMFetchingSelector);
 
   const submit = (values: NextMatch[]) => {
     console.log("submit", JSON.stringify(values, null, 2));
@@ -31,9 +40,9 @@ export const NMForm = (): JSX.Element => {
       validateOnChange={firstTry}
     >
       {({ values, dirty, isValid, submitForm }) => (
-        <Form className={styles.form}>
+        <Form className={classNames(styles.form, className)}>
           {values.map((nm, ind) => (
-            <OneMatchForm nm={nm} order={ind} key={nm.id} />
+            <OneMatchForm nm={nm} order={ind} key={nm.MATCHID} />
           ))}
           <Button
             variant={BUTTON_VARIANT.fill}
@@ -41,7 +50,7 @@ export const NMForm = (): JSX.Element => {
             type="submit"
             onClick={() => onClick(submitForm)}
             className={styles.button}
-            disabled={!dirty || !isValid}
+            disabled={!dirty || !isValid || isFetching}
           >
             Save
           </Button>

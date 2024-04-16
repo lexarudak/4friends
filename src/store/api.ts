@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { NMResponse } from "./types";
 
 const ORIGIN = "https://api.4friends.live/rest4friends";
 
@@ -51,6 +52,33 @@ export const apiSlice = createApi({
     totalScore: query({
       query: () => "cfc/getTotalPoints.cfc?method=getTotalPoints",
     }),
+    getNextMatches: query({
+      query: () => "cfc/getNextMatches.cfc?method=getNextMatches",
+      transformResponse: (response: NMResponse) => {
+        if (!response.SUCCESS) return response;
+
+        return {
+          ...response,
+          DATA: Object.values(response.DATA).map(
+            ({ WINNER, TEAM1, TEAM2, TIME, ...rest }) => {
+              return {
+                ...rest,
+                WINNER: ((WINNER === TEAM1.CODE && 1) ||
+                  (WINNER === TEAM2.CODE && 2) ||
+                  0) as 0 | 1 | 2,
+                TEAM1,
+                TEAM2,
+                TIME: new Date(TIME).valueOf(),
+                SAVEDSCORE:
+                  TEAM1.SCORE === "" || TEAM2.SCORE === ""
+                    ? []
+                    : [TEAM1.SCORE, TEAM2.SCORE],
+              };
+            },
+          ),
+        };
+      },
+    }),
   }),
 });
 
@@ -62,4 +90,5 @@ export const {
   useLazyAddRoomQuery,
   useLazySetRoomQuery,
   useLazyTotalScoreQuery,
+  useLazyGetNextMatchesQuery,
 } = apiSlice;

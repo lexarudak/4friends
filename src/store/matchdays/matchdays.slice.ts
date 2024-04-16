@@ -27,12 +27,12 @@ const mockedMatches: OldMatchInfo[] = [
     info: "1/4 Final",
     time: new Date("04/03/2024").valueOf(),
     team1: {
-      code: "CZE",
-      score: 1,
+      CODE: "CZE",
+      SCORE: 1,
     },
     team2: {
-      code: "SCO",
-      score: 0,
+      CODE: "SCO",
+      SCORE: 0,
     },
     usersBets: [
       {
@@ -68,12 +68,12 @@ const mockedMatches: OldMatchInfo[] = [
     info: "Group B",
     time: 1718398800000,
     team1: {
-      code: "SUI",
-      score: "",
+      CODE: "SUI",
+      SCORE: "",
     },
     team2: {
-      code: "NED",
-      score: "",
+      CODE: "NED",
+      SCORE: "",
     },
     usersBets: [
       {

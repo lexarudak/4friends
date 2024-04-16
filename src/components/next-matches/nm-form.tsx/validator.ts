@@ -7,18 +7,18 @@ export type ValidateErrors = {
 export const validator = (values: NextMatch[]) => {
   const errors: ValidateErrors = {};
 
-  values.forEach(({ extra, team1, team2, winner }, index) => {
-    if (extra && team1.score === team2.score && team1.score !== "") {
-      if (winner !== 1 && winner !== 2) {
-        errors[`[${index}].winner`] = "Winner should be picked";
+  values.forEach(({ EXTRA, TEAM1, TEAM2, WINNER }, index) => {
+    if (EXTRA && TEAM1.SCORE === TEAM2.SCORE && TEAM1.SCORE !== "") {
+      if (WINNER !== 1 && WINNER !== 2) {
+        errors[`[${index}].WINNER`] = "Winner should be picked";
       }
     }
 
     if (
-      team1.score !== team2.score &&
-      (team1.score === "" || team2.score === "")
+      TEAM1.SCORE !== TEAM2.SCORE &&
+      (TEAM1.SCORE === "" || TEAM2.SCORE === "")
     ) {
-      errors[`[${index}].score`] = "Set score or remove all values";
+      errors[`[${index}].SCORE`] = "Set score or remove all values";
     }
   });
 

@@ -6,26 +6,31 @@ import { FTSection } from "../ft-section/ft-section";
 import { MatchInfoSection } from "../match-info-section/match-info-section";
 import { WinnerSection } from "../winner-section/winner-section";
 import { useFormikContext } from "formik";
+import { useSelector } from "react-redux";
+import { isNMFetchingSelector } from "../../../store/next-matches/next-matches.selector";
 
 type Props = {
   nm: NextMatch;
   order: number;
+  disabled?: boolean;
 };
 
 export const OneMatchForm: FC<Props> = ({
-  nm: { team1, team2, time, info, savedScore, extra },
+  nm: { TEAM1, TEAM2, TIME, INFO, SAVEDSCORE, EXTRA },
   order,
 }): JSX.Element => {
-  const { score: score1 } = team1;
-  const { score: score2 } = team2;
-  const winnerName = `[${order}].winner`;
-  const [isSaved, setIsSaved] = useState(!!savedScore.length);
+  const { SCORE: score1 } = TEAM1;
+  const { SCORE: score2 } = TEAM2;
+  const winnerName = `[${order}].WINNER`;
+  const [isSaved, setIsSaved] = useState(!!SAVEDSCORE.length);
   const { setFieldValue, errors } = useFormikContext();
-  const isWinnerDisabled = () => score1 === "" || score1 !== score2;
+  const isFetching = useSelector(isNMFetchingSelector);
+  const isWinnerDisabled = () =>
+    score1 === "" || score1 !== score2 || isFetching;
 
   useEffect(() => {
     const getWinner = () => {
-      if (extra && score1 !== "" && score2 !== "") {
+      if (EXTRA && score1 !== "" && score2 !== "") {
         if (score1 > score2) return 1;
         if (score1 < score2) return 2;
         return 0;
@@ -33,22 +38,22 @@ export const OneMatchForm: FC<Props> = ({
       return 0;
     };
 
-    setIsSaved(score1 === savedScore[0] && score2 === savedScore[1]);
+    setIsSaved(score1 === SAVEDSCORE[0] && score2 === SAVEDSCORE[1]);
     setFieldValue(winnerName, getWinner());
-  }, [team1, team2]);
+  }, [TEAM1, TEAM2]);
 
   return (
     <div className={styles.oneMatch}>
       <MatchInfoSection
-        info={info}
-        time={time}
+        info={INFO}
+        time={TIME}
         isSaved={isSaved}
         order={order}
         errors={errors}
       />
       <div className={styles.container}>
-        <FTSection team1={team1} team2={team2} order={order} />
-        {extra ? (
+        <FTSection team1={TEAM1} team2={TEAM2} order={order} />
+        {EXTRA ? (
           <WinnerSection isDisabled={isWinnerDisabled()} name={winnerName} />
         ) : null}
       </div>

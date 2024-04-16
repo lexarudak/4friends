@@ -5,6 +5,7 @@ import { Field, useFormikContext } from "formik";
 
 type Props = {
   name: string;
+  disabled?: boolean;
 };
 
 const MAX_VALUE = 99;
@@ -25,7 +26,7 @@ const symbols = [
   "-",
 ];
 
-export const ScoreInput: FC<Props> = ({ name }): JSX.Element => {
+export const ScoreInput: FC<Props> = ({ name, disabled }): JSX.Element => {
   const { setFieldValue } = useFormikContext();
 
   const handleChange = (event: { target: { value: string; name: string } }) => {
@@ -71,6 +72,7 @@ export const ScoreInput: FC<Props> = ({ name }): JSX.Element => {
       max={MAX_VALUE}
       onChange={handleChange}
       onKeyPress={handleKeyPress}
+      disabled={disabled}
     />
   );
 };
