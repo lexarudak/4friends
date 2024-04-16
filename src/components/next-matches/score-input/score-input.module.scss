@@ -1,4 +1,5 @@
 .input {
+  transition: .3s;
   width: 35px;
   height: 35px;
   display: flex;
@@ -16,7 +17,7 @@
   }
 
   &:disabled {
-    background-color: $clr-ui-01;
+    background-color: $clr-ui-02;
     color: $clr-primary-03;
 
     &::placeholder {

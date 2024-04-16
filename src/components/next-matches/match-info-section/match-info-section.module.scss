@@ -4,8 +4,10 @@
   justify-content: space-around;
   background-color: $clr-ui-02;
   color: $clr-primary-03;
+  transition: .3s;
 
   &.saved {
+    transition: .3s;
     background-color: $clr-data-03;
   }
 
