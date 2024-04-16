@@ -20,8 +20,8 @@ export const MatchInfoSection: FC<Props> = ({
   order,
   errors,
 }): JSX.Element => {
-  const emptyError = errors?.[`[${order}].score`];
-  const winnerError = errors?.[`[${order}].winner`];
+  const emptyError = errors?.[`[${order}].SCORE`];
+  const winnerError = errors?.[`[${order}].WINNER`];
 
   const cn = {
     [styles.container]: true,

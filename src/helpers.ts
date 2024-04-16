@@ -1,6 +1,7 @@
 import { MAX_DATE, MIN_DATE } from "./const/const";
 import countries from "./const/countries";
 import { BREAKPOINTS } from "./hooks";
+import { NextMatch } from "./store/next-matches/next-matches.slice";
 
 export const getTime = (timestamp: number) => {
   const date = new Date(timestamp);
@@ -37,3 +38,13 @@ export const getName = (code: keyof typeof countries, BP: number) =>
       ? countries[code].name
       : code
     : code;
+
+export const isScoreSaved = (nm: NextMatch[]) => {
+  let isSaved = true;
+
+  nm.forEach(({ TEAM1, TEAM2, SAVEDSCORE: [score1, score2] }) => {
+    if (TEAM1.SCORE !== score1) isSaved = false;
+    if (TEAM2.SCORE !== score2) isSaved = false;
+  });
+  return isSaved;
+};
