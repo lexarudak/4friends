@@ -15,7 +15,7 @@ import {
 export const RoomSelector = (): JSX.Element => {
   const dispatch = useDispatch();
   const isRoomSelectorOpen = useSelector(isRoomSelectorOpenSelector);
-  const { activeRoom, rooms, userId } = useSelector(userSelector);
+  const { ACTIVEROOMID, ROOMS, USERID } = useSelector(userSelector);
   const [send, { isFetching }] = useLazySetRoomQuery();
   const [updateUser] = useLazyUserQuery({});
 
@@ -23,10 +23,10 @@ export const RoomSelector = (): JSX.Element => {
 
   const onClick = async (e: MouseEvent) => {
     const { id } = e.target as HTMLButtonElement;
-    if (isRoomSelectorOpen && id !== activeRoom) {
+    if (isRoomSelectorOpen && id !== ACTIVEROOMID) {
       const { data } = await send({
-        userid: userId,
-        roomid: id,
+        USERID,
+        ROOMID: id,
       });
 
       if (data.SUCCESS) {
@@ -58,8 +58,8 @@ export const RoomSelector = (): JSX.Element => {
           isOpen={isRoomSelectorOpen}
           className={classNames(activeCn)}
         />
-        {Object.entries(rooms).map(([key, room]) =>
-          key === activeRoom ? null : (
+        {Object.entries(ROOMS).map(([key, room]) =>
+          key === ACTIVEROOMID ? null : (
             <button
               onClick={onClick}
               className={classNames(styles.btn, hideCn)}
@@ -75,10 +75,10 @@ export const RoomSelector = (): JSX.Element => {
         <button
           onClick={onClick}
           className={classNames(styles.btn, activeCn)}
-          name={rooms[activeRoom]}
-          id={activeRoom}
+          name={ROOMS[ACTIVEROOMID]}
+          id={ACTIVEROOMID}
         >
-          {rooms[activeRoom]}
+          {ROOMS[ACTIVEROOMID]}
         </button>
       </div>
 

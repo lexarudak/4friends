@@ -185,6 +185,7 @@ export const RegisterPage = (): JSX.Element => {
                   className={styles.checkbox}
                   name="checkbox"
                   disabled={isFetching}
+                  si
                 />
                 <button
                   type="button"

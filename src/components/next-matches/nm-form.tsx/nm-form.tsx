@@ -13,33 +13,41 @@ import { OneMatchForm } from "../one-match-form/one-match-form";
 import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../../button/button";
 import { validator } from "./validator";
 import { useEffect, useState } from "react";
-import { isScoreSaved } from "../../../helpers";
-import {
-  useLazyGetNextMatchesQuery,
-  useLazySetNextMatchesQuery,
-} from "../../../store/api";
+import { isScoreChanged } from "../../../helpers";
+import { useLazySetNextMatchesQuery } from "../../../store/api";
 import { userSelector } from "../../../store/user/user.selector";
 import { FieldError } from "../../../pages/auth/field-error";
+import { CSSTransition } from "react-transition-group";
+
+const SAVED_BANNER_TIME = 1000;
 
 export const NMForm = (): JSX.Element => {
   const nextMatches = useSelector(nextMatchesSelector);
-  const { username, activeRoom, userId } = useSelector(userSelector);
+  const { USERNAME, ACTIVEROOMID, USERID } = useSelector(userSelector);
   const [firstTry, setFirstTry] = useState(false);
   const [setNM, { isFetching, isError }] = useLazySetNextMatchesQuery();
-  const [getNM] = useLazyGetNextMatchesQuery();
   const isLoading = useSelector(isNMLoadingSelector);
   const dispatch = useDispatch();
+  const [isSavedBanner, setIsSavedBanner] = useState(false);
 
-  const submit = async (values: NextMatch[]) => {
+  const showBanner = () => {
+    setIsSavedBanner(true);
+    setTimeout(() => {
+      setIsSavedBanner(false);
+    }, SAVED_BANNER_TIME);
+  };
+
+  const submit = async (NMDATA: NextMatch[]) => {
     console.log("set NM");
     const { data } = await setNM({
-      nmData: values,
-      username,
-      activeroomID: activeRoom,
-      userid: userId,
+      NMDATA,
+      USERNAME,
+      ACTIVEROOMID,
+      USERID,
     });
     if (data?.SUCCESS) {
-      await getNM({});
+      showBanner();
+      setFirstTry(false);
     }
     console.log("nm response", data);
   };
@@ -67,21 +75,40 @@ export const NMForm = (): JSX.Element => {
       {({ values, isValid, submitForm }) => {
         return (
           <Form className={styles.form}>
-            {values.map((nm, ind) => (
-              <OneMatchForm nm={nm} order={ind} key={nm.MATCHID} />
-            ))}
+            <div className={styles.bannerContainer}>
+              {values.map((nm, ind) => (
+                <OneMatchForm nm={nm} order={ind} key={nm.MATCHID} />
+              ))}
+              <CSSTransition
+                in={isSavedBanner || isFetching}
+                timeout={200}
+                classNames="fade"
+                unmountOnExit
+              >
+                <CSSTransition
+                  in={isSavedBanner}
+                  timeout={200}
+                  classNames="fade"
+                  unmountOnExit
+                >
+                  <div className={styles.banner}>Saved successfully!</div>
+                </CSSTransition>
+              </CSSTransition>
+            </div>
+
             <Button
               variant={BUTTON_VARIANT.fill}
               color={BUTTON_COLOR.active}
               type="submit"
               onClick={() => onClick(submitForm)}
               className={styles.button}
-              disabled={isScoreSaved(values) || !isValid || isLoading}
+              disabled={!isScoreChanged(values) || !isValid || isLoading}
             >
               Save
             </Button>
             <FieldError
               message={isError ? "Something went wrong. Try again" : ""}
+              className={styles.error}
             />
           </Form>
         );

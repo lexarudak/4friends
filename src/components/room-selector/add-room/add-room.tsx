@@ -28,14 +28,14 @@ export const AddRoom: FC<Props> = ({
 }): JSX.Element => {
   const [serverErrors, setServerErrors] = useState<ServerError>({});
   const [successMessage, setSuccessMessage] = useState("");
-  const userid = useSelector(userIdSelector);
+  const USERID = useSelector(userIdSelector);
 
   const [send, { isFetching }] = useLazyAddRoomQuery();
   const [updateUser, { isFetching: updateFetching }] = useLazyUserQuery({});
 
   const submit = async ({ room }: { room: string }) => {
     const { data } = await send({
-      userid,
+      USERID,
       roomname: room,
     });
 

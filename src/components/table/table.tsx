@@ -24,7 +24,7 @@ export const Table: FC<Props> = ({
   moreStatistic,
 }): JSX.Element => {
   const sortedUsers = [...users].sort((a, b) => b.POINTS - a.POINTS);
-  const username = useSelector(userNameSelector);
+  const myUsername = useSelector(userNameSelector);
 
   return users.length ? (
     <section className={classNames(styles.container, cn)}>
@@ -36,7 +36,7 @@ export const Table: FC<Props> = ({
             points={POINTS}
             key={ind}
             position={usePositions ? ind + 1 : null}
-            myCard={username === USERNAME}
+            myCard={myUsername === USERNAME}
           />
         ))}
       </ul>

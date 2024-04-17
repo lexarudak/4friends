@@ -22,7 +22,8 @@ export const OneMatchForm: FC<Props> = ({
   const { SCORE: score1 } = TEAM1;
   const { SCORE: score2 } = TEAM2;
   const winnerName = `[${order}].WINNER`;
-  const [isSaved, setIsSaved] = useState(!!SAVEDSCORE.length);
+  const isSaved = !!SAVEDSCORE.join("").length;
+  const [isChanged, setIsChanged] = useState(false);
   const { setFieldValue, errors } = useFormikContext();
   const isFetching = useSelector(isNMLoadingSelector);
   const isWinnerDisabled = () =>
@@ -30,7 +31,7 @@ export const OneMatchForm: FC<Props> = ({
 
   useEffect(() => {
     const getWinner = () => {
-      if (EXTRA && score1 !== "" && score2 !== "") {
+      if (score1 !== "" && score2 !== "") {
         if (score1 > score2) return 1;
         if (score1 < score2) return 2;
         return 0;
@@ -38,7 +39,7 @@ export const OneMatchForm: FC<Props> = ({
       return 0;
     };
 
-    setIsSaved(score1 === SAVEDSCORE[0] && score2 === SAVEDSCORE[1]);
+    setIsChanged([score1, score2].join("") !== SAVEDSCORE.join(""));
     setFieldValue(winnerName, getWinner());
   }, [TEAM1, TEAM2]);
 
@@ -48,6 +49,7 @@ export const OneMatchForm: FC<Props> = ({
         info={INFO}
         time={TIME}
         isSaved={isSaved}
+        isChanged={isChanged}
         order={order}
         errors={errors}
       />

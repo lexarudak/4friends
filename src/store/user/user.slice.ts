@@ -6,17 +6,17 @@ export type Rooms = {
 };
 
 type UserInfo = {
-  username: string;
-  activeRoom: string;
-  rooms: Rooms;
-  userId: number;
+  USERNAME: string;
+  ACTIVEROOMID: string;
+  ROOMS: Rooms;
+  USERID: number;
 };
 
 const initialState: UserInfo = {
-  username: "",
-  activeRoom: "",
-  rooms: {},
-  userId: 0,
+  USERNAME: "",
+  ACTIVEROOMID: "",
+  ROOMS: {},
+  USERID: 0,
 };
 
 const userSlice = createSlice({
@@ -24,7 +24,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setActiveRoom(state, action) {
-      state.activeRoom = action.payload;
+      state.ACTIVEROOMID = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -32,10 +32,10 @@ const userSlice = createSlice({
       apiSlice.endpoints.user.matchFulfilled,
       (state, { payload }) => {
         if (payload.SUCCESS) {
-          state.activeRoom = payload.DATA.ACTIVEROOM.toString();
-          state.rooms = payload.DATA.ROOMS;
-          state.userId = payload.USERID;
-          state.username = payload.DATA.USERNAME;
+          state.ACTIVEROOMID = payload.DATA.ACTIVEROOM.toString();
+          state.ROOMS = payload.DATA.ROOMS;
+          state.USERID = payload.USERID;
+          state.USERNAME = payload.DATA.USERNAME;
           console.log("success", payload);
         } else {
           console.log("other fail", payload);

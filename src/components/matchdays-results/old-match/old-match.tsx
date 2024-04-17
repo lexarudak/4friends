@@ -18,7 +18,7 @@ export const OldMatch: FC<Props> = ({
     if (b.points && a.points) return b.points - a.points;
     return 1;
   });
-  const username = useSelector(userNameSelector);
+  const USERNAME = useSelector(userNameSelector);
 
   return (
     <div className={styles.container}>
@@ -33,7 +33,7 @@ export const OldMatch: FC<Props> = ({
       </div>
       {team1.SCORE !== "" &&
         sortedBets.map((bet) => (
-          <UserBet bet={bet} key={bet.name} myBet={username === bet.name} />
+          <UserBet bet={bet} key={bet.name} myBet={USERNAME === bet.name} />
         ))}
     </div>
   );

@@ -16,10 +16,7 @@ export const transformNM = (response: NMResponse) => {
           TEAM1,
           TEAM2,
           TIME: new Date(TIME).valueOf(),
-          SAVEDSCORE:
-            TEAM1.SCORE === "" || TEAM2.SCORE === ""
-              ? []
-              : [TEAM1.SCORE, TEAM2.SCORE],
+          SAVEDSCORE: [TEAM1.SCORE, TEAM2.SCORE],
         };
       },
     ),
@@ -27,33 +24,27 @@ export const transformNM = (response: NMResponse) => {
 };
 
 export const prepareNMData = ({
-  nmData,
-  username,
-  activeroomID,
-  userid,
+  NMDATA,
+  USERNAME,
+  ACTIVEROOMID,
+  USERID,
 }: {
-  nmData: NextMatch[];
-  username: string;
-  activeroomID: number;
-  userid: number;
+  NMDATA: NextMatch[];
+  USERNAME: string;
+  ACTIVEROOMID: number;
+  USERID: number;
 }): NMRequest => {
   return {
-    userid,
-    data: nmData.map(({ MATCHID, USERID, TEAM1, TEAM2, WINNER }) => ({
-      matchid: MATCHID,
-      userid: USERID,
-      team1: {
-        code: TEAM1.CODE,
-        score: TEAM1.SCORE,
-      },
-      team2: {
-        code: TEAM2.CODE,
-        score: TEAM2.SCORE,
-      },
-      winner:
+    USERID,
+    DATA: NMDATA.map(({ MATCHID, USERID, TEAM1, TEAM2, WINNER }) => ({
+      MATCHID,
+      USERID,
+      TEAM1,
+      TEAM2,
+      WINNER:
         (WINNER === 1 && TEAM1.CODE) || (WINNER === 2 && TEAM2.CODE) || "",
-      username,
-      activeroomID,
+      USERNAME,
+      ACTIVEROOMID,
     })),
   };
 };

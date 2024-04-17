@@ -3,13 +3,13 @@ import { Rooms } from "./user.slice";
 
 export const userSelector = (state: RootState) => state.userSlice;
 
-export const activeRoomSelector = (state: RootState): string =>
-  state.userSlice.activeRoom;
+export const activeRoomIdSelector = (state: RootState): string =>
+  state.userSlice.ACTIVEROOMID;
 
-export const roomsSelector = (state: RootState): Rooms => state.userSlice.rooms;
+export const roomsSelector = (state: RootState): Rooms => state.userSlice.ROOMS;
 
 export const userIdSelector = (state: RootState): number =>
-  state.userSlice.userId;
+  state.userSlice.USERID;
 
 export const userNameSelector = (state: RootState): string =>
-  state.userSlice.username;
+  state.userSlice.USERNAME;

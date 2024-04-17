@@ -5,22 +5,22 @@ import { statisticSelector } from "../../store/statistic/statistic.selector";
 import { useLazyTotalScoreQuery } from "../../store/api";
 import { useEffect } from "react";
 import { setTable } from "../../store/statistic/statistic.slice";
-import { activeRoomSelector } from "../../store/user/user.selector";
+import { activeRoomIdSelector } from "../../store/user/user.selector";
 
 export const StatisticPage = (): JSX.Element => {
   const { table, exact, wins, average } = useSelector(statisticSelector);
   const dispatch = useDispatch();
-  const activeRoom = useSelector(activeRoomSelector);
+  const ACTIVEROOMID = useSelector(activeRoomIdSelector);
   const [fetchTable, { data }] = useLazyTotalScoreQuery();
 
   useEffect(() => {
-    if (activeRoom) {
+    if (ACTIVEROOMID) {
       fetchTable({});
       if (data && data.SUCCESS) {
         dispatch(setTable(data.DATA));
       }
     }
-  }, [data, dispatch, fetchTable, activeRoom]);
+  }, [data, dispatch, fetchTable, ACTIVEROOMID]);
 
   return (
     <section className={styles.page}>

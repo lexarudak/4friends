@@ -27,20 +27,15 @@ export interface ErrorResponse {
 
 export type NMResponse = SuccessResponse<GetNextMatchesData> | ErrorResponse;
 
-export type ReqTeam = {
-  code: string;
-  score: number | "";
-};
-
 export type Match = {
-  matchid: number;
-  userid: number;
-  team1: ReqTeam;
-  team2: ReqTeam;
-  winner: string;
+  MATCHID: number;
+  USERID: number;
+  TEAM1: Team;
+  TEAM2: Team;
+  WINNER: string;
 };
 
 export type NMRequest = {
-  data: Match[];
-  userid: number;
+  DATA: Match[];
+  USERID: number;
 };

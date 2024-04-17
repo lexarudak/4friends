@@ -7,8 +7,11 @@
   transition: .3s;
 
   &.saved {
-    transition: .3s;
     background-color: $clr-data-03;
+  }
+
+  &.changed {
+    background-color: $clr-accent-02;
   }
 
   &.error {

@@ -63,7 +63,7 @@ export const apiSlice = createApi({
         headers,
         body: JSON.stringify(prepareNMData(nmData)),
       }),
-      // transformResponse: transformNM,
+      transformResponse: transformNM,
     }),
   }),
 });

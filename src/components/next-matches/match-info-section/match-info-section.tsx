@@ -9,6 +9,7 @@ type Props = {
   time: number;
   info: string;
   isSaved: boolean;
+  isChanged?: boolean;
   order: number;
   errors?: FormikErrors<ValidateErrors>;
 };
@@ -17,6 +18,7 @@ export const MatchInfoSection: FC<Props> = ({
   info,
   time,
   isSaved,
+  isChanged,
   order,
   errors,
 }): JSX.Element => {
@@ -25,7 +27,8 @@ export const MatchInfoSection: FC<Props> = ({
 
   const cn = {
     [styles.container]: true,
-    [styles.saved]: isSaved,
+    [styles.saved]: isSaved && !isChanged,
+    [styles.changed]: isChanged,
     [styles.error]: (emptyError || winnerError) && errors,
   };
 

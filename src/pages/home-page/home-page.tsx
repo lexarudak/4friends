@@ -10,23 +10,23 @@ import {
 } from "../../store/api";
 import { useEffect } from "react";
 import { setTable } from "../../store/statistic/statistic.slice";
-import { activeRoomSelector } from "../../store/user/user.selector";
+import { activeRoomIdSelector } from "../../store/user/user.selector";
 import { setNMIsFetching } from "../../store/next-matches/next-matches.slice";
 
 export const HomePage = (): JSX.Element => {
   const dispatch = useDispatch();
   const users = useSelector(tableSelector);
-  const activeRoom = useSelector(activeRoomSelector);
+  const ACTIVEROOMID = useSelector(activeRoomIdSelector);
   const [fetchTable, { data }] = useLazyTotalScoreQuery();
   const [fetchNextMatches, { isFetching }] = useLazyGetNextMatchesQuery();
 
   useEffect(() => {
-    if (activeRoom) {
+    if (ACTIVEROOMID) {
       fetchTable({});
       fetchNextMatches({});
-      console.log("FETCH", activeRoom);
+      console.log("FETCH", ACTIVEROOMID);
     }
-  }, [activeRoom, fetchNextMatches, fetchTable]);
+  }, [ACTIVEROOMID, fetchNextMatches, fetchTable]);
 
   useEffect(() => {
     if (data && data.SUCCESS && data.DATA) {
