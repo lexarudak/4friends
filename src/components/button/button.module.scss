@@ -47,11 +47,11 @@
     &:disabled {
       cursor: default;
       background-color: rgba(239, 239, 239, 0.3);
-      border-color: rgba(239, 239, 239, 0.3);
+      border-color: rgba(99, 99, 99, 0.3);
 
       &:hover{
         background-color:rgba(239, 239, 239, 0.3);
-        border-color: rgba(239, 239, 239, 0.3);
+        border-color: rgba(99, 99, 99, 0.3);
       }
     }
   }

@@ -62,6 +62,11 @@ export const ScoreInput: FC<Props> = ({ name, disabled }): JSX.Element => {
       event.preventDefault();
     }
   };
+
+  const onFocus = (e: { target: { select: () => void } }) => {
+    e.target.select();
+  };
+
   return (
     <Field
       name={name}
@@ -73,6 +78,7 @@ export const ScoreInput: FC<Props> = ({ name, disabled }): JSX.Element => {
       onChange={handleChange}
       onKeyPress={handleKeyPress}
       disabled={disabled}
+      onFocus={onFocus}
     />
   );
 };
