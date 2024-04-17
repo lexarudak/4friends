@@ -85,10 +85,6 @@ const appSlice = createSlice({
       redirectHandle,
     );
     builder.addMatcher(
-      apiSlice.endpoints.setNextMatches.matchRejected,
-      serverErrHandle,
-    );
-    builder.addMatcher(
       apiSlice.endpoints.getNextMatches.matchFulfilled,
       redirectHandle,
     );

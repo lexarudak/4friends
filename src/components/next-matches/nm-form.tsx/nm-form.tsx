@@ -19,12 +19,13 @@ import {
   useLazySetNextMatchesQuery,
 } from "../../../store/api";
 import { userSelector } from "../../../store/user/user.selector";
+import { FieldError } from "../../../pages/auth/field-error";
 
 export const NMForm = (): JSX.Element => {
   const nextMatches = useSelector(nextMatchesSelector);
   const { username, activeRoom, userId } = useSelector(userSelector);
   const [firstTry, setFirstTry] = useState(false);
-  const [setNM, { isFetching }] = useLazySetNextMatchesQuery();
+  const [setNM, { isFetching, isError }] = useLazySetNextMatchesQuery();
   const [getNM] = useLazyGetNextMatchesQuery();
   const isLoading = useSelector(isNMLoadingSelector);
   const dispatch = useDispatch();
@@ -79,6 +80,9 @@ export const NMForm = (): JSX.Element => {
             >
               Save
             </Button>
+            <FieldError
+              message={isError ? "Something went wrong. Try again" : ""}
+            />
           </Form>
         );
       }}
