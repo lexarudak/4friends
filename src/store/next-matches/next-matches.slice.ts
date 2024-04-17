@@ -19,63 +19,10 @@ export type NextMatch = {
   MATCHID: number;
 };
 
-// const mockedNextMatches: NextMatch[] = [
-//   {
-//     EXTRA: true,
-//     WINNER: 1,
-//     INFO: "Group A",
-//     TIME: 1718388000000,
-//     SAVEDSCORE: [1, 0],
-//     TEAM1: {
-//       CODE: "CZE",
-//       SCORE: 1,
-//     },
-//     TEAM2: {
-//       CODE: "SCO",
-//       SCORE: 0,
-//     },
-//     MATCHID: 1,
-//     USERID: 2,
-//   },
-//   {
-//     EXTRA: true,
-//     WINNER: 0,
-//     INFO: "Group B",
-//     TIME: 1718398800000,
-//     SAVEDSCORE: [],
-//     TEAM1: {
-//       CODE: "SUI",
-//       SCORE: "",
-//     },
-//     TEAM2: {
-//       CODE: "NED",
-//       SCORE: "",
-//     },
-//     MATCHID: 2,
-//     USERID: 2,
-//   },
-//   {
-//     EXTRA: true,
-//     WINNER: 0,
-//     INFO: "Group C",
-//     TIME: 1718409600000,
-//     SAVEDSCORE: [],
-//     TEAM1: {
-//       CODE: "HUN",
-//       SCORE: "",
-//     },
-//     TEAM2: {
-//       CODE: "GER",
-//       SCORE: "",
-//     },
-//     MATCHID: 3,
-//     USERID: 2,
-//   },
-// ];
-
 const initialState = {
   nextMatches: [] as NextMatch[],
   isFetching: false,
+  isSetting: false,
 };
 
 const nextMatchesSlice = createSlice({
@@ -84,6 +31,9 @@ const nextMatchesSlice = createSlice({
   reducers: {
     setNMIsFetching: (state, { payload }) => {
       state.isFetching = payload;
+    },
+    setNMIsSetting: (state, { payload }) => {
+      state.isSetting = payload;
     },
   },
   extraReducers: (builder) => {
@@ -101,6 +51,6 @@ const nextMatchesSlice = createSlice({
   },
 });
 
-export const { setNMIsFetching } = nextMatchesSlice.actions;
+export const { setNMIsFetching, setNMIsSetting } = nextMatchesSlice.actions;
 
 export default nextMatchesSlice.reducer;

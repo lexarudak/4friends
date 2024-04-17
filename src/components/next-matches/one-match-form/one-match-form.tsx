@@ -7,7 +7,7 @@ import { MatchInfoSection } from "../match-info-section/match-info-section";
 import { WinnerSection } from "../winner-section/winner-section";
 import { useFormikContext } from "formik";
 import { useSelector } from "react-redux";
-import { isNMFetchingSelector } from "../../../store/next-matches/next-matches.selector";
+import { isNMLoadingSelector } from "../../../store/next-matches/next-matches.selector";
 
 type Props = {
   nm: NextMatch;
@@ -24,7 +24,7 @@ export const OneMatchForm: FC<Props> = ({
   const winnerName = `[${order}].WINNER`;
   const [isSaved, setIsSaved] = useState(!!SAVEDSCORE.length);
   const { setFieldValue, errors } = useFormikContext();
-  const isFetching = useSelector(isNMFetchingSelector);
+  const isFetching = useSelector(isNMLoadingSelector);
   const isWinnerDisabled = () =>
     score1 === "" || score1 !== score2 || isFetching;
 

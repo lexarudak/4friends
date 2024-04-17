@@ -5,7 +5,7 @@ import { ScoreInput } from "../score-input/score-input";
 import { useBreakPoint } from "../../../hooks";
 import { getFlag, getName } from "../../../helpers";
 import classNames from "classnames";
-import { isNMFetchingSelector } from "../../../store/next-matches/next-matches.selector";
+import { isNMLoadingSelector } from "../../../store/next-matches/next-matches.selector";
 import { useSelector } from "react-redux";
 
 type Props = {
@@ -16,7 +16,7 @@ type Props = {
 
 export const FTSection: FC<Props> = ({ team1, team2, order }): JSX.Element => {
   const BP = useBreakPoint();
-  const isFetching = useSelector(isNMFetchingSelector);
+  const isFetching = useSelector(isNMLoadingSelector);
 
   return (
     <div className={styles.ftSection}>

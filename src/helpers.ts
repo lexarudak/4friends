@@ -45,6 +45,9 @@ export const isScoreSaved = (nm: NextMatch[]) => {
   nm.forEach(({ TEAM1, TEAM2, SAVEDSCORE: [score1, score2] }) => {
     if (TEAM1.SCORE !== score1) isSaved = false;
     if (TEAM2.SCORE !== score2) isSaved = false;
+    console.log(TEAM1.SCORE === score1);
+    console.log(TEAM2.SCORE === score2);
   });
+  console.log({ isSaved });
   return isSaved;
 };
