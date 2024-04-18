@@ -45,14 +45,6 @@ const nextMatchesSlice = createSlice({
         }
       },
     );
-    builder.addMatcher(
-      apiSlice.endpoints.setNextMatches.matchFulfilled,
-      (state, { payload }) => {
-        if (payload.SUCCESS) {
-          state.nextMatches = payload.DATA;
-        }
-      },
-    );
   },
 });
 

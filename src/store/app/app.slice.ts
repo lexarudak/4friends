@@ -16,7 +16,7 @@ const initialState = {
   isMenuOpen: false,
   isModalOpen: false,
   isRoomSelectorOpen: false,
-  nextMatch: 1718388000000,
+  nextMatch: 1,
   serverError: DEFAULT_ERROR,
 };
 
@@ -78,6 +78,18 @@ const appSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addMatcher(
+      apiSlice.endpoints.getNMTime.matchFulfilled,
+      (state, { payload }) => {
+        if (payload.SUCCESS) {
+          state.nextMatch = payload.DATA;
+        }
+      },
+    );
+    builder.addMatcher(
+      apiSlice.endpoints.getNMTime.matchFulfilled,
+      redirectHandle,
+    );
     builder.addMatcher(apiSlice.endpoints.user.matchFulfilled, redirectHandle);
     builder.addMatcher(apiSlice.endpoints.user.matchRejected, serverErrHandle);
     builder.addMatcher(

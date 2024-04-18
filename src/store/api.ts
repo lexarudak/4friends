@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { prepareNMData, transformNM } from "./helpers";
+import { prepareNMData, transformNM, transformNMTime } from "./helpers";
 
 const ORIGIN = "https://api.4friends.live/rest4friends";
 
@@ -65,6 +65,10 @@ export const apiSlice = createApi({
       }),
       transformResponse: transformNM,
     }),
+    getNMTime: query({
+      query: () => "cfc/suggest.cfc?method=getNextMatches",
+      transformResponse: transformNMTime,
+    }),
   }),
 });
 
@@ -78,4 +82,5 @@ export const {
   useLazyTotalScoreQuery,
   useLazyGetNextMatchesQuery,
   useLazySetNextMatchesQuery,
+  useLazyGetNMTimeQuery,
 } = apiSlice;

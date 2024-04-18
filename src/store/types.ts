@@ -39,3 +39,12 @@ export type NMRequest = {
   DATA: Match[];
   USERID: number;
 };
+
+export type NMTime = {
+  match_id: number;
+  datetime: string;
+};
+
+export type NMTimeData = NMTime[];
+
+export type NMTimeResponse = SuccessResponse<NMTimeData> | ErrorResponse;

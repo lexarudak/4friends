@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export enum BREAKPOINTS {
   xs = 400,
@@ -34,4 +34,24 @@ export const useBreakPoint = () => {
   }, []);
 
   return breakpoint;
+};
+
+export const useInterval = (callback: () => void, delay: number) => {
+  const initCallback = () => {};
+  const savedCallback = useRef(initCallback);
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  });
+
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+
+    if (delay !== null) {
+      const id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
 };

@@ -27,12 +27,14 @@ export const Timer: FC<Props> = ({ className }): JSX.Element => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
+    setTimeLeft(calculateTimeLeft());
+
     const timerId = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
     return () => clearInterval(timerId);
-  }, []);
+  }, [nextMatch]);
 
   return (
     <div className={classNames(styles.container, className)}>

@@ -21,7 +21,7 @@ import { CSSTransition } from "react-transition-group";
 
 const SAVED_BANNER_TIME = 1000;
 
-export const NMForm = (): JSX.Element => {
+export const NMForm = (): JSX.Element | null => {
   const nextMatches = useSelector(nextMatchesSelector);
   const { USERNAME, ACTIVEROOMID, USERID } = useSelector(userSelector);
   const [firstTry, setFirstTry] = useState(false);
@@ -62,6 +62,10 @@ export const NMForm = (): JSX.Element => {
   useEffect(() => {
     dispatch(setNMIsSetting(isFetching));
   }, [isFetching, dispatch]);
+
+  if (isFetching) {
+    return null;
+  }
 
   return nextMatches.length ? (
     <Formik
@@ -115,6 +119,6 @@ export const NMForm = (): JSX.Element => {
       }}
     </Formik>
   ) : (
-    <div>No next matches</div>
+    <div className={styles.form}>No next matches</div>
   );
 };
