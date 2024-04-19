@@ -40,11 +40,12 @@ export const getName = (code: keyof typeof countries, BP: number) =>
     : code;
 
 export const isScoreChanged = (nm: NextMatch[]) => {
-  let isSaved = false;
+  let isChanged = false;
 
-  nm.forEach(({ TEAM1, TEAM2, SAVEDSCORE: [score1, score2] }) => {
-    if (TEAM1.SCORE !== score1) isSaved = true;
-    if (TEAM2.SCORE !== score2) isSaved = true;
+  nm.forEach(({ TEAM1, TEAM2, SAVEDSCORE: [score1, score2, win], WINNER }) => {
+    if (TEAM1.SCORE !== score1) isChanged = true;
+    if (TEAM2.SCORE !== score2) isChanged = true;
+    if (WINNER !== win) isChanged = true;
   });
-  return isSaved;
+  return isChanged;
 };

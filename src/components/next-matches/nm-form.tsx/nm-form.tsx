@@ -63,7 +63,7 @@ export const NMForm = (): JSX.Element | null => {
     dispatch(setNMIsSetting(isFetching));
   }, [isFetching, dispatch]);
 
-  if (isFetching) {
+  if (isLoading && !nextMatches.length) {
     return null;
   }
 

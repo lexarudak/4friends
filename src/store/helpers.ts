@@ -8,15 +8,16 @@ export const transformNM = (response: NMResponse) => {
     ...response,
     DATA: Object.values(response.DATA).map(
       ({ WINNER, TEAM1, TEAM2, TIME, ...rest }) => {
+        const numWinner = ((WINNER === TEAM1.CODE && 1) ||
+          (WINNER === TEAM2.CODE && 2) ||
+          0) as 0 | 1 | 2;
         return {
           ...rest,
-          WINNER: ((WINNER === TEAM1.CODE && 1) ||
-            (WINNER === TEAM2.CODE && 2) ||
-            0) as 0 | 1 | 2,
+          WINNER: numWinner,
           TEAM1,
           TEAM2,
           TIME: new Date(TIME).valueOf(),
-          SAVEDSCORE: [TEAM1.SCORE, TEAM2.SCORE],
+          SAVEDSCORE: [TEAM1.SCORE, TEAM2.SCORE, numWinner],
         };
       },
     ),

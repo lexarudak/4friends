@@ -79,6 +79,10 @@ const appSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addMatcher(
+      apiSlice.endpoints.getNMTime.matchRejected,
+      serverErrHandle,
+    );
+    builder.addMatcher(
       apiSlice.endpoints.getNMTime.matchFulfilled,
       (state, { payload }) => {
         if (payload.SUCCESS) {

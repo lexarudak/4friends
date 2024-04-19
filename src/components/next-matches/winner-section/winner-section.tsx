@@ -14,6 +14,7 @@ export const WinnerSection: FC<Props> = ({ isDisabled, name }): JSX.Element => {
   const onClickHandler = (winner: 1 | 2) => {
     setFieldValue(name, winner);
   };
+
   return (
     <fieldset disabled={isDisabled} className={styles.fieldset}>
       <button
