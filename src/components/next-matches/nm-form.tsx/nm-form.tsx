@@ -38,7 +38,6 @@ export const NMForm = (): JSX.Element | null => {
   };
 
   const submit = async (NMDATA: NextMatch[]) => {
-    console.log("set NM");
     const { data } = await setNM({
       NMDATA,
       USERNAME,
@@ -49,7 +48,6 @@ export const NMForm = (): JSX.Element | null => {
       showBanner();
       setFirstTry(false);
     }
-    console.log("nm response", data);
   };
 
   const onClick = (

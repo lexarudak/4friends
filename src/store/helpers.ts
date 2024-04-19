@@ -1,6 +1,10 @@
 import { NextMatch } from "./next-matches/next-matches.slice";
 import { NMRequest, NMResponse, NMTimeResponse } from "./types";
 
+export const getNumberTime = (dateString: string) => {
+  return new Date(dateString).valueOf();
+};
+
 export const transformNM = (response: NMResponse) => {
   if (!response.SUCCESS) return response;
 
@@ -16,7 +20,7 @@ export const transformNM = (response: NMResponse) => {
           WINNER: numWinner,
           TEAM1,
           TEAM2,
-          TIME: new Date(TIME).valueOf(),
+          TIME: getNumberTime(TIME),
           SAVEDSCORE: [TEAM1.SCORE, TEAM2.SCORE, numWinner],
         };
       },
@@ -61,9 +65,7 @@ const getNextTime = (arr: number[]) => {
 
 export const transformNMTime = (response: NMTimeResponse) => {
   if (!response.SUCCESS) return response;
-  const dates = response.DATA.map(({ datetime }) =>
-    new Date(datetime).valueOf(),
-  );
+  const dates = response.DATA.map(({ datetime }) => getNumberTime(datetime));
   const sortedDates = [...dates].sort((a, b) => a - b);
   const DATA = getNextTime(sortedDates);
 

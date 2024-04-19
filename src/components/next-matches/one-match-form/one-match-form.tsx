@@ -16,13 +16,13 @@ type Props = {
 };
 
 export const OneMatchForm: FC<Props> = ({
-  nm: { TEAM1, TEAM2, TIME, INFO, SAVEDSCORE, EXTRA },
+  nm: { TEAM1, TEAM2, TIME, INFO, SAVEDSCORE, EXTRA, WINNER },
   order,
 }): JSX.Element => {
   const { SCORE: score1 } = TEAM1;
   const { SCORE: score2 } = TEAM2;
   const winnerName = `[${order}].WINNER`;
-  const isSaved = !!SAVEDSCORE.join("").length;
+  const isSaved = SAVEDSCORE.join("") !== "0";
   const [isChanged, setIsChanged] = useState(false);
   const { setFieldValue, errors } = useFormikContext();
   const isFetching = useSelector(isNMLoadingSelector);
@@ -34,14 +34,14 @@ export const OneMatchForm: FC<Props> = ({
       if (score1 !== "" && score2 !== "") {
         if (score1 > score2) return 1;
         if (score1 < score2) return 2;
-        return 0;
+        return WINNER;
       }
       return 0;
     };
 
-    setIsChanged([score1, score2].join("") !== SAVEDSCORE.join(""));
+    setIsChanged([score1, score2, WINNER].join("") !== SAVEDSCORE.join(""));
     setFieldValue(winnerName, getWinner());
-  }, [TEAM1, TEAM2]);
+  }, [TEAM1, TEAM2, WINNER, SAVEDSCORE]);
 
   return (
     <div className={styles.oneMatch}>
