@@ -17,7 +17,9 @@ const initialState = {
   isModalOpen: false,
   isRoomSelectorOpen: false,
   nextMatch: 1,
+  serverTimeDif: 1,
   serverError: DEFAULT_ERROR,
+  isPageLoading: true,
 };
 
 interface Payload {
@@ -76,6 +78,9 @@ const appSlice = createSlice({
     setServerError(state, { payload }: { payload: ServerError }) {
       state.serverError = payload;
     },
+    setIsPageLoading(state, { payload }: { payload: boolean }) {
+      state.isPageLoading = payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -86,7 +91,8 @@ const appSlice = createSlice({
       apiSlice.endpoints.getNMTime.matchFulfilled,
       (state, { payload }) => {
         if (payload.SUCCESS) {
-          state.nextMatch = payload.DATA;
+          state.nextMatch = payload.DATA.nmTime;
+          state.serverTimeDif = payload.DATA.serverTimeDif;
         }
       },
     );
@@ -128,6 +134,7 @@ export const {
   removeServerError,
   toggleRoomSelector,
   closeRoomSelector,
+  setIsPageLoading,
 } = appSlice.actions;
 
 export default appSlice.reducer;

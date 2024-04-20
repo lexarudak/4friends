@@ -54,10 +54,10 @@ export const prepareNMData = ({
   };
 };
 
-const getNextTime = (arr: number[]) => {
+const getNextTime = (arr: number[], serverTime: number) => {
   let i = 0;
   while (i < arr.length) {
-    if (arr[i] > Date.now().valueOf()) return arr[i];
+    if (arr[i] > serverTime) return arr[i];
     i++;
   }
   return 0;
@@ -66,8 +66,13 @@ const getNextTime = (arr: number[]) => {
 export const transformNMTime = (response: NMTimeResponse) => {
   if (!response.SUCCESS) return response;
   const dates = response.DATA.map(({ datetime }) => getNumberTime(datetime));
+  const serverTime = getNumberTime(response.DATA[0].servertime);
+  const serverTimeDif = new Date().valueOf() - serverTime;
   const sortedDates = [...dates].sort((a, b) => a - b);
-  const DATA = getNextTime(sortedDates);
+  const DATA = {
+    nmTime: getNextTime(sortedDates, serverTime),
+    serverTimeDif,
+  };
 
   return {
     ...response,

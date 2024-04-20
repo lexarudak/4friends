@@ -2,7 +2,10 @@ import classNames from "classnames";
 import styles from "./timer.module.scss";
 import { FC, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { nextMatchSelector } from "../../store/app/app.selector";
+import {
+  nextMatchSelector,
+  serverTimeDifSelector,
+} from "../../store/app/app.selector";
 import { TimeBlock } from "./time-block/time-block";
 
 type Props = {
@@ -11,8 +14,9 @@ type Props = {
 
 export const Timer: FC<Props> = ({ className }): JSX.Element => {
   const nextMatch = useSelector(nextMatchSelector);
+  const serverTimeDif = useSelector(serverTimeDifSelector);
   const calculateTimeLeft = () => {
-    const difference = +new Date(nextMatch) - +new Date();
+    const difference = +new Date(nextMatch) - (+new Date() - serverTimeDif);
 
     return difference > 0
       ? {

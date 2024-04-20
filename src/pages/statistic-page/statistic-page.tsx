@@ -6,12 +6,13 @@ import { useLazyTotalScoreQuery } from "../../store/api";
 import { useEffect } from "react";
 import { setTable } from "../../store/statistic/statistic.slice";
 import { activeRoomIdSelector } from "../../store/user/user.selector";
+import { setIsPageLoading } from "../../store/app/app.slice";
 
 export const StatisticPage = (): JSX.Element => {
   const { table, exact, wins, average } = useSelector(statisticSelector);
   const dispatch = useDispatch();
   const ACTIVEROOMID = useSelector(activeRoomIdSelector);
-  const [fetchTable, { data }] = useLazyTotalScoreQuery();
+  const [fetchTable, { data, isSuccess }] = useLazyTotalScoreQuery();
 
   useEffect(() => {
     if (ACTIVEROOMID) {
@@ -21,6 +22,12 @@ export const StatisticPage = (): JSX.Element => {
       }
     }
   }, [data, dispatch, fetchTable, ACTIVEROOMID]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(setIsPageLoading(false));
+    }
+  }, [dispatch, isSuccess]);
 
   return (
     <section className={styles.page}>

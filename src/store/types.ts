@@ -43,6 +43,7 @@ export type NMRequest = {
 export type NMTime = {
   match_id: number;
   datetime: string;
+  servertime: string;
 };
 
 export type NMTimeData = NMTime[];

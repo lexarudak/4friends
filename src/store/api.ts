@@ -66,7 +66,7 @@ export const apiSlice = createApi({
       transformResponse: transformNM,
     }),
     getNMTime: query({
-      query: () => "cfc/suggest.cfc?method=getNextMatches",
+      query: () => "cfc/suggest.cfc?method=getAllMatches",
       transformResponse: transformNMTime,
     }),
   }),

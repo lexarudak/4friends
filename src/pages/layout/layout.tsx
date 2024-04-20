@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   appSelector,
   isServerErrorSelector,
+  pageLoadingSelector,
 } from "../../store/app/app.selector";
 import { RoomSelector } from "../../components/room-selector/room-selector";
 import { useUserQuery } from "../../store/api";
@@ -22,13 +23,15 @@ export const Layout = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, data } = useUserQuery({});
+  const isPageLoading = useSelector(pageLoadingSelector);
   const { pathname } = useLocation();
   const { isMenuOpen, isModalOpen, isRoomSelectorOpen } =
     useSelector(appSelector);
   const severError = useSelector(isServerErrorSelector);
 
   const showMainLoading =
-    (isLoading || severError.isError) && !regPages.includes(pathname);
+    (isLoading || severError.isError || isPageLoading) &&
+    !regPages.includes(pathname);
   const shouldRedirectFromLogin =
     !severError.isError && regPages.includes(pathname) && Cookies.get("TOKEN");
   const shouldRedirectToLogin =
