@@ -49,6 +49,8 @@ export const LoginPage = (): JSX.Element => {
       if (userData && userData.SUCCESS) {
         navigate(ROUTE_LIST.home);
       }
+    } else {
+      dispatch(setServerError({ isError: true, message: "Server error" }));
     }
   };
 

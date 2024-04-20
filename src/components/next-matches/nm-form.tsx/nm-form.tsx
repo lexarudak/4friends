@@ -79,7 +79,7 @@ export const NMForm = (): JSX.Element | null => {
               ))}
               <CSSTransition
                 in={isSavedBanner || isFetching}
-                timeout={200}
+                timeout={300}
                 classNames="fade"
                 unmountOnExit
               >
@@ -112,7 +112,7 @@ export const NMForm = (): JSX.Element | null => {
         );
       }}
     </Formik>
-  ) : (
+  ) : isLoading ? null : (
     <div className={styles.form}>No next matches</div>
   );
 };

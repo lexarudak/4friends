@@ -16,6 +16,7 @@ import { useUserQuery } from "../../store/api";
 import { FirstLoading } from "../../components/loading/first-loading";
 import Cookies from "js-cookie";
 import { setServerError } from "../../store/app/app.slice";
+import { CSSTransition } from "react-transition-group";
 
 const regPages: string[] = [ROUTE_LIST.login, ROUTE_LIST.register];
 
@@ -84,7 +85,14 @@ export const Layout = (): JSX.Element => {
       </main>
       <Footer />
 
-      {showMainLoading && <FirstLoading />}
+      <CSSTransition
+        in={showMainLoading}
+        timeout={300}
+        classNames="fade"
+        unmountOnExit
+      >
+        <FirstLoading />
+      </CSSTransition>
     </>
   );
 };
