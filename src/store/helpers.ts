@@ -1,9 +1,21 @@
-import { NextMatch } from "./next-matches/next-matches.slice";
-import { NMRequest, NMResponse, NMTimeResponse } from "./types";
+import { OldMatchInfo } from "./matchdays/matchdays.slice";
+import { NextMatch, Team } from "./next-matches/next-matches.slice";
+import {
+  MatchdaysResponse,
+  NMRequest,
+  NMResponse,
+  NMTimeResponse,
+} from "./types";
 
 export const getNumberTime = (dateString: string) => {
   return new Date(dateString).valueOf();
 };
+
+const getNumWinner = (WINNER: string, TEAM1: Team, TEAM2: Team) =>
+  ((WINNER === TEAM1.CODE && 1) || (WINNER === TEAM2.CODE && 2) || 0) as
+    | 0
+    | 1
+    | 2;
 
 export const transformNM = (response: NMResponse) => {
   if (!response.SUCCESS) return response;
@@ -11,17 +23,15 @@ export const transformNM = (response: NMResponse) => {
   return {
     ...response,
     DATA: Object.values(response.DATA).map(
-      ({ WINNER, TEAM1, TEAM2, TIME, ...rest }) => {
-        const numWinner = ((WINNER === TEAM1.CODE && 1) ||
-          (WINNER === TEAM2.CODE && 2) ||
-          0) as 0 | 1 | 2;
+      ({ WINNER: StrWin, TEAM1, TEAM2, TIME, ...rest }) => {
+        const WINNER = getNumWinner(StrWin, TEAM1, TEAM2);
         return {
           ...rest,
-          WINNER: numWinner,
+          WINNER,
           TEAM1,
           TEAM2,
           TIME: getNumberTime(TIME),
-          SAVEDSCORE: [TEAM1.SCORE, TEAM2.SCORE, numWinner],
+          SAVEDSCORE: [TEAM1.SCORE, TEAM2.SCORE, WINNER],
         };
       },
     ),
@@ -74,6 +84,37 @@ export const transformNMTime = (response: NMTimeResponse) => {
     serverTimeDif,
   };
 
+  return {
+    ...response,
+    DATA,
+  };
+};
+
+export const transformMatchdays = (response: MatchdaysResponse) => {
+  if (!response.SUCCESS) return response;
+
+  const DATA: OldMatchInfo[] = Object.entries(response.DATA).map(
+    ([ID, data]) => {
+      const { EXTRA, WINNER, TEAM1, TEAM2, INFO, TIME } = data;
+      return {
+        ID,
+        EXTRA,
+        TEAM1,
+        TEAM2,
+        WINNER: getNumWinner(WINNER, TEAM1, TEAM2),
+        INFO,
+        TIME: getNumberTime(TIME),
+        USERBETS: data["USER BETS"].map(
+          ({ TEAM1, TEAM2, POINTS, USERNAME, WINNER }) => ({
+            USERNAME,
+            WINNER: getNumWinner(WINNER, TEAM1, TEAM2),
+            SCORE: [TEAM1.SCORE, TEAM2.SCORE],
+            POINTS,
+          }),
+        ),
+      };
+    },
+  );
   return {
     ...response,
     DATA,

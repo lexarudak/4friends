@@ -1,5 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { prepareNMData, transformNM, transformNMTime } from "./helpers";
+import {
+  prepareNMData,
+  transformMatchdays,
+  transformNM,
+  transformNMTime,
+} from "./helpers";
 
 const ORIGIN = "https://api.4friends.live/rest4friends";
 
@@ -69,6 +74,15 @@ export const apiSlice = createApi({
       query: () => "cfc/suggest.cfc?method=getAllMatches",
       transformResponse: transformNMTime,
     }),
+    getMatchdays: query({
+      query: (dateRange) => ({
+        url: "cfc/getUserBets.cfc?method=getUsersBets",
+        method: "POST",
+        headers,
+        body: JSON.stringify(dateRange),
+      }),
+      transformResponse: transformMatchdays,
+    }),
   }),
 });
 
@@ -83,4 +97,6 @@ export const {
   useLazyGetNextMatchesQuery,
   useLazySetNextMatchesQuery,
   useLazyGetNMTimeQuery,
+  useLazyGetMatchdaysQuery,
+  useGetMatchdaysQuery,
 } = apiSlice;

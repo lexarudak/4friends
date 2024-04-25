@@ -12,10 +12,10 @@ type Props = {
 };
 
 export const OldMatch: FC<Props> = ({
-  matchInfo: { info, time, team1, team2, winner, usersBets },
+  matchInfo: { INFO, TIME, TEAM1, TEAM2, WINNER, USERBETS },
 }): JSX.Element => {
-  const sortedBets = [...usersBets].sort((a, b) => {
-    if (b.points && a.points) return b.points - a.points;
+  const sortedBets = [...USERBETS].sort((a, b) => {
+    if (b.POINTS && a.POINTS) return b.POINTS - a.POINTS;
     return 1;
   });
   const USERNAME = useSelector(userNameSelector);
@@ -24,16 +24,20 @@ export const OldMatch: FC<Props> = ({
     <div className={styles.container}>
       <div className={styles.info}>
         <MatchInfoSection
-          info={info}
-          time={time}
-          isSaved={time < Date.now().valueOf()}
+          info={INFO}
+          time={TIME}
+          isSaved={TIME < Date.now().valueOf()}
           order={0}
         />
-        <OldFTSection team1={team1} team2={team2} winner={winner} />
+        <OldFTSection team1={TEAM1} team2={TEAM2} winner={WINNER} />
       </div>
-      {team1.SCORE !== "" &&
+      {TEAM1.SCORE !== "" &&
         sortedBets.map((bet) => (
-          <UserBet bet={bet} key={bet.name} myBet={USERNAME === bet.name} />
+          <UserBet
+            bet={bet}
+            key={bet.USERNAME}
+            myBet={USERNAME === bet.USERNAME}
+          />
         ))}
     </div>
   );

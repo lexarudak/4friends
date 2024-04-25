@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const UserBet: FC<Props> = ({
-  bet: { name, score, winner, points },
+  bet: { USERNAME, SCORE, WINNER, POINTS },
   myBet,
 }): JSX.Element => {
   return (
@@ -20,24 +20,24 @@ export const UserBet: FC<Props> = ({
     >
       <span
         className={classNames(styles.score, {
-          [styles.hide]: winner !== 1,
+          [styles.hide]: WINNER !== 1,
         })}
       >
         &#x2022;
       </span>
-      <span className={styles.score}>{score.length ? score[0] : "-"}</span>
+      <span className={styles.score}>{SCORE.length ? SCORE[0] : "-"}</span>
       <span className={styles.score}>:</span>
-      <span className={styles.score}>{score.length ? score[1] : "-"}</span>
+      <span className={styles.score}>{SCORE.length ? SCORE[1] : "-"}</span>
       <span
         className={classNames({
           [styles.score]: true,
-          [styles.hide]: winner !== 2,
+          [styles.hide]: WINNER !== 2,
         })}
       >
         &#x2022;
       </span>
-      <span className={styles.name}>{name}</span>
-      <span className={styles.points}>{points}</span>
+      <span className={styles.name}>{USERNAME}</span>
+      <span className={styles.points}>{POINTS}</span>
     </div>
   );
 };

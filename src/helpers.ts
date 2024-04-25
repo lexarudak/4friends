@@ -22,8 +22,9 @@ export const getDate = (timestamp: number) => {
   return formattedDate;
 };
 
-export const validateDate = (from: number, to: number) => {
-  const isValid = (value: number) =>
+export const validateDate = (from: string, to: string) => {
+  console.log({ from, to });
+  const isValid = (value: string) =>
     new Date(value) >= new Date(MIN_DATE) &&
     new Date(value) <= new Date(MAX_DATE);
   return isValid(from) && isValid(to);

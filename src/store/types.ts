@@ -46,6 +46,25 @@ export type NMTime = {
   servertime: string;
 };
 
+export type MatchdaysData = {
+  [key: string]: {
+    TEAM1: Team;
+    TEAM2: Team;
+    INFO: string;
+    TIME: string;
+    EXTRA: boolean;
+    WINNER: string;
+    "USER BETS": {
+      TEAM1: Team;
+      TEAM2: Team;
+      WINNER: string;
+      POINTS: number;
+      USERNAME: string;
+    }[];
+  };
+};
+
 export type NMTimeData = NMTime[];
 
 export type NMTimeResponse = SuccessResponse<NMTimeData> | ErrorResponse;
+export type MatchdaysResponse = SuccessResponse<MatchdaysData> | ErrorResponse;
