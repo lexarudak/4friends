@@ -77,6 +77,7 @@ export const NMForm = (): JSX.Element | null => {
               {values.map((nm, ind) => (
                 <OneMatchForm nm={nm} order={ind} key={nm.MATCHID} />
               ))}
+              <span>Make your bets</span>
               <CSSTransition
                 in={isSavedBanner || isFetching}
                 timeout={300}
@@ -113,6 +114,6 @@ export const NMForm = (): JSX.Element | null => {
       }}
     </Formik>
   ) : isLoading ? null : (
-    <div className={styles.form}>No next matches</div>
+    <div className={styles.form}>No matches in the next 24 h</div>
   );
 };

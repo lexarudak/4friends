@@ -4,7 +4,6 @@
   color: $clr-primary-01;
   padding: 10px 20px;
   display: flex;
-  // justify-content: space-between;
   gap: 10px;
   position: relative;
 
@@ -17,7 +16,7 @@
     background-color: transparent;
   }
 
-  &:first-child {
+  &.winner {
     .firstItem {
       background-color: $clr-data-03;
     }

@@ -20,7 +20,10 @@ export const UserCard: FC<Props> = ({
   const mode = {
     [styles.card]: true,
     [styles.myCard]: myCard,
+    [styles.winner]: position === 1,
   };
+
+  console.log({ points });
 
   return (
     <div className={classNames(mode, cn)}>

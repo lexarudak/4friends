@@ -13,15 +13,15 @@
 }
 
 .score {
+  text-align: center;
   font-weight: 600;
-  margin-right: 5px;
-
-  &.hide {
-    color: transparent;
-  }
 
   &.num {
     width: 18px;
+  }
+
+  &.active {
+    text-decoration: underline;
   }
 }
 
@@ -30,7 +30,7 @@
 }
 
 .name {
-  padding-left: 10px;
+  padding-left: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

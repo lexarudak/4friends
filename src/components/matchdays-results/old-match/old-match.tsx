@@ -15,9 +15,11 @@ export const OldMatch: FC<Props> = ({
   matchInfo: { INFO, TIME, TEAM1, TEAM2, WINNER, USERBETS },
 }): JSX.Element => {
   const sortedBets = [...USERBETS].sort((a, b) => {
-    if (b.POINTS && a.POINTS) return b.POINTS - a.POINTS;
-    return 1;
+    if (a.SCORE[0] === "" && a.SCORE[1] === "") return 1;
+    if (b.SCORE[0] === "" && b.SCORE[1] === "") return -1;
+    return b.POINTS - a.POINTS;
   });
+
   const USERNAME = useSelector(userNameSelector);
 
   return (
@@ -32,7 +34,7 @@ export const OldMatch: FC<Props> = ({
         <OldFTSection team1={TEAM1} team2={TEAM2} winner={WINNER} />
       </div>
       {TEAM1.SCORE !== "" &&
-        sortedBets.map((bet) => (
+        [...sortedBets].map((bet) => (
           <UserBet
             bet={bet}
             key={bet.USERNAME}

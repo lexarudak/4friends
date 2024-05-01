@@ -72,7 +72,7 @@ export const HomePage = (): JSX.Element => {
     <section className={styles.page}>
       <Timer className={styles.timer} />
       <NextMatches />
-      <Table users={users} title="Table" moreStatistic />
+      <Table users={users} title="TOP 3" moreStatistic top={3} />
     </section>
   );
 };

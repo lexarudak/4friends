@@ -101,6 +101,10 @@ const appSlice = createSlice({
       redirectHandle,
     );
     builder.addMatcher(apiSlice.endpoints.user.matchFulfilled, redirectHandle);
+    builder.addMatcher(
+      apiSlice.endpoints.getMatchdays.matchFulfilled,
+      redirectHandle,
+    );
     builder.addMatcher(apiSlice.endpoints.user.matchRejected, serverErrHandle);
     builder.addMatcher(
       apiSlice.endpoints.getMatchdays.matchFulfilled,

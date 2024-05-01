@@ -32,10 +32,10 @@ export const StatisticPage = (): JSX.Element => {
   return (
     <section className={styles.page}>
       <h2 className={styles.title}>Statistic</h2>
-      <Table users={table} title="Total Score" usePositions />
-      <Table users={exact} title="Exact Score Hits" usePositions />
-      <Table users={wins} title="Predicted Wins" usePositions />
-      <Table users={average} title="Average Points per Match" usePositions />
+      <Table users={table} title="Total Score" />
+      <Table users={exact} title="Exact Score Hits" />
+      <Table users={wins} title="Predicted Wins" />
+      <Table users={average} title="Average Points per Match" />
     </section>
   );
 };

@@ -31,15 +31,24 @@ export const OldFTSection: FC<Props> = ({
             [styles.active]: winner === 1,
           })}
         >
-          {winner === 1 ? "• " : null}
           {getName(team1.CODE, BP)}
         </span>
       </div>
-      <span className={styles.score}>
+      <span
+        className={classNames({
+          [styles.score]: true,
+          [styles.active]: winner === 1,
+        })}
+      >
         {team1.SCORE === "" ? "-" : team1.SCORE}
       </span>
       <span className={styles.center}>:</span>
-      <span className={styles.score}>
+      <span
+        className={classNames({
+          [styles.score]: true,
+          [styles.active]: winner === 2,
+        })}
+      >
         {team2.SCORE === "" ? "-" : team2.SCORE}
       </span>
       <div className={styles.half}>
@@ -51,7 +60,6 @@ export const OldFTSection: FC<Props> = ({
           })}
         >
           {getName(team2.CODE, BP)}
-          {winner === 2 ? " •" : null}
         </span>
         <span
           className={classNames(`fi fi-${getFlag(team2.CODE)}`, styles.flag)}

@@ -19,26 +19,23 @@ export const UserBet: FC<Props> = ({
       })}
     >
       <span
-        className={classNames(styles.score, {
-          [styles.hide]: WINNER !== 1,
+        className={classNames({
+          [styles.score]: true,
+          [styles.num]: true,
+          [styles.active]: WINNER === 1,
         })}
       >
-        &#x2022;
-      </span>
-      <span className={classNames(styles.score, styles.num)}>
-        {SCORE.length ? SCORE[0] : "-"}
+        {SCORE[0] !== "" ? SCORE[0] : "-"}
       </span>
       <span className={styles.score}>:</span>
-      <span className={classNames(styles.score, styles.num)}>
-        {SCORE.length ? SCORE[1] : "-"}
-      </span>
       <span
         className={classNames({
           [styles.score]: true,
-          [styles.hide]: WINNER !== 2,
+          [styles.num]: true,
+          [styles.active]: WINNER === 2,
         })}
       >
-        &#x2022;
+        {SCORE[1] !== "" ? SCORE[1] : "-"}
       </span>
       <span className={styles.name}>{USERNAME}</span>
       <span className={styles.points}>{POINTS}</span>
