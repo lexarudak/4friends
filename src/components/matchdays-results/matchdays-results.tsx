@@ -21,7 +21,7 @@ export const MatchdaysResults = (): JSX.Element => {
   const [isValid, setIsValid] = useState(true);
   const severError = useSelector(isServerErrorSelector);
 
-  const getValidMatches = ({ TIME }: { TIME: number }) =>
+  const getValidMatch = ({ TIME }: { TIME: number }) =>
     TIME >= new Date(from).valueOf() && TIME <= new Date(to).valueOf();
 
   const [fetch, { isFetching }] = useLazyGetMatchdaysQuery();
@@ -55,9 +55,9 @@ export const MatchdaysResults = (): JSX.Element => {
         <FieldError message={severError.message} className={styles.error} />
       </div>
 
-      {data.filter(getValidMatches).length && isValid
+      {data.filter(getValidMatch).length && isValid
         ? [...data]
-            .filter(getValidMatches)
+            .filter(getValidMatch)
             .sort((a, b) => a.TIME - b.TIME)
             .map((data) => <OldMatch matchInfo={data} key={data.ID} />)
         : !isFetching && <div>No matches on these dates</div>}

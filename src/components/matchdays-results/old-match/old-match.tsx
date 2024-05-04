@@ -21,19 +21,15 @@ export const OldMatch: FC<Props> = ({
   });
 
   const USERNAME = useSelector(userNameSelector);
+  const isSaved = TIME < Date.now().valueOf();
 
   return (
     <div className={styles.container}>
       <div className={styles.info}>
-        <MatchInfoSection
-          info={INFO}
-          time={TIME}
-          isSaved={TIME < Date.now().valueOf()}
-          order={0}
-        />
+        <MatchInfoSection info={INFO} time={TIME} isSaved={isSaved} order={0} />
         <OldFTSection team1={TEAM1} team2={TEAM2} winner={WINNER} />
       </div>
-      {TEAM1.SCORE !== "" &&
+      {isSaved &&
         [...sortedBets].map((bet) => (
           <UserBet
             bet={bet}

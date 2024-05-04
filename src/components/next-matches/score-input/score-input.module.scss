@@ -10,7 +10,7 @@
   border: none;
   text-align: center;
   outline: $clr-tertiary-02;
-  font-size: large;
+  font-size: $font-size-xl;
   font-weight: 600;
   &::placeholder {
     color: $clr-text-01;
