@@ -23,14 +23,14 @@ const countries = {
   GEO: { code2: "ge", name: "Georgia" },
   POR: { code2: "pt", name: "Portugal" },
   CZE: { code2: "cz", name: "Czech Republic" },
-  SHU: { code2: "-", name: "Sheffield United" },
-  NTG: { code2: "-", name: "Nottingham Forest" },
-  MCI: { code2: "-", name: "Manchester City" },
+  SHU: { code2: "-", name: "Sheffield Utd" },
+  NTG: { code2: "-", name: "Nottingham Fst" },
+  MCI: { code2: "-", name: "Man City" },
   WLV: { code2: "-", name: "Wolverhampton" },
   BRH: { code2: "-", name: "Brighton" },
   AVA: { code2: "-", name: "Aston Villa" },
   CHE: { code2: "-", name: "Chelsea" },
-  WHU: { code2: "-", name: "West Ham United" },
+  WHU: { code2: "-", name: "West Ham Utd" },
 };
 
 export default countries;
