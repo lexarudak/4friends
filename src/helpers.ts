@@ -1,4 +1,4 @@
-import { MAX_DATE, MIN_DATE } from "./const/const";
+import { DATE_AFTER, MIN_DATE } from "./const/const";
 import countries from "./const/countries";
 import { BREAKPOINTS } from "./hooks";
 import { NextMatch } from "./store/next-matches/next-matches.slice";
@@ -23,10 +23,9 @@ export const getDate = (timestamp: number) => {
 };
 
 export const validateDate = (from: string, to: string) => {
-  console.log({ from, to });
   const isValid = (value: string) =>
     new Date(value) >= new Date(MIN_DATE) &&
-    new Date(value) <= new Date(MAX_DATE);
+    new Date(value) <= new Date(DATE_AFTER);
   return isValid(from) && isValid(to);
 };
 

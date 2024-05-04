@@ -1,6 +1,8 @@
 import { FC } from "react";
 import styles from "./user-card.module.scss";
 import classNames from "classnames";
+import { useLocation } from "react-router-dom";
+import { ROUTE_LIST } from "../../router/route-list";
 
 type Props = {
   cn?: string;
@@ -17,13 +19,14 @@ export const UserCard: FC<Props> = ({
   position,
   myCard,
 }): JSX.Element => {
+  const { pathname } = useLocation();
+  console.log({ pathname });
   const mode = {
     [styles.card]: true,
     [styles.myCard]: myCard,
     [styles.winner]: position === 1,
+    [styles.global]: pathname === ROUTE_LIST.top,
   };
-
-  console.log({ points });
 
   return (
     <div className={classNames(mode, cn)}>
@@ -33,4 +36,8 @@ export const UserCard: FC<Props> = ({
       <span className={styles.item}>{points}</span>
     </div>
   );
+};
+
+export const ShadowUserCard = (): JSX.Element => {
+  return <div className={styles.shadowCard}>0</div>;
 };

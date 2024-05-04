@@ -15,19 +15,36 @@ export type UserPoints = {
 //   },
 // ];
 
-const mockedExact: UserPoints[] = [
-  { USERNAME: "Val", POINTS: 10 },
-  { USERNAME: "kam", POINTS: 5 },
-  { USERNAME: "valera", POINTS: 2 },
+// const mockedExact: UserPoints[] = [
+//   { USERNAME: "Val", POINTS: 10 },
+//   { USERNAME: "kam", POINTS: 5 },
+//   { USERNAME: "valera", POINTS: 2 },
+//   {
+//     USERNAME: "Man with real long USERNAME USERNAME USERNAME USERNAME",
+//     POINTS: 0,
+//   },
+// ];
+
+// const mockedWins: UserPoints[] = [
+//   { USERNAME: "Val", POINTS: 10 },
+//   { USERNAME: "kam", POINTS: 15 },
+//   { USERNAME: "valera", POINTS: 5 },
+//   {
+//     USERNAME: "Man with real long USERNAME USERNAME USERNAME USERNAME",
+//     POINTS: 0,
+//   },
+// ];
+
+export const mockedAverage: UserPoints[] = [
+  { USERNAME: "Val", POINTS: 2 },
+  { USERNAME: "kam", POINTS: 2 },
+  { USERNAME: "valera", POINTS: 1.2 },
   {
     USERNAME: "Man with real long USERNAME USERNAME USERNAME USERNAME",
-    POINTS: 0,
+    POINTS: 5.43,
   },
-];
-
-const mockedWins: UserPoints[] = [
   { USERNAME: "Val", POINTS: 10 },
-  { USERNAME: "kam", POINTS: 15 },
+  { USERNAME: "kam", POINTS: 10 },
   { USERNAME: "valera", POINTS: 5 },
   {
     USERNAME: "Man with real long USERNAME USERNAME USERNAME USERNAME",
@@ -35,21 +52,12 @@ const mockedWins: UserPoints[] = [
   },
 ];
 
-const mockedAverage: UserPoints[] = [
-  { USERNAME: "Val", POINTS: 5.34 },
-  { USERNAME: "kam", POINTS: 4.33 },
-  { USERNAME: "valera", POINTS: 1.2 },
-  {
-    USERNAME: "Man with real long USERNAME USERNAME USERNAME USERNAME",
-    POINTS: 5.43,
-  },
-];
-
 const initialState = {
   table: [],
-  exact: mockedExact,
-  wins: mockedWins,
-  average: mockedAverage,
+  exact: [],
+  wins: [],
+  average: [],
+  globalTop: [],
 };
 
 export type StatisticState = typeof initialState;
@@ -61,9 +69,22 @@ const statisticSlice = createSlice({
     setTable(state, action) {
       state.table = action.payload;
     },
+    setExact(state, action) {
+      state.exact = action.payload;
+    },
+    setWins(state, action) {
+      state.wins = action.payload;
+    },
+    setAverage(state, action) {
+      state.average = action.payload;
+    },
+    setGlobalTop(state, action) {
+      state.globalTop = action.payload;
+    },
   },
 });
 
-export const { setTable } = statisticSlice.actions;
+export const { setTable, setGlobalTop, setExact, setWins, setAverage } =
+  statisticSlice.actions;
 
 export default statisticSlice.reducer;

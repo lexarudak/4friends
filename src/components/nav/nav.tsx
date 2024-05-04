@@ -10,6 +10,7 @@ const NAV_LIST = {
   Home: ROUTE_LIST.home,
   MATCHDAYS: ROUTE_LIST.matchdays,
   Statistic: ROUTE_LIST.statistic,
+  "Global Top": ROUTE_LIST.top,
   Rules: ROUTE_LIST.rules,
 };
 

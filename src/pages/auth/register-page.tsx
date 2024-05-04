@@ -21,7 +21,7 @@ import {
   isModalOpenSelector,
   isServerErrorSelector,
 } from "../../store/app/app.selector";
-import { MOCKED_TEXT } from "./text";
+import { TermsOfService } from "./text";
 import { useLazyRegisterQuery, useLazyUserQuery } from "../../store/api";
 import { Loading } from "../../components/loading/loading";
 import { CSSTransition } from "react-transition-group";
@@ -218,7 +218,7 @@ export const RegisterPage = (): JSX.Element => {
                 unmountOnExit
               >
                 <InfoModal onApply={() => setFieldValue("checkbox", true)}>
-                  {<p>{MOCKED_TEXT}</p>}
+                  {<p>{TermsOfService()}</p>}
                 </InfoModal>
               </CSSTransition>
             </Form>

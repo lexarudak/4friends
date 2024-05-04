@@ -5,4 +5,5 @@ export enum ROUTE_LIST {
   rules = "/rules",
   login = "/login",
   register = "/register",
+  top = "/top",
 }

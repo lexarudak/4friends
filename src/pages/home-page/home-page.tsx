@@ -47,7 +47,7 @@ export const HomePage = (): JSX.Element => {
 
   useEffect(() => {
     if (data && data.SUCCESS && data.DATA) {
-      dispatch(setTable(data.DATA));
+      dispatch(setTable(data.DATA.MAINTABLE));
     }
   }, [data, dispatch]);
 
@@ -72,7 +72,7 @@ export const HomePage = (): JSX.Element => {
     <section className={styles.page}>
       <Timer className={styles.timer} />
       <NextMatches />
-      <Table users={users} title="TOP 3" moreStatistic top={3} />
+      <Table users={users} title="Top 3" moreStatistic top items={3} />
     </section>
   );
 };

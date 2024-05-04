@@ -85,63 +85,67 @@ export const LoginPage = (): JSX.Element => {
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={submit}
-      validate={loginValidator}
-      validateOnChange={shouldValidate}
-      validateOnBlur={shouldValidate}
-    >
-      {({ errors, isValid }) => (
-        <>
-          <h2 className={styles.title}>
-            Login
-            <span className={styles.subtitle}>{" | "}</span>
-            {
-              <Link to={ROUTE_LIST.register} className={styles.link}>
-                Register
-              </Link>
-            }
-            <Loading loading={false} />
-          </h2>
-          <Form className={styles.form}>
-            <p className={styles.text}>Email</p>
-            <Field
-              type="email"
-              className={styles.field}
-              name="email"
-              onFocus={onFocus}
-              disabled={isFetching}
-            />
-            <FieldError message={getError(errors.email, serverErrors?.email)} />
-            <p className={styles.text}>Password</p>
-            <Field
-              type="password"
-              className={styles.field}
-              name="password"
-              onFocus={onFocus}
-              disabled={isFetching}
-            />
-            <FieldError
-              message={getError(errors.password, serverErrors?.password)}
-            />
-
-            <Button
-              type="submit"
-              color={BUTTON_COLOR.active}
-              variant={BUTTON_VARIANT.fill}
-              disabled={
-                !isValid || !!Object.keys(serverErrors).length || isFetching
-              }
-              onClick={onClick}
-              className={styles.button}
-            >
+    <>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={submit}
+        validate={loginValidator}
+        validateOnChange={shouldValidate}
+        validateOnBlur={shouldValidate}
+      >
+        {({ errors, isValid }) => (
+          <>
+            <h2 className={styles.title}>
               Login
-            </Button>
-            <FieldError message={severError.message} />
-          </Form>
-        </>
-      )}
-    </Formik>
+              <span className={styles.subtitle}>{" | "}</span>
+              {
+                <Link to={ROUTE_LIST.register} className={styles.link}>
+                  Register
+                </Link>
+              }
+              <Loading loading={false} />
+            </h2>
+            <Form className={styles.form}>
+              <p className={styles.text}>Email</p>
+              <Field
+                type="email"
+                className={styles.field}
+                name="email"
+                onFocus={onFocus}
+                disabled={isFetching}
+              />
+              <FieldError
+                message={getError(errors.email, serverErrors?.email)}
+              />
+              <p className={styles.text}>Password</p>
+              <Field
+                type="password"
+                className={styles.field}
+                name="password"
+                onFocus={onFocus}
+                disabled={isFetching}
+              />
+              <FieldError
+                message={getError(errors.password, serverErrors?.password)}
+              />
+
+              <Button
+                type="submit"
+                color={BUTTON_COLOR.active}
+                variant={BUTTON_VARIANT.fill}
+                disabled={
+                  !isValid || !!Object.keys(serverErrors).length || isFetching
+                }
+                onClick={onClick}
+                className={styles.button}
+              >
+                Login
+              </Button>
+              <FieldError message={severError.message} />
+            </Form>
+          </>
+        )}
+      </Formik>
+    </>
   );
 };
