@@ -13,7 +13,7 @@ import { OneMatchForm } from "../one-match-form/one-match-form";
 import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../../button/button";
 import { validator } from "./validator";
 import { useEffect, useState } from "react";
-import { isScoreChanged } from "../../../helpers";
+import { isScoreChanged, isScoreEmpty } from "../../../helpers";
 import { useLazySetNextMatchesQuery } from "../../../store/api";
 import { userSelector } from "../../../store/user/user.selector";
 import { FieldError } from "../../../pages/auth/field-error";
@@ -57,6 +57,22 @@ export const NMForm = (): JSX.Element | null => {
     submitForm();
   };
 
+  const clearForm = (
+    setValues: (values: React.SetStateAction<NextMatch[]>) => void,
+    values: NextMatch[],
+  ) => {
+    const clearValues: NextMatch[] = values.map((nm) => {
+      const { TEAM1, TEAM2 } = nm;
+      return {
+        ...nm,
+        WINNER: 0,
+        TEAM1: { ...TEAM1, SCORE: "" },
+        TEAM2: { ...TEAM2, SCORE: "" },
+      };
+    });
+    setValues(clearValues);
+  };
+
   useEffect(() => {
     dispatch(setNMIsSetting(isFetching));
   }, [isFetching, dispatch]);
@@ -70,7 +86,7 @@ export const NMForm = (): JSX.Element | null => {
       validateOnBlur={false}
       validateOnChange={firstTry}
     >
-      {({ values, isValid, submitForm }) => {
+      {({ values, isValid, submitForm, setValues }) => {
         return (
           <Form className={styles.form}>
             <div className={styles.bannerContainer}>
@@ -95,16 +111,29 @@ export const NMForm = (): JSX.Element | null => {
               </CSSTransition>
             </div>
 
-            <Button
-              variant={BUTTON_VARIANT.fill}
-              color={BUTTON_COLOR.active}
-              type="submit"
-              onClick={() => onClick(submitForm)}
-              className={styles.button}
-              disabled={!isScoreChanged(values) || !isValid || isLoading}
-            >
-              Save
-            </Button>
+            <div className={styles.btnBlock}>
+              <Button
+                variant={BUTTON_VARIANT.fill}
+                color={BUTTON_COLOR.active}
+                type="submit"
+                onClick={() => onClick(submitForm)}
+                className={styles.button}
+                disabled={!isScoreChanged(values) || !isValid || isLoading}
+              >
+                Save
+              </Button>
+              <Button
+                variant={BUTTON_VARIANT.contour}
+                color={BUTTON_COLOR.active}
+                type="button"
+                onClick={() => clearForm(setValues, values)}
+                className={styles.button}
+                disabled={isScoreEmpty(values) || isLoading}
+              >
+                Clear
+              </Button>
+            </div>
+
             <FieldError
               message={isError ? "Something went wrong. Try again" : ""}
               className={styles.error}

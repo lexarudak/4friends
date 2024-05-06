@@ -12,7 +12,7 @@ export const UserBet: FC<Props> = ({
   bet: { USERNAME, SCORE, WINNER, POINTS },
   myBet,
 }): JSX.Element => {
-  const equalScore = SCORE === SCORE;
+  const equalScore = SCORE[0] === SCORE[1];
 
   return (
     <div

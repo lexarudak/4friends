@@ -17,8 +17,13 @@
   position: relative;
 }
 
-.button {
+.btnBlock {
   margin-top: 40px;
+  display: flex;
+  gap: 20px;
+}
+
+.button {
   width: fit-content;
 }
 

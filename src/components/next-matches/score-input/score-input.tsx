@@ -24,6 +24,8 @@ const symbols = [
   "{",
   "}",
   "-",
+  ".",
+  ",",
 ];
 
 export const ScoreInput: FC<Props> = ({ name, disabled }): JSX.Element => {

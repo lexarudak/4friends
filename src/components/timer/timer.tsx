@@ -6,11 +6,14 @@ import {
   nextMatchSelector,
   serverTimeDifSelector,
 } from "../../store/app/app.selector";
-import { TimeBlock } from "./time-block/time-block";
+import { TimeBlock, TimeColor } from "./time-block/time-block";
 
 type Props = {
   className?: string;
 };
+
+const FIVE_MINUTES_IN_MS = 5 * 60 * 1000;
+const ONE_HOUR_IN_MS = 60 * 60 * 1000;
 
 export const Timer: FC<Props> = ({ className }): JSX.Element => {
   const nextMatch = useSelector(nextMatchSelector);
@@ -20,12 +23,15 @@ export const Timer: FC<Props> = ({ className }): JSX.Element => {
 
     return difference > 0
       ? {
-          Days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          Hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          Minutes: Math.floor((difference / 1000 / 60) % 60),
-          Seconds: Math.floor((difference / 1000) % 60),
+          info: {
+            Days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+            Hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+            Minutes: Math.floor((difference / 1000 / 60) % 60),
+            Seconds: Math.floor((difference / 1000) % 60),
+          },
+          difference,
         }
-      : { Days: 0, Hours: 0, Minutes: 0, Seconds: 0 };
+      : { info: { Days: 0, Hours: 0, Minutes: 0, Seconds: 0 }, difference };
   };
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
@@ -40,12 +46,23 @@ export const Timer: FC<Props> = ({ className }): JSX.Element => {
     return () => clearInterval(timerId);
   }, [nextMatch]);
 
+  const getColor = (dif: number) => {
+    if (dif < FIVE_MINUTES_IN_MS) return TimeColor.red;
+    if (dif < ONE_HOUR_IN_MS) return TimeColor.yellow;
+    return TimeColor.white;
+  };
+
   return (
     <div className={classNames(styles.container, className)}>
       <h2 className={styles.title}>Countdown</h2>
       <div className={styles.timers}>
-        {Object.entries(timeLeft).map(([name, time]) => (
-          <TimeBlock name={name} time={time} key={name} />
+        {Object.entries(timeLeft.info).map(([name, time], ind) => (
+          <TimeBlock
+            name={name}
+            time={time}
+            key={name}
+            color={ind > 1 ? getColor(timeLeft.difference) : TimeColor.white}
+          />
         ))}
       </div>
     </div>

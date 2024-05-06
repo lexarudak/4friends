@@ -49,3 +49,14 @@ export const isScoreChanged = (nm: NextMatch[]) => {
   });
   return isChanged;
 };
+
+export const isScoreEmpty = (nm: NextMatch[]) => {
+  let isEmpty = true;
+
+  nm.forEach(({ TEAM1, TEAM2, WINNER }) => {
+    if (TEAM1.SCORE !== "") isEmpty = false;
+    if (TEAM2.SCORE !== "") isEmpty = false;
+    if (WINNER !== 0) isEmpty = false;
+  });
+  return isEmpty;
+};
