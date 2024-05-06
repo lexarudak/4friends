@@ -20,7 +20,6 @@ export const UserCard: FC<Props> = ({
   myCard,
 }): JSX.Element => {
   const { pathname } = useLocation();
-  console.log({ pathname });
   const mode = {
     [styles.card]: true,
     [styles.myCard]: myCard,

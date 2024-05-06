@@ -8,3 +8,6 @@ export const matchdaysDateSelector = createSelector(
 
 export const matchdaysMatchesSelector = (state: RootState) =>
   state.matchdaysSlice.matches;
+
+export const countrySelector = (state: RootState) =>
+  state.matchdaysSlice.country;

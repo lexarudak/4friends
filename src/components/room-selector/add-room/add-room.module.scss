@@ -20,6 +20,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-radius: 0 0 3px 3px;
 }
 
 .input {
@@ -28,6 +29,7 @@
   flex-direction: column;
   width: 100%;
   font-size: $font-size-m;
+  border-radius: 3px 3px 0 0;
   
   &::placeholder {
     color: $clr-ui-04;

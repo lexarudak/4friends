@@ -23,6 +23,7 @@ const initialState = {
 };
 
 interface Payload {
+  SUCCESS: boolean;
   MESSAGE: string;
   ERRORFIELD?: string;
 }
@@ -31,7 +32,7 @@ const redirectHandle = (
   state: { serverError: ServerError },
   { payload }: PayloadAction<Payload>,
 ) => {
-  if (payload.ERRORFIELD === "TOKEN") {
+  if (payload.ERRORFIELD === "TOKEN" || !payload.SUCCESS) {
     state.serverError = {
       isError: true,
       message: "",

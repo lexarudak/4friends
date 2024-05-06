@@ -4,6 +4,7 @@ import { MatchdaysResults } from "../../components/matchdays-results/matchdays-r
 import styles from "./matchdays-page.module.scss";
 import { useDispatch } from "react-redux";
 import { setIsPageLoading } from "../../store/app/app.slice";
+import { TeamSelector } from "../../components/team-selector/team-selector";
 
 export const MatchdaysPage = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export const MatchdaysPage = (): JSX.Element => {
     <section className={styles.page}>
       <h2 className={styles.title}>MATCHDAYS</h2>
       <DateSelector />
+      <TeamSelector />
       <MatchdaysResults />
     </section>
   );

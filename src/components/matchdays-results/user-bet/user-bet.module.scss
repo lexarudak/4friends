@@ -5,6 +5,8 @@
   color: $clr-primary-03;
   padding: 10px 20px;
   transition: .3s;
+  border-radius: 3px;
+  overflow: hidden;
 
   &.myBet {
     background-color: $clr-data-02;

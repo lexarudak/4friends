@@ -18,7 +18,6 @@ export const OldFTSection: FC<Props> = ({
 }): JSX.Element => {
   const BP = useBreakPoint();
   const equalScore = team1.SCORE === team2.SCORE;
-  console.log({ equalScore, team1, team2 });
 
   return (
     <div className={styles.container}>

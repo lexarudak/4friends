@@ -9,7 +9,7 @@
   left: 0;
   top: 0;
   color: $clr-primary-03;
-  background-color: rgba($clr-support-02, 0.7);
+  background-color: transparent;
 }
 
 .modal {
@@ -22,6 +22,8 @@
   width: 535px;
   max-width: 535px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 3px;
+  overflow: hidden;
 
   @include mediaMax('l') {
     width: 340px;

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { Team } from "../next-matches/next-matches.slice";
 import { apiSlice } from "../api";
 import dayjs from "dayjs";
+import { MIN_DATE } from "../../const/const";
 
 export type UserBetInfo = {
   USERNAME: string;
@@ -110,12 +111,14 @@ type InitialState = {
   from: string;
   to: string;
   matches: OldMatchInfo[];
+  country: string;
 };
 
 const initialState: InitialState = {
-  from: dayjs().startOf("day").format("YYYY-MM-DD HH:mm:ss"),
+  from: dayjs(MIN_DATE).format("YYYY-MM-DD HH:mm:ss"),
   to: dayjs().endOf("day").format("YYYY-MM-DD HH:mm:ss"),
   matches: [],
+  country: "",
 };
 
 const matchdaysSlice = createSlice({
@@ -127,6 +130,9 @@ const matchdaysSlice = createSlice({
     },
     setTo(state, action) {
       state.to = action.payload;
+    },
+    setCountry(state, action) {
+      state.country = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -147,6 +153,6 @@ const matchdaysSlice = createSlice({
   },
 });
 
-export const { setFrom, setTo } = matchdaysSlice.actions;
+export const { setFrom, setTo, setCountry } = matchdaysSlice.actions;
 
 export default matchdaysSlice.reducer;

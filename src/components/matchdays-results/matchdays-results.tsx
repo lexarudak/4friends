@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import styles from "./matchdays-results.module.scss";
 import {
+  countrySelector,
   matchdaysDateSelector,
   matchdaysMatchesSelector,
 } from "../../store/matchdays/matchdays.selector";
@@ -13,6 +14,8 @@ import { activeRoomIdSelector } from "../../store/user/user.selector";
 import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../button/button";
 import { isServerErrorSelector } from "../../store/app/app.selector";
 import { FieldError } from "../../pages/auth/field-error";
+import { OldMatchInfo } from "../../store/matchdays/matchdays.slice";
+import countries from "../../const/countries";
 
 export const MatchdaysResults = (): JSX.Element => {
   const data = useSelector(matchdaysMatchesSelector);
@@ -20,9 +23,20 @@ export const MatchdaysResults = (): JSX.Element => {
   const ACTIVEROOMID = useSelector(activeRoomIdSelector);
   const [isValid, setIsValid] = useState(true);
   const severError = useSelector(isServerErrorSelector);
+  const pickedCountry = useSelector(countrySelector);
 
-  const getValidMatch = ({ TIME }: { TIME: number }) =>
+  const getValidMatch = ({ TIME }: OldMatchInfo) =>
     TIME >= new Date(from).valueOf() && TIME <= new Date(to).valueOf();
+
+  const getValidCountry = ({ TEAM1, TEAM2 }: OldMatchInfo) => {
+    const searchValue = pickedCountry.trim().toUpperCase();
+    return [
+      TEAM1.CODE,
+      TEAM2.CODE,
+      countries[TEAM1.CODE].name.toUpperCase(),
+      countries[TEAM2.CODE].name.toUpperCase(),
+    ].some((value) => value.startsWith(searchValue));
+  };
 
   const [fetch, { isFetching }] = useLazyGetMatchdaysQuery();
 
@@ -55,10 +69,11 @@ export const MatchdaysResults = (): JSX.Element => {
         <FieldError message={severError.message} className={styles.error} />
       </div>
 
-      {data.filter(getValidMatch).length && isValid
+      {data.filter(getValidMatch).filter(getValidCountry).length && isValid
         ? [...data]
             .filter(getValidMatch)
-            .sort((a, b) => a.TIME - b.TIME)
+            .filter(getValidCountry)
+            .sort((a, b) => b.TIME - a.TIME)
             .map((data) => <OldMatch matchInfo={data} key={data.ID} />)
         : !isFetching && <div>No matches on these dates</div>}
     </section>

@@ -10,7 +10,7 @@ import classNames from "classnames";
 import { MAX_DATE, MIN_DATE } from "../../const/const";
 
 const text = "Select date range to show";
-const errorText = `Pick date in range 01/04/24 - 31/08/24`;
+const errorText = `Pick date in range 01/05/24 - 31/08/24`;
 
 export const DateSelector = (): JSX.Element => {
   const { from, to } = useSelector(matchdaysDateSelector);
