@@ -64,6 +64,14 @@ export const MatchdaysResults = (): JSX.Element => {
           >
             Refresh
           </Button>
+          {/* <Button
+            color={BUTTON_COLOR.active}
+            variant={BUTTON_VARIANT.contour}
+            onClick={clearFilter}
+            disabled={isFetching}
+          >
+            Clear
+          </Button> */}
           <Loading loading={isFetching} />
         </div>
         <FieldError message={severError.message} className={styles.error} />
