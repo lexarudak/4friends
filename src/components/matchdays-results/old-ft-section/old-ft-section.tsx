@@ -17,6 +17,8 @@ export const OldFTSection: FC<Props> = ({
   winner,
 }): JSX.Element => {
   const BP = useBreakPoint();
+  const equalScore = team1.SCORE === team2.SCORE;
+  console.log({ equalScore, team1, team2 });
 
   return (
     <div className={styles.container}>
@@ -28,7 +30,6 @@ export const OldFTSection: FC<Props> = ({
           className={classNames({
             [styles.code]: true,
             [styles.rp]: true,
-            [styles.active]: winner === 1,
           })}
         >
           {getName(team1.CODE, BP)}
@@ -37,7 +38,7 @@ export const OldFTSection: FC<Props> = ({
       <span
         className={classNames({
           [styles.score]: true,
-          [styles.active]: winner === 1,
+          [styles.active]: winner === 1 && equalScore,
         })}
       >
         {team1.SCORE === "" ? "-" : team1.SCORE}
@@ -46,7 +47,7 @@ export const OldFTSection: FC<Props> = ({
       <span
         className={classNames({
           [styles.score]: true,
-          [styles.active]: winner === 2,
+          [styles.active]: winner === 2 && equalScore,
         })}
       >
         {team2.SCORE === "" ? "-" : team2.SCORE}
@@ -56,7 +57,6 @@ export const OldFTSection: FC<Props> = ({
           className={classNames({
             [styles.code]: true,
             [styles.lp]: true,
-            [styles.active]: winner === 2,
           })}
         >
           {getName(team2.CODE, BP)}

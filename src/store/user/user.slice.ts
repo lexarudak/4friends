@@ -26,6 +26,12 @@ const userSlice = createSlice({
     setActiveRoom(state, action) {
       state.ACTIVEROOMID = action.payload;
     },
+    clearUser(state) {
+      state.ACTIVEROOMID = initialState.ACTIVEROOMID;
+      state.USERID = initialState.USERID;
+      state.USERNAME = initialState.USERNAME;
+      state.ROOMS = initialState.ROOMS;
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -45,6 +51,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setActiveRoom } = userSlice.actions;
+export const { setActiveRoom, clearUser } = userSlice.actions;
 
 export default userSlice.reducer;

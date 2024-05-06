@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import {
   closeMenu,
   removeServerError,
+  setIsPageLoading,
   setServerError,
 } from "../../store/app/app.slice";
 import { FieldError } from "./field-error";
@@ -44,12 +45,12 @@ export const LoginPage = (): JSX.Element => {
   const submit = async (values: LoginValues) => {
     dispatch(removeServerError());
     const { data } = await login(values);
+
     if (data && data.SUCCESS) {
-      const { data: userData } = await user({});
-      if (userData && userData.SUCCESS) {
-        navigate(ROUTE_LIST.home);
-      }
-    } else {
+      await user({});
+    }
+
+    if (!data?.SUCCESS && !data.ERRORFIELD) {
       dispatch(setServerError({ isError: true, message: "Server error" }));
     }
   };
@@ -73,6 +74,8 @@ export const LoginPage = (): JSX.Element => {
   };
 
   useEffect(() => {
+    dispatch(setIsPageLoading(false));
+    dispatch(removeServerError());
     dispatch(closeMenu());
   }, []);
 
@@ -80,6 +83,7 @@ export const LoginPage = (): JSX.Element => {
     { target: { name } }: { target: { name: string } },
     otherName?: string,
   ) => {
+    dispatch(removeServerError());
     if (name in serverErrors) setServerErrors({});
     if (otherName && otherName in serverErrors) setServerErrors({});
   };
@@ -103,7 +107,7 @@ export const LoginPage = (): JSX.Element => {
                   Register
                 </Link>
               }
-              <Loading loading={false} />
+              <Loading loading={isFetching} />
             </h2>
             <Form className={styles.form}>
               <p className={styles.text}>Email</p>

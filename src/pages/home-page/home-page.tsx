@@ -41,9 +41,10 @@ export const HomePage = (): JSX.Element => {
   }, [ACTIVEROOMID, fetchNextMatches, fetchTable, fetchTime]);
 
   useEffect(() => {
-    if (tableSuccess && nmSuccess && isSuccess)
+    console.log({ tableSuccess, nmSuccess, isSuccess });
+    if (tableSuccess && nmSuccess && isSuccess && data)
       dispatch(setIsPageLoading(false));
-  }, [tableSuccess, nmSuccess, isSuccess, dispatch]);
+  }, [tableSuccess, nmSuccess, isSuccess, dispatch, data]);
 
   useEffect(() => {
     if (data && data.SUCCESS && data.DATA) {

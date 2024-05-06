@@ -35,6 +35,9 @@ const nextMatchesSlice = createSlice({
     setNMIsSetting: (state, { payload }) => {
       state.isSetting = payload;
     },
+    setNextMatches(state, { payload }) {
+      state.nextMatches = payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -56,6 +59,7 @@ const nextMatchesSlice = createSlice({
   },
 });
 
-export const { setNMIsFetching, setNMIsSetting } = nextMatchesSlice.actions;
+export const { setNMIsFetching, setNMIsSetting, setNextMatches } =
+  nextMatchesSlice.actions;
 
 export default nextMatchesSlice.reducer;

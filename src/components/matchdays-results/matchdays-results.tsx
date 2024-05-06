@@ -40,7 +40,7 @@ export const MatchdaysResults = (): JSX.Element => {
 
   return (
     <section className={styles.container}>
-      <div>
+      <div className={styles.refreshBlock}>
         <div className={styles.btnContainer}>
           <Button
             color={BUTTON_COLOR.active}

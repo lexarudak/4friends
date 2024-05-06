@@ -55,6 +55,14 @@
   border: none;
   outline: none;
   font-size: $font-size-m;
+  width: 535px;
+  max-width: 535px;
+
+  @include mediaMax('l') {
+    width: 340px;
+    max-width: 340px;
+  }
+
 }
 
 .button {
@@ -63,7 +71,13 @@
 
 .subBlock {
   .field {
+  width: 257px;
+  max-width: 257px;
+
+  @include mediaMax('l') {
     width: 160px;
+    max-width: 160px;
+  }
   }
 
   &:last-child {
@@ -73,10 +87,16 @@
 
 .policy {
   padding-top: 10px;
-  width: 340px;
   display: flex;
   align-items: flex-start;
   gap: 20px;
+  width: 535px;
+  max-width: 535px;
+
+  @include mediaMax('l') {
+    width: 340px;
+    max-width: 340px;
+  }
 }
 
 .checkbox {

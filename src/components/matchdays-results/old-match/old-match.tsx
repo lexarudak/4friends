@@ -26,7 +26,13 @@ export const OldMatch: FC<Props> = ({
   return (
     <div className={styles.container}>
       <div className={styles.info}>
-        <MatchInfoSection info={INFO} time={TIME} isSaved={isSaved} order={0} />
+        <MatchInfoSection
+          info={INFO}
+          time={TIME}
+          isSaved={isSaved}
+          order={0}
+          isChanged={isSaved && TEAM1.SCORE === ""}
+        />
         <OldFTSection team1={TEAM1} team2={TEAM2} winner={WINNER} />
       </div>
       {isSaved &&

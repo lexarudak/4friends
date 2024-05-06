@@ -12,6 +12,8 @@ export const UserBet: FC<Props> = ({
   bet: { USERNAME, SCORE, WINNER, POINTS },
   myBet,
 }): JSX.Element => {
+  const equalScore = SCORE === SCORE;
+
   return (
     <div
       className={classNames(styles.card, {
@@ -22,7 +24,7 @@ export const UserBet: FC<Props> = ({
         className={classNames({
           [styles.score]: true,
           [styles.num]: true,
-          [styles.active]: WINNER === 1,
+          [styles.active]: WINNER === 1 && equalScore,
         })}
       >
         {SCORE[0] !== "" ? SCORE[0] : "-"}
@@ -32,7 +34,7 @@ export const UserBet: FC<Props> = ({
         className={classNames({
           [styles.score]: true,
           [styles.num]: true,
-          [styles.active]: WINNER === 2,
+          [styles.active]: WINNER === 2 && equalScore,
         })}
       >
         {SCORE[1] !== "" ? SCORE[1] : "-"}

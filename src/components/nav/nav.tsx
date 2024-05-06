@@ -5,6 +5,9 @@ import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../button/button";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../../store/app/app.slice";
 import Cookies from "js-cookie";
+import { clearUser } from "../../store/user/user.slice";
+import { setTable } from "../../store/statistic/statistic.slice";
+import { setNextMatches } from "../../store/next-matches/next-matches.slice";
 
 const NAV_LIST = {
   Home: ROUTE_LIST.home,
@@ -23,6 +26,11 @@ export const Nav = (): JSX.Element => {
 
   const logout = () => {
     Cookies.remove("TOKEN", { path: "/", domain: ".4friends.live" });
+
+    dispatch(clearUser());
+    dispatch(setNextMatches([]));
+    dispatch(setTable([]));
+
     close();
   };
 

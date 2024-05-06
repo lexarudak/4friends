@@ -13,6 +13,7 @@ import {
   closeMenu,
   openModal,
   removeServerError,
+  setIsPageLoading,
 } from "../../store/app/app.slice";
 import { FieldError } from "./field-error";
 import { getError, registerValidator } from "./validators";
@@ -66,6 +67,7 @@ export const RegisterPage = (): JSX.Element => {
     if (data && data.SUCCESS) {
       const { data: userData } = await user({});
       if (userData && userData.SUCCESS) {
+        dispatch(setIsPageLoading(true));
         navigate(ROUTE_LIST.home);
       }
     }
@@ -90,6 +92,8 @@ export const RegisterPage = (): JSX.Element => {
   };
 
   useEffect(() => {
+    dispatch(setIsPageLoading(false));
+    dispatch(removeServerError());
     dispatch(closeMenu());
   }, []);
 

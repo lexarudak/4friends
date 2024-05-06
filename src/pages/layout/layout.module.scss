@@ -4,6 +4,15 @@
   flex-direction: column;
   flex-grow: 1;
   width: 535px;
+  min-height: 100%;
+
+  &.login {
+    justify-content: center;
+
+    h2 {
+      padding: 0;
+    }
+  }
 
   @include mediaMax('l') {
     width: 340px;

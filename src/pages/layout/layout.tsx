@@ -15,8 +15,9 @@ import { RoomSelector } from "../../components/room-selector/room-selector";
 import { useUserQuery } from "../../store/api";
 import { FirstLoading } from "../../components/loading/first-loading";
 import Cookies from "js-cookie";
-import { setServerError } from "../../store/app/app.slice";
+import { setIsPageLoading, setServerError } from "../../store/app/app.slice";
 import { CSSTransition } from "react-transition-group";
+import classNames from "classnames";
 
 const regPages: string[] = [ROUTE_LIST.login, ROUTE_LIST.register];
 
@@ -30,9 +31,7 @@ export const Layout = (): JSX.Element => {
     useSelector(appSelector);
   const severError = useSelector(isServerErrorSelector);
 
-  const showMainLoading =
-    (isLoading || severError.isError || isPageLoading) &&
-    !regPages.includes(pathname);
+  const showMainLoading = isLoading || isPageLoading;
   const shouldRedirectFromLogin =
     !severError.isError && regPages.includes(pathname) && Cookies.get("TOKEN");
   const shouldRedirectToLogin =
@@ -47,6 +46,7 @@ export const Layout = (): JSX.Element => {
   });
 
   useEffect(() => {
+    console.log({ pathname });
     if (shouldRedirectToLogin) {
       Cookies.remove("TOKEN", { path: "/", domain: ".4friends.live" });
       dispatch(
@@ -59,6 +59,7 @@ export const Layout = (): JSX.Element => {
     }
 
     if (shouldRedirectFromLogin) {
+      dispatch(setIsPageLoading(true));
       navigate(ROUTE_LIST.home);
     }
   }, [
@@ -80,7 +81,11 @@ export const Layout = (): JSX.Element => {
         </>
       )}
 
-      <main className={styles.main}>
+      <main
+        className={classNames(styles.main, {
+          [styles.login]: regPages.includes(pathname),
+        })}
+      >
         <Outlet />
       </main>
       <Footer />
@@ -88,7 +93,7 @@ export const Layout = (): JSX.Element => {
       <CSSTransition
         in={showMainLoading}
         timeout={300}
-        classNames="fade"
+        classNames="fastFade"
         unmountOnExit
       >
         <FirstLoading />
