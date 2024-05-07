@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { apiSlice } from "../api";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { getInitLocale } from "../helpers";
 
 type ServerError = {
   isError: boolean;
@@ -20,6 +21,7 @@ const initialState = {
   serverTimeDif: 1,
   serverError: DEFAULT_ERROR,
   isPageLoading: true,
+  lang: getInitLocale(),
 };
 
 interface Payload {
@@ -55,6 +57,9 @@ const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
+    setLang(state, { payload }) {
+      state.lang = payload;
+    },
     toggleMenu(state) {
       state.isMenuOpen = !state.isMenuOpen;
     },
@@ -144,6 +149,7 @@ export const {
   toggleRoomSelector,
   closeRoomSelector,
   setIsPageLoading,
+  setLang,
 } = appSlice.actions;
 
 export default appSlice.reducer;

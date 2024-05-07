@@ -18,6 +18,7 @@ import Cookies from "js-cookie";
 import { setIsPageLoading, setServerError } from "../../store/app/app.slice";
 import { CSSTransition } from "react-transition-group";
 import classNames from "classnames";
+import { LangToggler } from "../../components/lang-toggler/lang-toggler";
 
 const regPages: string[] = [ROUTE_LIST.login, ROUTE_LIST.register];
 
@@ -46,7 +47,6 @@ export const Layout = (): JSX.Element => {
   });
 
   useEffect(() => {
-    console.log({ pathname });
     if (shouldRedirectToLogin) {
       Cookies.remove("TOKEN", { path: "/", domain: ".4friends.live" });
       dispatch(
@@ -81,6 +81,7 @@ export const Layout = (): JSX.Element => {
         </>
       )}
 
+      <LangToggler regClass={regPages.includes(pathname)} />
       <main
         className={classNames(styles.main, {
           [styles.login]: regPages.includes(pathname),

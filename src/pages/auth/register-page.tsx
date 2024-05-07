@@ -26,6 +26,7 @@ import { TermsOfService } from "./text";
 import { useLazyRegisterQuery, useLazyUserQuery } from "../../store/api";
 import { Loading } from "../../components/loading/loading";
 import { CSSTransition } from "react-transition-group";
+import { useLang } from "../../lang/useLang";
 
 export type RegisterValues = {
   login: string;
@@ -35,9 +36,6 @@ export type RegisterValues = {
   room: string;
   checkbox: boolean;
 };
-
-const POLICY_TEXT =
-  "I have read and agree to the Terms of Service and Privacy Policy";
 
 const initialValues: RegisterValues = {
   login: "",
@@ -58,6 +56,9 @@ export const RegisterPage = (): JSX.Element => {
   const [register, { isFetching, currentData }] = useLazyRegisterQuery();
   const [user] = useLazyUserQuery();
   const severError = useSelector(isServerErrorSelector);
+  const {
+    messages: { auth },
+  } = useLang();
 
   const isModalOpen = useSelector(isModalOpenSelector);
 
@@ -117,17 +118,17 @@ export const RegisterPage = (): JSX.Element => {
         {({ errors, isValid, setFieldValue }) => (
           <>
             <h2 className={styles.title}>
-              Register
+              {auth.reg}
               <span className={styles.subtitle}>{" | "}</span>
               {
                 <Link to={ROUTE_LIST.login} className={styles.link}>
-                  Login
+                  {auth.login}
                 </Link>
               }
               <Loading loading={isFetching} />
             </h2>
             <Form className={styles.form}>
-              <p className={styles.text}>Username</p>
+              <p className={styles.text}>{auth.username}</p>
               <Field
                 type="text"
                 className={styles.field}
@@ -138,7 +139,7 @@ export const RegisterPage = (): JSX.Element => {
               <FieldError
                 message={getError(errors.login, serverErrors?.login)}
               />
-              <p className={styles.text}>Email</p>
+              <p className={styles.text}>{auth.email}</p>
               <Field
                 type="email"
                 className={styles.field}
@@ -154,7 +155,7 @@ export const RegisterPage = (): JSX.Element => {
 
               <div className={styles.block}>
                 <div className={styles.subBlock}>
-                  <p className={styles.text}>Password</p>
+                  <p className={styles.text}>{auth.pass}</p>
                   <Field
                     type="password"
                     className={styles.field}
@@ -163,7 +164,7 @@ export const RegisterPage = (): JSX.Element => {
                   />
                 </div>
                 <div className={styles.subBlock}>
-                  <p className={styles.text}>Confirm Password</p>
+                  <p className={styles.text}>{auth.confPass}</p>
                   <Field
                     type="password"
                     className={styles.field}
@@ -174,7 +175,7 @@ export const RegisterPage = (): JSX.Element => {
               </div>
               <FieldError message={getError(errors.password)} />
 
-              <p className={styles.text}>Room</p>
+              <p className={styles.text}>{auth.room}</p>
               <Field
                 type="text"
                 className={styles.field}
@@ -197,7 +198,7 @@ export const RegisterPage = (): JSX.Element => {
                   className={styles.policyText}
                   disabled={isFetching}
                 >
-                  {POLICY_TEXT}
+                  {auth.policy}
                 </button>
               </div>
               <FieldError message={getError(errors.checkbox)} />
@@ -212,7 +213,7 @@ export const RegisterPage = (): JSX.Element => {
                 onClick={onClick}
                 className={styles.button}
               >
-                Register
+                {auth.regBtn}
               </Button>
               <FieldError message={severError.message} />
               <CSSTransition

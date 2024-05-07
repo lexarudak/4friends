@@ -20,6 +20,7 @@ import { getError, loginValidator } from "./validators";
 import { Loading } from "../../components/loading/loading";
 import { useLazyLoginQuery, useLazyUserQuery } from "../../store/api";
 import { isServerErrorSelector } from "../../store/app/app.selector";
+import { useLang } from "../../lang/useLang";
 
 export type LoginValues = {
   email: string;
@@ -41,6 +42,9 @@ export const LoginPage = (): JSX.Element => {
   }>({});
   const [login, { isFetching, currentData, isError }] = useLazyLoginQuery();
   const [user] = useLazyUserQuery();
+  const {
+    messages: { auth },
+  } = useLang();
 
   const submit = async (values: LoginValues) => {
     dispatch(removeServerError());
@@ -100,17 +104,17 @@ export const LoginPage = (): JSX.Element => {
         {({ errors, isValid }) => (
           <>
             <h2 className={styles.title}>
-              Login
+              {auth.login}
               <span className={styles.subtitle}>{" | "}</span>
               {
                 <Link to={ROUTE_LIST.register} className={styles.link}>
-                  Register
+                  {auth.reg}
                 </Link>
               }
               <Loading loading={isFetching} />
             </h2>
             <Form className={styles.form}>
-              <p className={styles.text}>Email</p>
+              <p className={styles.text}>{auth.email}</p>
               <Field
                 type="email"
                 className={styles.field}
@@ -121,7 +125,7 @@ export const LoginPage = (): JSX.Element => {
               <FieldError
                 message={getError(errors.email, serverErrors?.email)}
               />
-              <p className={styles.text}>Password</p>
+              <p className={styles.text}>{auth.pass}</p>
               <Field
                 type="password"
                 className={styles.field}
@@ -143,7 +147,7 @@ export const LoginPage = (): JSX.Element => {
                 onClick={onClick}
                 className={styles.button}
               >
-                Login
+                {auth.login}
               </Button>
               <FieldError message={severError.message} />
             </Form>

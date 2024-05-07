@@ -21,3 +21,5 @@ export const isServerErrorSelector = (state: RootState) =>
 
 export const pageLoadingSelector = (state: RootState) =>
   state.appSlice.isPageLoading;
+
+export const langSelector = (state: RootState) => state.appSlice.lang;

@@ -120,3 +120,22 @@ export const transformMatchdays = (response: MatchdaysResponse) => {
     DATA,
   };
 };
+
+export const getInitLocale = () => {
+  let lang = localStorage.getItem("lang");
+  if (!lang) {
+    const browserLocale = navigator.language;
+    switch (browserLocale) {
+      case "ru-RU":
+        lang = "ru";
+        localStorage.setItem("lang", "ru");
+        break;
+
+      default:
+        lang = "en";
+        localStorage.setItem("lang", "en");
+        break;
+    }
+  }
+  return lang;
+};
