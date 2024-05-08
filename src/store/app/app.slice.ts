@@ -34,7 +34,19 @@ const redirectHandle = (
   state: { serverError: ServerError },
   { payload }: PayloadAction<Payload>,
 ) => {
-  if (payload.ERRORFIELD === "TOKEN" || !payload.SUCCESS) {
+  if (payload.ERRORFIELD === "TOKEN") {
+    state.serverError = {
+      isError: true,
+      message: "",
+    };
+  }
+};
+
+const errorRedirectHandle = (
+  state: { serverError: ServerError },
+  { payload }: PayloadAction<Payload>,
+) => {
+  if (!payload.SUCCESS) {
     state.serverError = {
       isError: true,
       message: "",
@@ -106,10 +118,22 @@ const appSlice = createSlice({
       apiSlice.endpoints.getNMTime.matchFulfilled,
       redirectHandle,
     );
+    builder.addMatcher(
+      apiSlice.endpoints.getNMTime.matchFulfilled,
+      errorRedirectHandle,
+    );
     builder.addMatcher(apiSlice.endpoints.user.matchFulfilled, redirectHandle);
+    builder.addMatcher(
+      apiSlice.endpoints.user.matchFulfilled,
+      errorRedirectHandle,
+    );
     builder.addMatcher(
       apiSlice.endpoints.getMatchdays.matchFulfilled,
       redirectHandle,
+    );
+    builder.addMatcher(
+      apiSlice.endpoints.getMatchdays.matchFulfilled,
+      errorRedirectHandle,
     );
     builder.addMatcher(apiSlice.endpoints.user.matchRejected, serverErrHandle);
     builder.addMatcher(
@@ -123,6 +147,10 @@ const appSlice = createSlice({
     builder.addMatcher(
       apiSlice.endpoints.getNextMatches.matchFulfilled,
       redirectHandle,
+    );
+    builder.addMatcher(
+      apiSlice.endpoints.getNextMatches.matchFulfilled,
+      errorRedirectHandle,
     );
     builder.addMatcher(
       apiSlice.endpoints.getNextMatches.matchRejected,

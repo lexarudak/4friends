@@ -81,7 +81,13 @@ export const Layout = (): JSX.Element => {
         </>
       )}
 
-      <LangToggler regClass={regPages.includes(pathname)} />
+      <LangToggler
+        className={{
+          [styles.toggler]: true,
+          [styles.isOpen]: isMenuOpen,
+          [styles.hide]: regPages.includes(pathname),
+        }}
+      />
       <main
         className={classNames(styles.main, {
           [styles.login]: regPages.includes(pathname),

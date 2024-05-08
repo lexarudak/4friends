@@ -4,6 +4,7 @@ import styles from "./info-modal.module.scss";
 import { closeModal } from "../../store/app/app.slice";
 import { FC } from "react";
 import classNames from "classnames";
+import { useLang } from "../../lang/useLang";
 
 type Props = {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ export const InfoModal: FC<Props> = ({
   onClose,
 }): JSX.Element => {
   const dispatch = useDispatch();
+  const { messages } = useLang();
   const apply = () => {
     onApply && onApply();
     dispatch(closeModal());
@@ -42,7 +44,7 @@ export const InfoModal: FC<Props> = ({
           className={styles.apply}
           onClick={apply}
         >
-          Apply
+          {messages.auth.apply}
         </Button>
       </div>
     </div>

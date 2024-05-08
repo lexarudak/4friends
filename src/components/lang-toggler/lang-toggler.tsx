@@ -6,10 +6,10 @@ import { useDispatch } from "react-redux";
 import classNames from "classnames";
 
 type Props = {
-  regClass: boolean;
+  className: string | object;
 };
 
-export const LangToggler: FC<Props> = ({ regClass }): JSX.Element => {
+export const LangToggler: FC<Props> = ({ className }): JSX.Element => {
   const dispatch = useDispatch();
   const { messages, lang } = useLang();
 
@@ -23,10 +23,10 @@ export const LangToggler: FC<Props> = ({ regClass }): JSX.Element => {
 
   return (
     <button
-      className={classNames(styles.toggler, { [styles.reg]: regClass })}
+      className={classNames(styles.toggler, className)}
       onClick={toggleLang}
     >
-      {messages.lang}
+      {messages.global.lang}
     </button>
   );
 };

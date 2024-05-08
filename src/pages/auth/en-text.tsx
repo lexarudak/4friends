@@ -1,4 +1,4 @@
-export const TermsOfService = () => (
+export const EnTermsOfService = () => (
   <>
     <strong>Terms of Service for 4friends.live</strong>
     <br />

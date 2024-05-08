@@ -22,11 +22,13 @@ import {
   isModalOpenSelector,
   isServerErrorSelector,
 } from "../../store/app/app.selector";
-import { TermsOfService } from "./text";
+import { EnTermsOfService } from "./en-text";
+import { RuTermsOfService } from "./ru-text";
 import { useLazyRegisterQuery, useLazyUserQuery } from "../../store/api";
 import { Loading } from "../../components/loading/loading";
 import { CSSTransition } from "react-transition-group";
 import { useLang } from "../../lang/useLang";
+import { LangToggler } from "../../components/lang-toggler/lang-toggler";
 
 export type RegisterValues = {
   login: string;
@@ -58,6 +60,7 @@ export const RegisterPage = (): JSX.Element => {
   const severError = useSelector(isServerErrorSelector);
   const {
     messages: { auth },
+    lang,
   } = useLang();
 
   const isModalOpen = useSelector(isModalOpenSelector);
@@ -117,6 +120,11 @@ export const RegisterPage = (): JSX.Element => {
       >
         {({ errors, isValid, setFieldValue }) => (
           <>
+            <LangToggler
+              className={{
+                [styles.toggler]: true,
+              }}
+            />
             <h2 className={styles.title}>
               {auth.reg}
               <span className={styles.subtitle}>{" | "}</span>
@@ -223,7 +231,11 @@ export const RegisterPage = (): JSX.Element => {
                 unmountOnExit
               >
                 <InfoModal onApply={() => setFieldValue("checkbox", true)}>
-                  {<p>{TermsOfService()}</p>}
+                  {
+                    <p>
+                      {lang === "ru" ? RuTermsOfService() : EnTermsOfService()}
+                    </p>
+                  }
                 </InfoModal>
               </CSSTransition>
             </Form>

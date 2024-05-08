@@ -92,6 +92,7 @@
   gap: 20px;
   width: 535px;
   max-width: 535px;
+  height: 63px;
 
   @include mediaMax('l') {
     width: 340px;
@@ -116,4 +117,9 @@
     color: rgba(255, 255, 255, 0.541);
     cursor: default;
   }
+}
+
+.toggler {
+  // margin-left: auto;
+  margin-bottom: 50px;
 }

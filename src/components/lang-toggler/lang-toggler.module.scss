@@ -1,23 +1,9 @@
 .toggler {
-  z-index: 100;
   display: block;
-  position: fixed;
-  right: 130px;
-  top: 60px;
   width: 40px;
   height: 40px;
   background-color: $clr-background;
   color: $clr-primary-03;
   border-radius: 100%;
-
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-
-  &.reg {
-    right: 60px;
-  }
-
-  @include mediaMin('l') {
-    right: 60px;
-  }
-  
+  transition: .3s;
 }

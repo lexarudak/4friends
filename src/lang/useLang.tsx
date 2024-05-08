@@ -7,6 +7,7 @@ export const useLang = () => {
   const lang = useSelector(langSelector);
 
   const messages = lang === "ru" ? ruMessages : enMessages;
+  // const messages = enMessages;
 
   return { lang, messages };
 };
