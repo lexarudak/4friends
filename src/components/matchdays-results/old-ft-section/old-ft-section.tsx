@@ -4,6 +4,7 @@ import styles from "./old-ft-section.module.scss";
 import { getFlag, getName } from "../../../helpers";
 import { useBreakPoint } from "../../../hooks";
 import classNames from "classnames";
+import { useLang } from "../../../lang/useLang";
 
 type Props = {
   team1: Team;
@@ -18,12 +19,16 @@ export const OldFTSection: FC<Props> = ({
 }): JSX.Element => {
   const BP = useBreakPoint();
   const equalScore = team1.SCORE === team2.SCORE;
+  const { countries } = useLang();
 
   return (
     <div className={styles.container}>
       <div className={styles.half}>
         <span
-          className={classNames(`fi fi-${getFlag(team1.CODE)}`, styles.flag)}
+          className={classNames(
+            `fi fi-${getFlag(team1.CODE, countries)}`,
+            styles.flag,
+          )}
         />
         <span
           className={classNames({
@@ -31,7 +36,7 @@ export const OldFTSection: FC<Props> = ({
             [styles.rp]: true,
           })}
         >
-          {getName(team1.CODE, BP)}
+          {getName(team1.CODE, countries, BP)}
         </span>
       </div>
       <span
@@ -58,10 +63,13 @@ export const OldFTSection: FC<Props> = ({
             [styles.lp]: true,
           })}
         >
-          {getName(team2.CODE, BP)}
+          {getName(team2.CODE, countries, BP)}
         </span>
         <span
-          className={classNames(`fi fi-${getFlag(team2.CODE)}`, styles.flag)}
+          className={classNames(
+            `fi fi-${getFlag(team2.CODE, countries)}`,
+            styles.flag,
+          )}
         />
       </div>
     </div>

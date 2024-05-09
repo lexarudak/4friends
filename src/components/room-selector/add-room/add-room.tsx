@@ -8,6 +8,7 @@ import { useLazyAddRoomQuery, useLazyUserQuery } from "../../../store/api";
 import { useSelector } from "react-redux";
 import { userIdSelector } from "../../../store/user/user.selector";
 import classNames from "classnames";
+import { useLang } from "../../../lang/useLang";
 
 const DEFAULT_SUCCESS = "Room successfully added!";
 
@@ -32,6 +33,7 @@ export const AddRoom: FC<Props> = ({
 
   const [send, { isFetching }] = useLazyAddRoomQuery();
   const [updateUser, { isFetching: updateFetching }] = useLazyUserQuery({});
+  const { messages } = useLang();
 
   const submit = async ({ room }: { room: string }) => {
     const { data } = await send({
@@ -78,7 +80,7 @@ export const AddRoom: FC<Props> = ({
               type="text"
               className={styles.input}
               name="room"
-              placeholder="Add room"
+              placeholder={messages.global.addRoom}
               onFocus={onFocus}
               disabled={false}
             />

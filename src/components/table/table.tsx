@@ -7,6 +7,7 @@ import { ROUTE_LIST } from "../../router/route-list";
 import { usePaginationTable, useTop } from "./hooks";
 import { useSelector } from "react-redux";
 import { userNameSelector } from "../../store/user/user.selector";
+import { useLang } from "../../lang/useLang";
 
 type Props = {
   cn?: string;
@@ -37,6 +38,7 @@ export const Table: FC<Props> = ({
   });
   const topTable = useTop(sortedUsers, items);
   const paginationTable = usePaginationTable(sortedUsers, items);
+  const { messages } = useLang();
 
   return users.length && items ? (
     <section
@@ -46,7 +48,7 @@ export const Table: FC<Props> = ({
       {top ? topTable : paginationTable}
       {moreStatistic && (
         <Link to={ROUTE_LIST.statistic} className={styles.link}>
-          More statistic
+          {messages.table.moreStat}
         </Link>
       )}
     </section>

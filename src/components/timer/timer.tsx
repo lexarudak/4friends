@@ -7,6 +7,7 @@ import {
   serverTimeDifSelector,
 } from "../../store/app/app.selector";
 import { TimeBlock, TimeColor } from "./time-block/time-block";
+import { useLang } from "../../lang/useLang";
 
 type Props = {
   className?: string;
@@ -17,6 +18,9 @@ const ONE_HOUR_IN_MS = 60 * 60 * 1000;
 
 export const Timer: FC<Props> = ({ className }): JSX.Element => {
   const nextMatch = useSelector(nextMatchSelector);
+  const {
+    messages: { timer },
+  } = useLang();
   const serverTimeDif = useSelector(serverTimeDifSelector);
   const calculateTimeLeft = () => {
     const difference = +new Date(nextMatch) - (+new Date() - serverTimeDif);
@@ -54,11 +58,11 @@ export const Timer: FC<Props> = ({ className }): JSX.Element => {
 
   return (
     <div className={classNames(styles.container, className)}>
-      <h2 className={styles.title}>Countdown</h2>
+      <h2 className={styles.title}>{timer.countdown}</h2>
       <div className={styles.timers}>
         {Object.entries(timeLeft.info).map(([name, time], ind) => (
           <TimeBlock
-            name={name}
+            name={timer[name]}
             time={time}
             key={name}
             color={ind > 1 ? getColor(timeLeft.difference) : TimeColor.white}

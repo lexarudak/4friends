@@ -1,9 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
-import countries from "../../const/countries";
 import { apiSlice } from "../api";
 
+export type CountryKey =
+  | "GER"
+  | "SCO"
+  | "HUN"
+  | "SUI"
+  | "ESP"
+  | "CRO"
+  | "ITA"
+  | "ALB"
+  | "SVN"
+  | "DEN"
+  | "SRB"
+  | "ENG"
+  | "POL"
+  | "NED"
+  | "AUT"
+  | "FRA"
+  | "BEL"
+  | "SVK"
+  | "ROU"
+  | "UKR"
+  | "TUR"
+  | "GEO"
+  | "POR"
+  | "CZE";
+
 export type Team = {
-  CODE: keyof typeof countries; // код из 3 букв
+  CODE: CountryKey; // код из 3 букв
   SCORE: number | ""; // если счет не поставлен, то пустую строку. если поставлен - число
 };
 

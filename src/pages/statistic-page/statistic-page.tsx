@@ -12,12 +12,16 @@ import {
 } from "../../store/statistic/statistic.slice";
 import { activeRoomIdSelector } from "../../store/user/user.selector";
 import { setIsPageLoading } from "../../store/app/app.slice";
+import { useLang } from "../../lang/useLang";
 
 export const StatisticPage = (): JSX.Element => {
   const { table, exact, wins, average } = useSelector(statisticSelector);
   const dispatch = useDispatch();
   const ACTIVEROOMID = useSelector(activeRoomIdSelector);
   const [fetchTable, { data, isSuccess }] = useLazyTotalScoreQuery();
+  const {
+    messages: { stat },
+  } = useLang();
 
   useEffect(() => {
     if (ACTIVEROOMID) {
@@ -39,11 +43,11 @@ export const StatisticPage = (): JSX.Element => {
 
   return (
     <section className={styles.page}>
-      <h2 className={styles.title}>Statistic</h2>
-      <Table users={table} title="Total Score" items={10} />
-      <Table users={exact} title="Exact Score Hits" items={10} />
-      <Table users={wins} title="Predicted Wins" items={10} />
-      <Table users={average} title="Average Points per Match" items={10} />
+      <h2 className={styles.title}>{stat.title}</h2>
+      <Table users={table} title={stat.total} items={10} />
+      <Table users={exact} title={stat.exact} items={10} />
+      <Table users={wins} title={stat.wins} items={10} />
+      <Table users={average} title={stat.average} items={10} />
     </section>
   );
 };

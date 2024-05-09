@@ -19,6 +19,7 @@ import {
 } from "../../store/app/app.selector";
 import { useInterval } from "../../hooks";
 import { setIsPageLoading } from "../../store/app/app.slice";
+import { useLang } from "../../lang/useLang";
 
 export const HomePage = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ export const HomePage = (): JSX.Element => {
   const serverTimeDif = useSelector(serverTimeDifSelector);
   const users = useSelector(tableSelector);
   const ACTIVEROOMID = useSelector(activeRoomIdSelector);
+  const { messages } = useLang();
   const [fetchTable, { isSuccess: tableSuccess, data }] =
     useLazyTotalScoreQuery();
   const [fetchNextMatches, { isSuccess: nmSuccess, isFetching }] =
@@ -41,7 +43,6 @@ export const HomePage = (): JSX.Element => {
   }, [ACTIVEROOMID, fetchNextMatches, fetchTable, fetchTime]);
 
   useEffect(() => {
-    console.log({ tableSuccess, nmSuccess, isSuccess });
     if (tableSuccess && nmSuccess && isSuccess && data)
       dispatch(setIsPageLoading(false));
   }, [tableSuccess, nmSuccess, isSuccess, dispatch, data]);
@@ -73,7 +74,13 @@ export const HomePage = (): JSX.Element => {
     <section className={styles.page}>
       <Timer className={styles.timer} />
       <NextMatches />
-      <Table users={users} title="Top 3" moreStatistic top items={3} />
+      <Table
+        users={users}
+        title={messages.table.top3}
+        moreStatistic
+        top
+        items={3}
+      />
     </section>
   );
 };

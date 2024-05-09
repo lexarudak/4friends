@@ -1,7 +1,7 @@
 import { DATE_AFTER, MIN_DATE } from "./const/const";
-import countries from "./const/countries";
+import { CountriesType } from "./const/countries";
 import { BREAKPOINTS } from "./hooks";
-import { NextMatch } from "./store/next-matches/next-matches.slice";
+import { CountryKey, NextMatch } from "./store/next-matches/next-matches.slice";
 
 export const getTime = (timestamp: number) => {
   const date = new Date(timestamp);
@@ -29,14 +29,18 @@ export const validateDate = (from: string, to: string) => {
   return isValid(from) && isValid(to);
 };
 
-export const getFlag = (code: keyof typeof countries) =>
-  code in countries ? countries[code].code2 : "---";
+export const getFlag = (code: CountryKey, countries: CountriesType) =>
+  code in countries ? countries[code].code2 : "eu";
 
-export const getName = (code: keyof typeof countries, BP: number) =>
+export const getName = (
+  code: CountryKey,
+  countries: CountriesType,
+  BP: number,
+) =>
   code in countries
     ? BP === BREAKPOINTS.xl
       ? countries[code].name
-      : code
+      : countries[code].code3
     : code;
 
 export const isScoreChanged = (nm: NextMatch[]) => {

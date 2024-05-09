@@ -1,7 +1,8 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./matchdays-results.module.scss";
 import {
   countrySelector,
+  initMatchdaysSelector,
   matchdaysDateSelector,
   matchdaysMatchesSelector,
 } from "../../store/matchdays/matchdays.selector";
@@ -14,8 +15,11 @@ import { activeRoomIdSelector } from "../../store/user/user.selector";
 import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../button/button";
 import { isServerErrorSelector } from "../../store/app/app.selector";
 import { FieldError } from "../../pages/auth/field-error";
-import { OldMatchInfo } from "../../store/matchdays/matchdays.slice";
-import countries from "../../const/countries";
+import {
+  OldMatchInfo,
+  resetMatchdays,
+} from "../../store/matchdays/matchdays.slice";
+import { useLang } from "../../lang/useLang";
 
 export const MatchdaysResults = (): JSX.Element => {
   const data = useSelector(matchdaysMatchesSelector);
@@ -24,18 +28,29 @@ export const MatchdaysResults = (): JSX.Element => {
   const [isValid, setIsValid] = useState(true);
   const severError = useSelector(isServerErrorSelector);
   const pickedCountry = useSelector(countrySelector);
+  const isInit = useSelector(initMatchdaysSelector);
+  const dispatch = useDispatch();
+  const {
+    messages: { md },
+    countries,
+  } = useLang();
 
   const getValidMatch = ({ TIME }: OldMatchInfo) =>
     TIME >= new Date(from).valueOf() && TIME <= new Date(to).valueOf();
 
   const getValidCountry = ({ TEAM1, TEAM2 }: OldMatchInfo) => {
     const searchValue = pickedCountry.trim().toUpperCase();
-    return [
-      TEAM1.CODE,
-      TEAM2.CODE,
-      countries[TEAM1.CODE].name.toUpperCase(),
-      countries[TEAM2.CODE].name.toUpperCase(),
-    ].some((value) => value.startsWith(searchValue));
+    return (
+      !searchValue ||
+      [
+        countries[TEAM1.CODE]?.code3,
+        countries[TEAM2.CODE]?.code3,
+        countries[TEAM1.CODE]?.name.toUpperCase(),
+        countries[TEAM2.CODE]?.name.toUpperCase(),
+      ]
+        .filter((val) => !!val)
+        .some((value) => value.startsWith(searchValue))
+    );
   };
 
   const [fetch, { isFetching }] = useLazyGetMatchdaysQuery();
@@ -52,6 +67,10 @@ export const MatchdaysResults = (): JSX.Element => {
     }
   }, [fetch, from, to, ACTIVEROOMID]);
 
+  const clearFilter = () => {
+    dispatch(resetMatchdays());
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.refreshBlock}>
@@ -62,16 +81,16 @@ export const MatchdaysResults = (): JSX.Element => {
             onClick={() => fetch({ from, to })}
             disabled={!isValid || isFetching}
           >
-            Refresh
+            {md.refresh}
           </Button>
-          {/* <Button
+          <Button
             color={BUTTON_COLOR.active}
             variant={BUTTON_VARIANT.contour}
             onClick={clearFilter}
-            disabled={isFetching}
+            disabled={isFetching || isInit}
           >
-            Clear
-          </Button> */}
+            {md.clear}
+          </Button>
           <Loading loading={isFetching} />
         </div>
         <FieldError message={severError.message} className={styles.error} />
@@ -83,7 +102,7 @@ export const MatchdaysResults = (): JSX.Element => {
             .filter(getValidCountry)
             .sort((a, b) => b.TIME - a.TIME)
             .map((data) => <OldMatch matchInfo={data} key={data.ID} />)
-        : !isFetching && <div>No matches on these dates</div>}
+        : !isFetching && <div>{md.noMatches}</div>}
     </section>
   );
 };

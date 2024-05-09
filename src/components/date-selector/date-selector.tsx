@@ -8,14 +8,15 @@ import { useEffect, useState } from "react";
 import { validateDate } from "../../helpers";
 import classNames from "classnames";
 import { MAX_DATE, MIN_DATE } from "../../const/const";
-
-const text = "Select date range to show";
-const errorText = `Pick date in range 01/05/24 - 31/08/24`;
+import { useLang } from "../../lang/useLang";
 
 export const DateSelector = (): JSX.Element => {
   const { from, to } = useSelector(matchdaysDateSelector);
   const [isValid, setIsValid] = useState(true);
   const dispatch = useDispatch();
+  const {
+    messages: { md },
+  } = useLang();
 
   const fromChange = (e: Dayjs | null) => {
     dispatch(setFrom(e?.format("YYYY-MM-DD HH:mm:ss")));
@@ -53,7 +54,9 @@ export const DateSelector = (): JSX.Element => {
             maxDate={dayjs(MAX_DATE)}
           />
         </div>
-        <p className={classNames(textStyle)}>{isValid ? text : errorText}</p>
+        <p className={classNames(textStyle)}>
+          {isValid ? md.selectText : md.error}
+        </p>
       </div>
     </>
   );

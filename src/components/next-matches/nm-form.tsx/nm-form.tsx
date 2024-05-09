@@ -18,6 +18,7 @@ import { useLazySetNextMatchesQuery } from "../../../store/api";
 import { userSelector } from "../../../store/user/user.selector";
 import { FieldError } from "../../../pages/auth/field-error";
 import { CSSTransition } from "react-transition-group";
+import { useLang } from "../../../lang/useLang";
 
 const SAVED_BANNER_TIME = 1000;
 
@@ -29,6 +30,9 @@ export const NMForm = (): JSX.Element | null => {
   const isLoading = useSelector(isNMLoadingSelector);
   const dispatch = useDispatch();
   const [isSavedBanner, setIsSavedBanner] = useState(false);
+  const {
+    messages: { nm, global },
+  } = useLang();
 
   const showBanner = () => {
     setIsSavedBanner(true);
@@ -93,7 +97,7 @@ export const NMForm = (): JSX.Element | null => {
               {values.map((nm, ind) => (
                 <OneMatchForm nm={nm} order={ind} key={nm.MATCHID} />
               ))}
-              <span>Make your bets</span>
+              <span>{nm.makeBets}</span>
               <CSSTransition
                 in={isSavedBanner || isFetching}
                 timeout={300}
@@ -106,7 +110,7 @@ export const NMForm = (): JSX.Element | null => {
                   classNames="fade"
                   unmountOnExit
                 >
-                  <div className={styles.banner}>Saved successfully!</div>
+                  <div className={styles.banner}>{nm.saved}</div>
                 </CSSTransition>
               </CSSTransition>
             </div>
@@ -120,7 +124,7 @@ export const NMForm = (): JSX.Element | null => {
                 className={styles.button}
                 disabled={!isScoreChanged(values) || !isValid || isLoading}
               >
-                Save
+                {global.save}
               </Button>
               <Button
                 variant={BUTTON_VARIANT.contour}
@@ -130,7 +134,7 @@ export const NMForm = (): JSX.Element | null => {
                 className={styles.button}
                 disabled={isScoreEmpty(values) || isLoading}
               >
-                Clear
+                {global.clear}
               </Button>
             </div>
 
@@ -143,6 +147,6 @@ export const NMForm = (): JSX.Element | null => {
       }}
     </Formik>
   ) : isLoading ? null : (
-    <div className={styles.form}>No matches in the next 24 h</div>
+    <div className={styles.form}>{nm.noMatches}</div>
   );
 };

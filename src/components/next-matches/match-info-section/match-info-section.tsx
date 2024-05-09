@@ -4,6 +4,7 @@ import { getDate, getTime } from "../../../helpers";
 import classNames from "classnames";
 import { FormikErrors } from "formik";
 import { ValidateErrors } from "../nm-form.tsx/validator";
+import { useLang } from "../../../lang/useLang";
 
 type Props = {
   time: number;
@@ -24,6 +25,7 @@ export const MatchInfoSection: FC<Props> = ({
 }): JSX.Element => {
   const emptyError = errors?.[`[${order}].SCORE`];
   const winnerError = errors?.[`[${order}].WINNER`];
+  const { lang } = useLang();
 
   const cn = {
     [styles.container]: true,
@@ -48,9 +50,14 @@ export const MatchInfoSection: FC<Props> = ({
     );
   }
 
+  const translateInfo = (info: string) =>
+    info.replace(/Final/g, "Финал").replace(/Group/g, "Группа");
+
   return (
     <div className={classNames(cn)}>
-      <span className={styles.item}>{info}</span>
+      <span className={styles.item}>
+        {lang === "ru" ? translateInfo(info) : info}
+      </span>
       <span className={styles.item}>{getTime(time)}</span>
       <span className={styles.item}>{getDate(time)}</span>
     </div>
