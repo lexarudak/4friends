@@ -2,11 +2,7 @@ import { Field, Form, Formik } from "formik";
 import styles from "./auth.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { ROUTE_LIST } from "../../router/route-list";
-import {
-  BUTTON_COLOR,
-  BUTTON_VARIANT,
-  Button,
-} from "../../components/button/button";
+import { Button } from "../../components/button/button";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
@@ -29,6 +25,7 @@ import { Loading } from "../../components/loading/loading";
 import { CSSTransition } from "react-transition-group";
 import { useLang } from "../../lang/useLang";
 import { LangToggler } from "../../components/lang-toggler/lang-toggler";
+import { BUTTON_COLOR, BUTTON_VARIANT } from "../../const/const";
 
 export type RegisterValues = {
   login: string;

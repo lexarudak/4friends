@@ -1,10 +1,11 @@
 import { useDispatch } from "react-redux";
-import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../button/button";
+import { Button } from "../button/button";
 import styles from "./info-modal.module.scss";
 import { closeModal } from "../../store/app/app.slice";
 import { FC } from "react";
 import classNames from "classnames";
 import { useLang } from "../../lang/useLang";
+import { BUTTON_COLOR, BUTTON_VARIANT } from "../../const/const";
 
 type Props = {
   children: React.ReactNode;

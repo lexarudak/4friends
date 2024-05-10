@@ -73,6 +73,37 @@ const messages: {
     noMatches: "No matches on these dates",
     clear: "Clear",
   },
+  rules: {
+    title: "Rules",
+    forFriendsText:
+      "4friends is a platform for competing with friends! Make predictions for the EURO 2024 matches, score points, follow the statistics and win! You can bet on a box of Pepsi or an orange peel. We will make sure the game is fun and all the results are counted correctly. Good luck!",
+    howToPlayTitle: "How to play",
+    bet: "Make your bet!",
+    betText:
+      "When there are 48 hours left until the match, it appears on the main page. Now you can place a bet.",
+    betText2: "The color of the card will indicate the status of your bet:",
+    points: "Get points",
+    pointsText:
+      "As a result of each match, the player receives points. You will find the scoring system with examples ",
+    pointsText2:
+      "After the start of the match, you will be able to see the bets made by other players",
+    pointsText3: "Matches also have color indication:",
+    stat: "Follow the statistic",
+    statText:
+      'On the "Statistics" page, in addition to the main table with points, you will find statistics on guessed victories, exact scores, and the average number of points per match',
+    statText2:
+      'On the "Global top" page, you will see the overall rating of all players in all rooms. If you are in several, your best indicator is taken',
+  },
+  colorsMatchList: {
+    Grey: " - match has not started yet",
+    Yellow: " - match is going on right now",
+    Green: " - match has ended",
+  },
+  colorsList: {
+    Grey: " - bet is not placed",
+    Yellow: " - bet is being edited",
+    Green: " - bet is saved",
+  },
 };
 
 export default messages;

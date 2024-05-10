@@ -7,6 +7,7 @@ import { LoginPage } from "../pages/auth/login-page";
 import { RegisterPage } from "../pages/auth/register-page";
 import { StatisticPage } from "../pages/statistic-page/statistic-page";
 import { TopPage } from "../pages/top-page/top-page";
+import { RulesPage } from "../pages/rules-page/rules-page";
 
 export const AppRouter = (): JSX.Element => {
   return (
@@ -16,7 +17,7 @@ export const AppRouter = (): JSX.Element => {
         <Route path={ROUTE_LIST.matchdays} element={<MatchdaysPage />} />
         <Route path={ROUTE_LIST.statistic} element={<StatisticPage />} />
         <Route path={ROUTE_LIST.top} element={<TopPage />} />
-        <Route path={ROUTE_LIST.rules} element={<></>} />
+        <Route path={ROUTE_LIST.rules} element={<RulesPage />} />
         <Route path={ROUTE_LIST.login} element={<LoginPage />} />
         <Route path={ROUTE_LIST.register} element={<RegisterPage />} />
       </Route>

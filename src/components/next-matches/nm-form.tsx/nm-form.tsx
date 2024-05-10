@@ -10,7 +10,7 @@ import {
   setNMIsSetting,
 } from "../../../store/next-matches/next-matches.slice";
 import { OneMatchForm } from "../one-match-form/one-match-form";
-import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../../button/button";
+import { Button } from "../../button/button";
 import { validator } from "./validator";
 import { useEffect, useState } from "react";
 import { isScoreChanged, isScoreEmpty } from "../../../helpers";
@@ -19,6 +19,7 @@ import { userSelector } from "../../../store/user/user.selector";
 import { FieldError } from "../../../pages/auth/field-error";
 import { CSSTransition } from "react-transition-group";
 import { useLang } from "../../../lang/useLang";
+import { BUTTON_COLOR, BUTTON_VARIANT } from "../../../const/const";
 
 const SAVED_BANNER_TIME = 1000;
 

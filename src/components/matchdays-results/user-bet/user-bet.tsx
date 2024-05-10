@@ -40,7 +40,7 @@ export const UserBet: FC<Props> = ({
         {SCORE[1] !== "" ? SCORE[1] : "-"}
       </span>
       <span className={styles.name}>{USERNAME}</span>
-      <span className={styles.points}>{POINTS}</span>
+      <span className={styles.points}>{POINTS || 0}</span>
     </div>
   );
 };

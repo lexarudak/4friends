@@ -1,0 +1,52 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  padding-top: 150px;
+  gap: 80px;
+
+  p {
+    margin: 10px 0;
+  }
+}
+
+.li {
+  margin: 10px 0;
+}
+
+.blockTitle {
+  padding-bottom: 20px;
+}
+
+.color-0 {
+  color: $clr-ui-02;
+}
+
+.color-1 {
+  color: $clr-accent-02;
+}
+
+.color-2 {
+  color: $clr-data-03;
+}
+
+.videoBlock {
+  display: flex;
+  align-items: center;
+  margin: 40px 0;
+  gap: 40px;
+
+  &.right {
+    flex-direction: row-reverse;
+  }
+
+  .video {
+    width: 200px;
+    border: 2px solid $clr-background;
+    border-radius: 5px;
+
+    @include mediaMax('l') {
+      width: 140px;
+    }
+  }
+
+}

@@ -1,9 +1,10 @@
 import classNames from "classnames";
-import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../button/button";
+import { Button } from "../button/button";
 import styles from "./burger.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { isMenuOpenSelector } from "../../store/app/app.selector";
 import { toggleMenu } from "../../store/app/app.slice";
+import { BUTTON_COLOR, BUTTON_VARIANT } from "../../const/const";
 
 export const Burger = (): JSX.Element => {
   const dispatch = useDispatch();

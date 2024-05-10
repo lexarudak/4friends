@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { ROUTE_LIST } from "../../router/route-list";
 import styles from "./nav.module.scss";
-import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../button/button";
+import { Button } from "../button/button";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../../store/app/app.slice";
 import Cookies from "js-cookie";
@@ -9,6 +9,7 @@ import { clearUser } from "../../store/user/user.slice";
 import { setTable } from "../../store/statistic/statistic.slice";
 import { setNextMatches } from "../../store/next-matches/next-matches.slice";
 import { useLang } from "../../lang/useLang";
+import { BUTTON_COLOR, BUTTON_VARIANT } from "../../const/const";
 
 const NAV_LIST = {
   home: ROUTE_LIST.home,

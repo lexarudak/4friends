@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { validateDate } from "../../helpers";
 import { Loading } from "../loading/loading";
 import { activeRoomIdSelector } from "../../store/user/user.selector";
-import { BUTTON_COLOR, BUTTON_VARIANT, Button } from "../button/button";
+import { Button } from "../button/button";
 import { isServerErrorSelector } from "../../store/app/app.selector";
 import { FieldError } from "../../pages/auth/field-error";
 import {
@@ -20,6 +20,7 @@ import {
   resetMatchdays,
 } from "../../store/matchdays/matchdays.slice";
 import { useLang } from "../../lang/useLang";
+import { BUTTON_COLOR, BUTTON_VARIANT } from "../../const/const";
 
 export const MatchdaysResults = (): JSX.Element => {
   const data = useSelector(matchdaysMatchesSelector);
