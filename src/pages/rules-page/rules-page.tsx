@@ -28,7 +28,7 @@ export const RulesPage = (): JSX.Element => {
       </RulesBlock>
       <RulesBlock title={rules.bet}>
         <p>{rules.betText}</p>
-        <VideoBlock src="/public/videos/bet.MP4">
+        <VideoBlock src="/videos/bet.MP4">
           <p>{rules.betText2}</p>
           {getColoredList(colorsList)}
         </VideoBlock>
@@ -39,17 +39,14 @@ export const RulesPage = (): JSX.Element => {
           <a href="#">{rules.here}</a>
         </p>
         <p>{rules.pointsText2}</p>
-        <VideoBlock
-          src="/public/videos/points.MP4"
-          variant={VIDEO_VARIANT.right}
-        >
+        <VideoBlock src="/videos/points.MP4" variant={VIDEO_VARIANT.right}>
           <p>{rules.pointsText3}</p>
           {getColoredList(colorsMatchList)}
         </VideoBlock>
       </RulesBlock>
       <RulesBlock title={rules.stat}>
         <p>{rules.statText}</p>
-        <VideoBlock src="/public/videos/stat.MP4">
+        <VideoBlock src="/videos/stat.MP4">
           <p>{rules.statText2}</p>
         </VideoBlock>
       </RulesBlock>
