@@ -18,7 +18,14 @@ export const VideoBlock: FC<Props> = ({
 }): JSX.Element => {
   return (
     <div className={classNames(className, styles.videoBlock, styles[variant])}>
-      <video src={src} autoPlay className={styles.video} loop muted />
+      <video
+        src={src}
+        autoPlay
+        className={styles.video}
+        loop
+        muted
+        playsInline
+      />
       <div className={styles.disc}>{children}</div>
     </div>
   );

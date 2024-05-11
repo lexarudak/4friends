@@ -51,6 +51,7 @@
   justify-content: center;
   transition: .3s;
   color: $clr-ui-04;
+  font-family: revert;
 
   &:hover {
     border: 2px solid $clr-ui-05;

@@ -93,6 +93,14 @@ const messages: {
       'On the "Statistics" page, in addition to the main table with points, you will find statistics on guessed victories, exact scores, and the average number of points per match',
     statText2:
       'On the "Global top" page, you will see the overall rating of all players in all rooms. If you are in several, your best indicator is taken',
+    calc: "Point calculation",
+    calcPlay: "Playoff",
+    calcText2:
+      "Points are calculated in the same way as in the group stage, i.e. according to the final score on the scoreboard (it doesn't matter whether after the main time or after the extra time, the final score on the scoreboard matters)",
+    calcText3:
+      "The WINNER checkbox brings an additional 2 points if the player made a correct prediction on which team will advance to the next round.",
+    finish: "That's it, good luck with the game! ",
+    start: "Start",
   },
   colorsMatchList: {
     Grey: " - match has not started yet",
@@ -103,6 +111,13 @@ const messages: {
     Grey: " - bet is not placed",
     Yellow: " - bet is being edited",
     Green: " - bet is saved",
+  },
+  points: {
+    "3 points": " - guessed the exact score and the winner",
+    "2 points":
+      " - guessed the winner and the difference in goals, but did not guess the exact score",
+    "1 point":
+      " - guessed the correct outcome of the match, but did not guess the difference in goals",
   },
 };
 
