@@ -64,7 +64,6 @@ export const useIsLogin = () => {
   const [isLogin, setIsLogin] = useState(true);
   const ACTIVEROOMID = useSelector(activeRoomIdSelector);
   const { pathname } = useLocation();
-  console.log(Cookies.get("TOKEN"), { ACTIVEROOMID, pathname });
 
   useEffect(() => {
     setIsLogin(!!Cookies.get("TOKEN"));

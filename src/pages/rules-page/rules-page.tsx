@@ -90,17 +90,17 @@ export const RulesPage = (): JSX.Element => {
       </RulesBlock>
       <RulesBlock title={rules.calcPlay}>
         <div className={styles.imgContainer}>
-          <img src="/pic/extraNotWin.png" className={styles.img} />
           <p className={classNames(styles.bold, styles.img)}>
             {rules.calcText2}
           </p>
+          <img src="/pic/extraNotWin.png" className={styles.img} />
         </div>
         <p className={classNames(styles.italic)}>{rules.calcText4}</p>
         <div className={styles.imgContainer}>
+          <img src="/pic/checkboxes.png" className={styles.img} />
           <p className={classNames(styles.bold, styles.img)}>
             {rules.calcText3}
           </p>
-          <img src="/pic/checkboxes.png" className={styles.img} />
         </div>
 
         <p>

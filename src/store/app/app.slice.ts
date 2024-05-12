@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { apiSlice } from "../api";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { getInitLocale } from "../helpers";
 
 type ServerError = {
@@ -54,11 +53,9 @@ const errorRedirectHandle = (
   }
 };
 
-const serverErrHandle = (
-  state: { serverError: { isError: boolean; message: string } },
-  { payload }: { payload: FetchBaseQueryError | undefined },
-) => {
-  console.log(payload);
+const serverErrHandle = (state: {
+  serverError: { isError: boolean; message: string };
+}) => {
   state.serverError = {
     isError: true,
     message: "Server error",

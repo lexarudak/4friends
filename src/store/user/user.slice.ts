@@ -42,9 +42,6 @@ const userSlice = createSlice({
           state.ROOMS = payload.DATA.ROOMS;
           state.USERID = payload.USERID;
           state.USERNAME = payload.DATA.USERNAME;
-          console.log("success", payload);
-        } else {
-          console.log("other fail", payload);
         }
       },
     );
