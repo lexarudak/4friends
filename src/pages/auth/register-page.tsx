@@ -147,6 +147,7 @@ export const RegisterPage = (): JSX.Element => {
                   onFocus(e, "login")
                 }
                 disabled={isFetching}
+                max={40}
               />
               <FieldError
                 message={getError(errors.email, serverErrors?.login)}

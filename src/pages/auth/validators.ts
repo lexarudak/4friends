@@ -30,6 +30,10 @@ export const loginValidator = ({ email, password }: LoginValues) => {
     errors.email = "Email should not be empty";
   }
 
+  if (email.length > 40) {
+    errors.login = "Maximum email length is 40 chars";
+  }
+
   if (!isEmail(email)) {
     errors.email = "Email is not valid";
   }
@@ -56,6 +60,10 @@ export const registerValidator = ({
 
   if (login.length < 1) {
     errors.login = "Username should not be empty";
+  }
+
+  if (login.length > 40) {
+    errors.login = "Maximum username length is 40 chars";
   }
 
   if (password2 !== password) {
