@@ -1,28 +1,49 @@
 .menu {
-  z-index: 100;
+  height: 413px;
+  z-index: 200;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  background-color: $clr-background;
+  background-color: $clr-data-02;
   position: fixed;
   transition: .3s;
-  width: 250px;
-  bottom: 0px;
-  left: -350px;
-  border-radius: 0px 50px 0px 0px;
-  box-shadow: $shadow-main-1;
+  width: 340px;
+  bottom: -383px;
+  border-radius: 3px;
+  box-shadow: $shadow-main-2;
+
+  nav {
+    color: $clr-text-01;
+
+    a:hover {
+      color: $clr-background;
+    }
+  }
 
   @include mediaMin('l') {
+    bottom: 0px;
+    top: 0px;
     left: 0px;
     box-shadow: none;
     border-radius: 0;
     height: 100vh;
+    width: 240px;
+    background-color: $clr-background;
+    box-shadow: none;
+  
+    nav {
+      color: $clr-primary-01;
+
+      a:hover {
+      color: $clr-primary-03;
+    }
+    }
   }
 }
 
 .isOpen {
-  left: 0px
+  bottom: 0px;
 }
 
 .hover {
@@ -41,5 +62,18 @@
 
   img {
     width: 135px;
+  }
+}
+
+.icon {
+  background-color: $clr-background;
+  height: 3px;
+  border-radius: 4px;
+  width: calc(100% - 40px);
+  margin-top: 10px;
+  margin-bottom: auto;
+
+  @include mediaMin('l') {
+    display: none;
   }
 }

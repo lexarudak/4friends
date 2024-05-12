@@ -1,4 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import Cookies from "js-cookie";
+import { activeRoomIdSelector } from "./store/user/user.selector";
+import { useSelector } from "react-redux";
 
 export enum BREAKPOINTS {
   xs = 400,
@@ -54,4 +58,17 @@ export const useInterval = (callback: () => void, delay: number) => {
       return () => clearInterval(id);
     }
   }, [delay]);
+};
+
+export const useIsLogin = () => {
+  const [isLogin, setIsLogin] = useState(true);
+  const ACTIVEROOMID = useSelector(activeRoomIdSelector);
+  const { pathname } = useLocation();
+  console.log(Cookies.get("TOKEN"), { ACTIVEROOMID, pathname });
+
+  useEffect(() => {
+    setIsLogin(!!Cookies.get("TOKEN"));
+  }, [pathname, ACTIVEROOMID]);
+
+  return isLogin;
 };

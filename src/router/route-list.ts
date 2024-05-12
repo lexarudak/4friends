@@ -1,8 +1,8 @@
 export enum ROUTE_LIST {
-  home = "/",
+  rules = "/",
+  home = "/home",
   matchdays = "/matchdays",
   statistic = "/statistic",
-  rules = "/rules",
   login = "/login",
   register = "/register",
   top = "/top",

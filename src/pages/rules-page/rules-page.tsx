@@ -9,6 +9,7 @@ import { setIsPageLoading } from "../../store/app/app.slice";
 import { Link } from "react-router-dom";
 import { ROUTE_LIST } from "../../router/route-list";
 import classNames from "classnames";
+import { useIsLogin } from "../../hooks";
 
 const getColoredList = (items: object, color?: boolean) => (
   <ul>
@@ -25,6 +26,7 @@ const getColoredList = (items: object, color?: boolean) => (
 
 export const RulesPage = (): JSX.Element => {
   const dispatch = useDispatch();
+  const isLogin = useIsLogin();
   const {
     messages: { rules, colorsList, colorsMatchList, points },
   } = useLang();
@@ -35,9 +37,22 @@ export const RulesPage = (): JSX.Element => {
 
   return (
     <section className={styles.page}>
-      <h2 className={styles.title}>{rules.title}</h2>
-      <RulesBlock title={"4friends"}>
+      <h2 className={styles.title}>
+        {"4friends"}
+        <span className={styles.subtitle}>{" | "}</span>
+        {
+          <Link
+            to={isLogin ? ROUTE_LIST.home : ROUTE_LIST.login}
+            className={styles.link}
+          >
+            {rules.start}
+          </Link>
+        }
+      </h2>
+      <RulesBlock>
         <p>{rules.forFriendsText}</p>
+        <p className={styles.bold}>{rules.forFriendsText3}</p>
+        <p>{rules.forFriendsText4}</p>
       </RulesBlock>
       <RulesBlock title={rules.bet}>
         <p>{rules.betText}</p>
@@ -45,6 +60,7 @@ export const RulesPage = (): JSX.Element => {
           <p>{rules.betText2}</p>
           {getColoredList(colorsList, true)}
         </VideoBlock>
+        <p>{rules.betText3}</p>
       </RulesBlock>
       <RulesBlock title={rules.points}>
         <p>
@@ -65,27 +81,42 @@ export const RulesPage = (): JSX.Element => {
           <p>{rules.statText2}</p>
         </VideoBlock>
       </RulesBlock>
-      <RulesBlock title={rules.calc} id="calc">
+      <h2 id="calc">{rules.calc}</h2>
+      <RulesBlock title={rules.calcGroup}>
         <div className={styles.imgContainer}>
           <div className={styles.img}>{getColoredList(points)}</div>
           <img src="/pic/win.png" className={styles.img} />
         </div>
       </RulesBlock>
       <RulesBlock title={rules.calcPlay}>
-        <p>{rules.calcText2}</p>
         <div className={styles.imgContainer}>
           <img src="/pic/extraNotWin.png" className={styles.img} />
           <p className={classNames(styles.bold, styles.img)}>
-            {rules.calcText3}
+            {rules.calcText2}
           </p>
         </div>
+        <p className={classNames(styles.italic)}>{rules.calcText4}</p>
+        <div className={styles.imgContainer}>
+          <p className={classNames(styles.bold, styles.img)}>
+            {rules.calcText3}
+          </p>
+          <img src="/pic/checkboxes.png" className={styles.img} />
+        </div>
+
         <p>
           <span>{rules.finish}</span>
-          <Link to={ROUTE_LIST.home} className={styles.link}>
+          <Link
+            to={isLogin ? ROUTE_LIST.home : ROUTE_LIST.login}
+            className={styles.link}
+          >
             {rules.start}
           </Link>
         </p>
       </RulesBlock>
+      <p>
+        <span>{rules.contacts}</span>
+        <span className={styles.bold}>{rules.telegram}</span>
+      </p>
     </section>
   );
 };

@@ -31,8 +31,9 @@ const messages: {
     matchdays: "MATCHDAYS",
     statistic: "Statistic",
     globalTop: "Global Top",
-    rules: "Rules",
+    rules: "4friends",
     logout: "Log out",
+    login: "Login",
   },
   timer: {
     countdown: "Countdown",
@@ -76,31 +77,46 @@ const messages: {
   rules: {
     title: "Rules",
     forFriendsText:
-      "4friends is a platform for competing with friends! Make predictions for the EURO 2024 matches, score points, follow the statistics and win! You can bet on a box of Pepsi or an orange peel. We will make sure the game is fun and all the results are counted correctly. Good luck!",
+      "4friends is a platform for competitions with friends! Make predictions for the EURO 2024 matches, earn points, follow the statistics and win!",
+    forFriendsText2:
+      "In our app, you can bet on anything - a box of soda or a chocolate cake, the latest issue of 'Science' magazine or a comic book subscription, an orange peel or an honorary certificate.",
+    forFriendsText3:
+      "In our app, you decide what your prize pool will be and how it will be distributed among the winners.",
+    forFriendsText4:
+      "We will ensure that the game is fun and all results are calculated correctly and on time.",
     howToPlayTitle: "How to play",
-    bet: "Make your bet!",
+    bet: "Place a bet!",
     betText:
-      "When there are 48 hours left until the match, it appears on the main page. Now you can place a bet.",
+      "When there are 48 hours left until the match, it appears on the main page. Now you can make and save your prediction.",
     betText2: "The color of the card will indicate the status of your bet:",
-    points: "Get points",
+    betText3:
+      "The countdown to the start of the match indicates when the next match will start.",
+    here: "here",
+    points: "Earn Points",
     pointsText:
       "As a result of each match, the player receives points. You will find the scoring system with examples ",
     pointsText2:
-      "After the start of the match, you will be able to see the bets made by other players",
+      "After the start of the match, you will be able to see the bets made by other players.",
     pointsText3: "Matches also have color indication:",
-    stat: "Follow the statistic",
+    stat: "Keep track of the statistics",
     statText:
       'On the "Statistics" page, in addition to the main table with points, you will find statistics on guessed victories, exact scores, and the average number of points per match',
     statText2:
-      'On the "Global top" page, you will see the overall rating of all players in all rooms. If you are in several, your best indicator is taken',
+      'On the "Overall rating" page, you will see the overall rating of all players in all rooms. If you are in several, your best indicator is taken',
     calc: "Point calculation",
-    calcPlay: "Playoff",
+    calcGroup: "Group stage",
+    calcPlay: "Play-off",
     calcText2:
-      "Points are calculated in the same way as in the group stage, i.e. according to the final score on the scoreboard (it doesn't matter whether after the main time or after the extra time, the final score on the scoreboard matters)",
+      "Points are calculated in the same way as in the group stage (i.e. according to the '3-2-1' system) in accordance with the prediction made and the final score on the scoreboard.*",
     calcText3:
-      "The WINNER checkbox brings an additional 2 points if the player made a correct prediction on which team will advance to the next round.",
-    finish: "That's it, good luck with the game! ",
+      'The "win" checkbox brings an additional 2 points if the player made a correct prediction on which team will advance to the next round.',
+    calcText4:
+      "*It doesn't matter whether the match ended in regular or extra time, the final score on the scoreboard matters. ",
+    finish: "Good luck with the game! ",
     start: "Start",
+    contacts:
+      "To launch a room for yourself and your friends, contact us on telegram ",
+    telegram: "@friendseuro2024",
   },
   colorsMatchList: {
     Grey: " - match has not started yet",

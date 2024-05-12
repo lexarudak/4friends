@@ -3,16 +3,16 @@ import styles from "./room-selector.module.scss";
 import { userSelector } from "../../store/user/user.selector";
 import { MouseEvent } from "react";
 import classNames from "classnames";
-import { CSSTransition } from "react-transition-group";
 import { AddRoom } from "./add-room/add-room";
 import { useLazySetRoomQuery, useLazyUserQuery } from "../../store/api";
 import { isRoomSelectorOpenSelector } from "../../store/app/app.selector";
 import {
+  closeMenu,
   closeRoomSelector,
   toggleRoomSelector,
 } from "../../store/app/app.slice";
 
-export const RoomSelector = (): JSX.Element => {
+export const RoomSelector = (): JSX.Element | null => {
   const dispatch = useDispatch();
   const isRoomSelectorOpen = useSelector(isRoomSelectorOpenSelector);
   const { ACTIVEROOMID, ROOMS, USERID } = useSelector(userSelector);
@@ -34,6 +34,7 @@ export const RoomSelector = (): JSX.Element => {
         updateUser({});
       }
     } else {
+      dispatch(closeMenu());
       dispatch(toggleRoomSelector());
     }
   };
@@ -49,9 +50,12 @@ export const RoomSelector = (): JSX.Element => {
     [styles.container]: true,
   };
 
+  if (!ACTIVEROOMID) {
+    return null;
+  }
+
   return (
     <>
-      <div className={styles.mobileDeco} />
       <div className={classNames(cn)}>
         <AddRoom
           isLoading={isFetching}
@@ -81,15 +85,6 @@ export const RoomSelector = (): JSX.Element => {
           {ROOMS[ACTIVEROOMID]}
         </button>
       </div>
-
-      <CSSTransition
-        in={isRoomSelectorOpen}
-        timeout={200}
-        classNames="fade"
-        unmountOnExit
-      >
-        <div className={styles.bg} onClick={closeSelector} />
-      </CSSTransition>
     </>
   );
 };

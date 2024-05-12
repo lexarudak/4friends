@@ -22,7 +22,7 @@
   background-color: $clr-data-02;
   color: $clr-text-01;
   width: 535px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  box-shadow: $shadow-main-1;
   transition: .3s;
   flex-grow: 1;
   gap: 20px;

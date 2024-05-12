@@ -3,6 +3,7 @@
   padding-bottom: 40px;
   display: flex;
   align-items: center;
+  margin-top: 50px;
 }
 
 .subtitle {
@@ -12,7 +13,7 @@
 
 .link {
   color: $clr-secondary-02;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: underline;
   padding: 0 20px 0 10px;
 }
@@ -93,6 +94,7 @@
   width: 535px;
   max-width: 535px;
   height: 63px;
+  margin-bottom: 5px;
 
   @include mediaMax('l') {
     width: 340px;
@@ -117,9 +119,4 @@
     color: rgba(255, 255, 255, 0.541);
     cursor: default;
   }
-}
-
-.toggler {
-  // margin-left: auto;
-  margin-bottom: 50px;
 }

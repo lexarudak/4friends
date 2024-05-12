@@ -27,7 +27,7 @@ export const NMForm = (): JSX.Element | null => {
   const nextMatches = useSelector(nextMatchesSelector);
   const { USERNAME, ACTIVEROOMID, USERID } = useSelector(userSelector);
   const [firstTry, setFirstTry] = useState(false);
-  const [setNM, { isFetching, isError }] = useLazySetNextMatchesQuery();
+  const [setNM, { isFetching, data }] = useLazySetNextMatchesQuery();
   const isLoading = useSelector(isNMLoadingSelector);
   const dispatch = useDispatch();
   const [isSavedBanner, setIsSavedBanner] = useState(false);
@@ -139,10 +139,7 @@ export const NMForm = (): JSX.Element | null => {
               </Button>
             </div>
 
-            <FieldError
-              message={isError ? "Something went wrong. Try again" : ""}
-              className={styles.error}
-            />
+            <FieldError message={data?.MESSAGE} className={styles.error} />
           </Form>
         );
       }}

@@ -17,8 +17,21 @@
     }
 
     &.active {
-      color: $clr-support-03;
+      color: $clr-text-01;
+      text-decoration: underline;
       cursor: default;
+        &:hover {
+        color: $clr-text-01;
+      }
+
+       @include mediaMin('l') {
+          text-decoration: none;
+         color: $clr-data-02;
+         &:hover {
+          color: $clr-data-02;
+        }
+       }
+
     }
   }
 

@@ -17,7 +17,6 @@ import { Loading } from "../../components/loading/loading";
 import { useLazyLoginQuery, useLazyUserQuery } from "../../store/api";
 import { isServerErrorSelector } from "../../store/app/app.selector";
 import { useLang } from "../../lang/useLang";
-import { LangToggler } from "../../components/lang-toggler/lang-toggler";
 import { BUTTON_COLOR, BUTTON_VARIANT } from "../../const/const";
 
 export type LoginValues = {
@@ -101,11 +100,6 @@ export const LoginPage = (): JSX.Element => {
       >
         {({ errors, isValid }) => (
           <>
-            <LangToggler
-              className={{
-                [styles.toggler]: true,
-              }}
-            />
             <h2 className={styles.title}>
               {auth.login}
               <span className={styles.subtitle}>{" | "}</span>

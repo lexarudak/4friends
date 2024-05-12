@@ -24,7 +24,6 @@ import { useLazyRegisterQuery, useLazyUserQuery } from "../../store/api";
 import { Loading } from "../../components/loading/loading";
 import { CSSTransition } from "react-transition-group";
 import { useLang } from "../../lang/useLang";
-import { LangToggler } from "../../components/lang-toggler/lang-toggler";
 import { BUTTON_COLOR, BUTTON_VARIANT } from "../../const/const";
 
 export type RegisterValues = {
@@ -117,11 +116,6 @@ export const RegisterPage = (): JSX.Element => {
       >
         {({ errors, isValid, setFieldValue }) => (
           <>
-            <LangToggler
-              className={{
-                [styles.toggler]: true,
-              }}
-            />
             <h2 className={styles.title}>
               {auth.reg}
               <span className={styles.subtitle}>{" | "}</span>

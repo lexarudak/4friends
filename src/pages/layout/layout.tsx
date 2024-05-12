@@ -1,6 +1,5 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import styles from "./layout.module.scss";
-import { Header } from "./header/header";
 import { Footer } from "./footer/footer";
 import { Menu } from "../../components/menu/menu";
 import { ROUTE_LIST } from "../../router/route-list";
@@ -19,12 +18,20 @@ import { setIsPageLoading, setServerError } from "../../store/app/app.slice";
 import { CSSTransition } from "react-transition-group";
 import classNames from "classnames";
 import { LangToggler } from "../../components/lang-toggler/lang-toggler";
+import { useIsLogin } from "../../hooks";
 
 const regPages: string[] = [ROUTE_LIST.login, ROUTE_LIST.register];
+
+const freePages: string[] = [
+  ROUTE_LIST.login,
+  ROUTE_LIST.register,
+  ROUTE_LIST.rules,
+];
 
 export const Layout = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isLogin = useIsLogin();
   const { isLoading, data } = useUserQuery({});
   const isPageLoading = useSelector(pageLoadingSelector);
   const { pathname } = useLocation();
@@ -34,11 +41,11 @@ export const Layout = (): JSX.Element => {
 
   const showMainLoading = isLoading || isPageLoading;
   const shouldRedirectFromLogin =
-    !severError.isError && regPages.includes(pathname) && Cookies.get("TOKEN");
+    !severError.isError && regPages.includes(pathname) && isLogin;
   const shouldRedirectToLogin =
-    severError.isError && !regPages.includes(pathname);
+    severError.isError && !freePages.includes(pathname);
   const shouldHoldBody = isMenuOpen || isModalOpen || isRoomSelectorOpen;
-  const shouldShowMenu = !regPages.includes(pathname);
+  const shouldShowRoomSelector = !regPages.includes(pathname) && isLogin;
 
   useEffect(() => {
     shouldHoldBody
@@ -47,14 +54,16 @@ export const Layout = (): JSX.Element => {
   });
 
   useEffect(() => {
-    if (shouldRedirectToLogin) {
-      Cookies.remove("TOKEN", { path: "/", domain: ".4friends.live" });
+    if (!isLogin && !freePages.includes(pathname)) {
       dispatch(
         setServerError({
           isError: true,
           message: data?.MESSAGE || "Access token error",
         }),
       );
+    }
+    if (shouldRedirectToLogin) {
+      Cookies.remove("TOKEN", { path: "/", domain: ".4friends.live" });
       navigate(ROUTE_LIST.login);
     }
 
@@ -69,23 +78,17 @@ export const Layout = (): JSX.Element => {
     shouldRedirectToLogin,
     dispatch,
     data?.MESSAGE,
+    isLogin,
   ]);
 
   return (
     <>
-      {shouldShowMenu && (
-        <>
-          <Header />
-          <Menu />
-          <RoomSelector />
-        </>
-      )}
-
+      {shouldShowRoomSelector && <RoomSelector />}
+      <Menu />
       <LangToggler
         className={{
           [styles.toggler]: true,
           [styles.isOpen]: isMenuOpen,
-          [styles.hide]: regPages.includes(pathname),
         }}
       />
       <main

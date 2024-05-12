@@ -9,6 +9,16 @@
   }
 }
 
+.subtitle {
+  color: $clr-secondary-02;
+}
+
+.link {
+  color: $clr-secondary-02;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
 .li {
   margin: 10px 0;
 }
@@ -30,12 +40,11 @@
 }
 
 .bold {
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.link {
-  text-decoration: underline;
-  color: $clr-crown;
+.italic {
+  font-style: italic;
 }
 
 .imgContainer {
