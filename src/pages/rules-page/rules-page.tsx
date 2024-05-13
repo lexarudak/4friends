@@ -50,11 +50,11 @@ export const RulesPage = (): JSX.Element => {
         }
       </h2>
       <RulesBlock>
-        <p>{rules.forFriendsText}</p>
+        <p>{rules.lang}</p>
         <VideoBlock src="/videos/intro.MP4" variant={VIDEO_VARIANT.right}>
-          <p>{rules.lang}</p>
           <p className={styles.italic}>{rules.lang2}</p>
         </VideoBlock>
+        <p>{rules.forFriendsText}</p>
         <p className={styles.bold}>{rules.forFriendsText3}</p>
         <p>{rules.forFriendsText4}</p>
       </RulesBlock>

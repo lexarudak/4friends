@@ -77,9 +77,8 @@ const messages: {
   },
   rules: {
     title: "Правила",
-    lang: "Для смены языка в мобильной версии сайта воспользуйтесь кнопкой вызова меню внизу экрана.",
-    lang2:
-      "To change the language in the mobile version of the site, use the menu call button at the bottom of the screen.",
+    lang: "Для смены языка в мобильной версии воспользуйтесь кнопкой  меню.",
+    lang2: "To change the language in the mobile version, use the menu button.",
     forFriendsText:
       "4friends - это площадка для соревнований с друзьями! Делайте прогнозы на матчи EURO 2024, зарабатывайте баллы, следите за статистикой и побеждайте!",
     forFriendsText2:
