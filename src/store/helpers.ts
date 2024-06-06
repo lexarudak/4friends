@@ -51,13 +51,15 @@ export const prepareNMData = ({
 }): NMRequest => {
   return {
     USERID,
-    DATA: NMDATA.map(({ MATCHID, USERID, TEAM1, TEAM2, WINNER }) => ({
+    DATA: NMDATA.map(({ MATCHID, USERID, TEAM1, TEAM2, WINNER, EXTRA }) => ({
       MATCHID,
       USERID,
       TEAM1,
       TEAM2,
       WINNER:
-        (WINNER === 1 && TEAM1.CODE) || (WINNER === 2 && TEAM2.CODE) || "",
+        !EXTRA && TEAM1.SCORE === TEAM2.SCORE
+          ? ""
+          : (WINNER === 1 && TEAM1.CODE) || (WINNER === 2 && TEAM2.CODE) || "",
       USERNAME,
       ACTIVEROOMID,
     })),
