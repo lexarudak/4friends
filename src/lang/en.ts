@@ -46,7 +46,7 @@ const messages: {
     title: "Next matches",
     makeBets: "Make your bets",
     saved: "Saved successfully!",
-    noMatches: "No matches in the next 24 h",
+    noMatches: "No matches in the next 48 h",
   },
   table: {
     top3: "Top 3",
