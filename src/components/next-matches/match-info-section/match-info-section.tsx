@@ -5,32 +5,40 @@ import classNames from "classnames";
 import { FormikErrors } from "formik";
 import { ValidateErrors } from "../nm-form.tsx/validator";
 import { useLang } from "../../../lang/useLang";
+import {
+  MatchStatus,
+  STATUS_TYPE,
+} from "../../../store/matchdays/matchdays.slice";
+import { useStatusText } from "../../../hooks";
 
 type Props = {
   time: number;
   info: string;
   isSaved: boolean;
-  isChanged?: boolean;
+  inProgress?: boolean;
   order: number;
   errors?: FormikErrors<ValidateErrors>;
+  matchStatus?: MatchStatus;
 };
 
 export const MatchInfoSection: FC<Props> = ({
   info,
   time,
   isSaved,
-  isChanged,
+  inProgress,
   order,
   errors,
+  matchStatus,
 }): JSX.Element => {
   const emptyError = errors?.[`[${order}].SCORE`];
   const winnerError = errors?.[`[${order}].WINNER`];
   const { lang } = useLang();
+  const statusText = useStatusText(matchStatus);
 
   const cn = {
     [styles.container]: true,
-    [styles.saved]: isSaved && !isChanged,
-    [styles.changed]: isChanged,
+    [styles.saved]: isSaved && !inProgress,
+    [styles.changed]: inProgress,
     [styles.error]: (emptyError || winnerError) && errors,
   };
 
@@ -59,7 +67,11 @@ export const MatchInfoSection: FC<Props> = ({
         {lang === "ru" ? translateInfo(info) : info}
       </span>
       <span className={styles.item}>{getTime(time)}</span>
-      <span className={styles.item}>{getDate(time)}</span>
+      <span className={styles.item}>
+        {statusText && matchStatus?.TYPE === STATUS_TYPE.inProgress
+          ? statusText
+          : getDate(time)}
+      </span>
     </div>
   );
 };

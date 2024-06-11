@@ -49,7 +49,7 @@ export const OneMatchForm: FC<Props> = ({
         info={INFO}
         time={TIME}
         isSaved={isSaved}
-        isChanged={isChanged}
+        inProgress={isChanged}
         order={order}
         errors={errors}
       />

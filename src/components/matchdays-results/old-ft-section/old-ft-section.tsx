@@ -5,17 +5,23 @@ import { getFlag, getName } from "../../../helpers";
 import { useBreakPoint } from "../../../hooks";
 import classNames from "classnames";
 import { useLang } from "../../../lang/useLang";
+import {
+  MatchStatus,
+  STATUS_TYPE,
+} from "../../../store/matchdays/matchdays.slice";
 
 type Props = {
   team1: Team;
   team2: Team;
   winner: 0 | 1 | 2;
+  status: MatchStatus;
 };
 
 export const OldFTSection: FC<Props> = ({
   team1,
   team2,
   winner,
+  status,
 }): JSX.Element => {
   const BP = useBreakPoint();
   const equalScore = team1.SCORE === team2.SCORE;
@@ -42,19 +48,30 @@ export const OldFTSection: FC<Props> = ({
       <span
         className={classNames({
           [styles.score]: true,
-          [styles.active]: winner === 1 && equalScore,
+          [styles.inProgress]: status.TYPE === STATUS_TYPE.inProgress,
+          [styles.active]:
+            winner === 1 && equalScore && status.TYPE === STATUS_TYPE.finished,
         })}
       >
-        {team1.SCORE === "" ? "-" : team1.SCORE}
+        {status.TYPE === STATUS_TYPE.notStarted ? "-" : team1.SCORE}
       </span>
-      <span className={styles.center}>:</span>
+      <span
+        className={classNames({
+          [styles.center]: true,
+          [styles.inProgress]: status.TYPE === STATUS_TYPE.inProgress,
+        })}
+      >
+        :
+      </span>
       <span
         className={classNames({
           [styles.score]: true,
-          [styles.active]: winner === 2 && equalScore,
+          [styles.inProgress]: status.TYPE === STATUS_TYPE.inProgress,
+          [styles.active]:
+            winner === 2 && equalScore && status.TYPE === STATUS_TYPE.finished,
         })}
       >
-        {team2.SCORE === "" ? "-" : team2.SCORE}
+        {status.TYPE === STATUS_TYPE.notStarted ? "-" : team2.SCORE}
       </span>
       <div className={styles.half}>
         <span
