@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import { activeRoomIdSelector } from "./store/user/user.selector";
 import { useSelector } from "react-redux";
+import { MatchStatus } from "./store/matchdays/matchdays.slice";
 
 export enum BREAKPOINTS {
   xs = 400,
@@ -38,6 +39,13 @@ export const useBreakPoint = () => {
   }, []);
 
   return breakpoint;
+};
+
+export const useStatusText = (status: MatchStatus | undefined) => {
+  const BP = useBreakPoint();
+  if (!status) return null;
+  const statusText = BP === BREAKPOINTS.xl ? status.LONG : status.SHORT;
+  return statusText;
 };
 
 export const useInterval = (callback: () => void, delay: number) => {

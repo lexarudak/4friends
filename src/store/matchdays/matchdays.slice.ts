@@ -3,6 +3,18 @@ import { Team } from "../next-matches/next-matches.slice";
 import { apiSlice } from "../api";
 import dayjs from "dayjs";
 
+export enum STATUS_TYPE {
+  notStarted = "Scheduled",
+  inProgress = "In Play",
+  finished = "Finished",
+}
+
+export type MatchStatus = {
+  LONG: string;
+  SHORT: string;
+  TYPE: STATUS_TYPE;
+};
+
 export type UserBetInfo = {
   USERNAME: string;
   SCORE: (number | string)[];
@@ -19,6 +31,7 @@ export type OldMatchInfo = {
   TEAM1: Team;
   TEAM2: Team;
   USERBETS: UserBetInfo[];
+  STATUS: MatchStatus;
 };
 
 // const mockedMatches: OldMatchInfo[] = [

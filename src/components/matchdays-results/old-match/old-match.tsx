@@ -1,5 +1,8 @@
 import { FC } from "react";
-import { OldMatchInfo } from "../../../store/matchdays/matchdays.slice";
+import {
+  OldMatchInfo,
+  STATUS_TYPE,
+} from "../../../store/matchdays/matchdays.slice";
 import styles from "./old-match.module.scss";
 import { MatchInfoSection } from "../../next-matches/match-info-section/match-info-section";
 import { OldFTSection } from "../old-ft-section/old-ft-section";
@@ -12,7 +15,7 @@ type Props = {
 };
 
 export const OldMatch: FC<Props> = ({
-  matchInfo: { INFO, TIME, TEAM1, TEAM2, WINNER, USERBETS },
+  matchInfo: { INFO, TIME, TEAM1, TEAM2, WINNER, USERBETS, STATUS },
 }): JSX.Element => {
   const sortedBets = [...USERBETS].sort((a, b) => {
     if (a.SCORE[0] === "" && a.SCORE[1] === "") return 1;
@@ -21,7 +24,7 @@ export const OldMatch: FC<Props> = ({
   });
 
   const USERNAME = useSelector(userNameSelector);
-  const isSaved = TIME < Date.now().valueOf();
+  const matchStarted = STATUS.TYPE !== STATUS_TYPE.notStarted;
 
   return (
     <div className={styles.container}>
@@ -29,13 +32,18 @@ export const OldMatch: FC<Props> = ({
         <MatchInfoSection
           info={INFO}
           time={TIME}
-          isSaved={isSaved}
+          isSaved={STATUS.TYPE === STATUS_TYPE.finished}
           order={0}
-          isChanged={isSaved && TEAM1.SCORE === ""}
+          inProgress={STATUS.TYPE === STATUS_TYPE.inProgress}
         />
-        <OldFTSection team1={TEAM1} team2={TEAM2} winner={WINNER} />
+        <OldFTSection
+          team1={TEAM1}
+          team2={TEAM2}
+          winner={WINNER}
+          status={STATUS}
+        />
       </div>
-      {isSaved &&
+      {matchStarted &&
         [...sortedBets].map((bet) => (
           <UserBet
             bet={bet}

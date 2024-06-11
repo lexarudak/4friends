@@ -1,3 +1,4 @@
+import { MatchStatus } from "./matchdays/matchdays.slice";
 import { Team } from "./next-matches/next-matches.slice";
 
 export type GetNextMatchesData = {
@@ -54,6 +55,7 @@ export type MatchdaysData = {
     TIME: string;
     EXTRA: boolean;
     WINNER: string;
+    STATUS: MatchStatus;
     "USER BETS": {
       TEAM1: Team;
       TEAM2: Team;
