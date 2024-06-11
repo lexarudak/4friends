@@ -57,15 +57,21 @@ export const MatchdaysResults = (): JSX.Element => {
   const [fetch, { isFetching }] = useLazyGetMatchdaysQuery();
 
   useEffect(() => {
-    fetch({ from, to });
-  }, []);
+    const updateInfo = () => {
+      console.log("fetch");
+      const isValid = validateDate(from, to);
+      setIsValid(isValid);
+      if (isValid) {
+        fetch({ from, to });
+      }
+    };
+    updateInfo();
 
-  useEffect(() => {
-    const isValid = validateDate(from, to);
-    setIsValid(isValid);
-    if (isValid) {
-      fetch({ from, to });
-    }
+    const interval = setInterval(updateInfo, 120000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, [fetch, from, to, ACTIVEROOMID]);
 
   const clearFilter = () => {

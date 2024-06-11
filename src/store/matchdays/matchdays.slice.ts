@@ -148,12 +148,6 @@ const matchdaysSlice = createSlice({
         }
       },
     );
-    builder.addMatcher(
-      apiSlice.endpoints.getMatchdays.matchPending,
-      (state) => {
-        state.matches = [];
-      },
-    );
   },
 });
 
