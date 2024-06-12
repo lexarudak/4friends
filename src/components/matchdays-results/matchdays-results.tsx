@@ -8,8 +8,8 @@ import {
 } from "../../store/matchdays/matchdays.selector";
 import { OldMatch } from "./old-match/old-match";
 import { useLazyGetMatchdaysQuery } from "../../store/api";
-import { useEffect, useState } from "react";
-import { validateDate } from "../../helpers";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { getLiveMatches, getRestMatches, validateDate } from "../../helpers";
 import { Loading } from "../loading/loading";
 import { activeRoomIdSelector } from "../../store/user/user.selector";
 import { Button } from "../button/button";
@@ -36,29 +36,34 @@ export const MatchdaysResults = (): JSX.Element => {
     countries,
   } = useLang();
 
-  const getValidMatch = ({ TIME }: OldMatchInfo) =>
-    TIME >= new Date(from).valueOf() && TIME <= new Date(to).valueOf();
+  const getValidMatch = useCallback(
+    ({ TIME }: OldMatchInfo) =>
+      TIME >= new Date(from).valueOf() && TIME <= new Date(to).valueOf(),
+    [from, to],
+  );
 
-  const getValidCountry = ({ TEAM1, TEAM2 }: OldMatchInfo) => {
-    const searchValue = pickedCountry.trim().toUpperCase();
-    return (
-      !searchValue ||
-      [
-        countries[TEAM1.CODE]?.code3,
-        countries[TEAM2.CODE]?.code3,
-        countries[TEAM1.CODE]?.name.toUpperCase(),
-        countries[TEAM2.CODE]?.name.toUpperCase(),
-      ]
-        .filter((val) => !!val)
-        .some((value) => value.startsWith(searchValue))
-    );
-  };
+  const getValidCountry = useCallback(
+    ({ TEAM1, TEAM2 }: OldMatchInfo) => {
+      const searchValue = pickedCountry.trim().toUpperCase();
+      return (
+        !searchValue ||
+        [
+          countries[TEAM1.CODE]?.code3,
+          countries[TEAM2.CODE]?.code3,
+          countries[TEAM1.CODE]?.name.toUpperCase(),
+          countries[TEAM2.CODE]?.name.toUpperCase(),
+        ]
+          .filter((val) => !!val)
+          .some((value) => value.startsWith(searchValue))
+      );
+    },
+    [countries, pickedCountry],
+  );
 
   const [fetch, { isFetching }] = useLazyGetMatchdaysQuery();
 
   useEffect(() => {
     const updateInfo = () => {
-      console.log("fetch");
       const isValid = validateDate(from, to);
       setIsValid(isValid);
       if (isValid) {
@@ -77,6 +82,21 @@ export const MatchdaysResults = (): JSX.Element => {
   const clearFilter = () => {
     dispatch(resetMatchdays());
   };
+
+  const matches = useMemo(
+    () => data.filter(getValidMatch).filter(getValidCountry),
+    [data, getValidMatch, getValidCountry],
+  );
+
+  const getSortedLive = matches
+    .filter(getLiveMatches)
+    .sort((a, b) => a.TIME - b.TIME)
+    .map((data) => <OldMatch matchInfo={data} key={data.ID} />);
+
+  const getSortedRest = matches
+    .filter(getRestMatches)
+    .sort((a, b) => a.TIME - b.TIME)
+    .map((data) => <OldMatch matchInfo={data} key={data.ID} />);
 
   return (
     <section className={styles.container}>
@@ -103,13 +123,14 @@ export const MatchdaysResults = (): JSX.Element => {
         <FieldError message={severError.message} className={styles.error} />
       </div>
 
-      {data.filter(getValidMatch).filter(getValidCountry).length && isValid
-        ? [...data]
-            .filter(getValidMatch)
-            .filter(getValidCountry)
-            .sort((a, b) => b.TIME - a.TIME)
-            .map((data) => <OldMatch matchInfo={data} key={data.ID} />)
-        : !isFetching && <div>{md.noMatches}</div>}
+      {matches.length && isValid ? (
+        <>
+          {getSortedLive}
+          {getSortedRest}
+        </>
+      ) : (
+        !isFetching && <div>{md.noMatches}</div>
+      )}
     </section>
   );
 };

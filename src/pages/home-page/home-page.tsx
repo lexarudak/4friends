@@ -20,6 +20,7 @@ import {
 import { useInterval } from "../../hooks";
 import { setIsPageLoading } from "../../store/app/app.slice";
 import { useLang } from "../../lang/useLang";
+import { LiveMatches } from "../../components/live-matches/live-matches";
 
 export const HomePage = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -74,6 +75,7 @@ export const HomePage = (): JSX.Element => {
     <section className={styles.page}>
       <Timer className={styles.timer} />
       <NextMatches />
+      <LiveMatches />
       <Table
         users={users}
         title={messages.table.top3}

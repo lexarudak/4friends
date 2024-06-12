@@ -35,6 +35,7 @@ export const OldMatch: FC<Props> = ({
           isSaved={STATUS.TYPE === STATUS_TYPE.finished}
           order={0}
           inProgress={STATUS.TYPE === STATUS_TYPE.inProgress}
+          matchStatus={STATUS}
         />
         <OldFTSection
           team1={TEAM1}

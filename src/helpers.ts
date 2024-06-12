@@ -1,6 +1,7 @@
 import { DATE_AFTER, MIN_DATE } from "./const/const";
 import { CountriesType } from "./const/countries";
 import { BREAKPOINTS } from "./hooks";
+import { OldMatchInfo, STATUS_TYPE } from "./store/matchdays/matchdays.slice";
 import { CountryKey, NextMatch } from "./store/next-matches/next-matches.slice";
 
 export const getTime = (timestamp: number) => {
@@ -64,3 +65,9 @@ export const isScoreEmpty = (nm: NextMatch[]) => {
   });
   return isEmpty;
 };
+
+export const getLiveMatches = ({ STATUS: { TYPE } }: OldMatchInfo) =>
+  TYPE === STATUS_TYPE.inProgress;
+
+export const getRestMatches = ({ STATUS: { TYPE } }: OldMatchInfo) =>
+  TYPE !== STATUS_TYPE.inProgress;
