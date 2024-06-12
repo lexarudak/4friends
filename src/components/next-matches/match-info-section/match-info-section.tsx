@@ -67,9 +67,9 @@ export const MatchInfoSection: FC<Props> = ({
         {lang === "ru" ? translateInfo(info) : info}
       </span>
       <span className={styles.item}>
-        {statusText && matchStatus?.TYPE === STATUS_TYPE.notStarted
-          ? getTime(time)
-          : statusText}
+        {statusText && matchStatus?.TYPE === STATUS_TYPE.inProgress
+          ? statusText
+          : getTime(time)}
       </span>
       <span className={styles.item}>{getDate(time)}</span>
     </div>
