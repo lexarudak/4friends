@@ -6,4 +6,5 @@ export enum ROUTE_LIST {
   login = "/login",
   register = "/register",
   top = "/top",
+  euro = "/euro",
 }

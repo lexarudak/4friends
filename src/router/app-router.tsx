@@ -8,6 +8,7 @@ import { RegisterPage } from "../pages/auth/register-page";
 import { StatisticPage } from "../pages/statistic-page/statistic-page";
 import { TopPage } from "../pages/top-page/top-page";
 import { RulesPage } from "../pages/rules-page/rules-page";
+import { EuroPage } from "../pages/euro-page/euro-page";
 
 export const AppRouter = (): JSX.Element => {
   return (
@@ -16,6 +17,7 @@ export const AppRouter = (): JSX.Element => {
         <Route index element={<RulesPage />} />
         <Route path={ROUTE_LIST.matchdays} element={<MatchdaysPage />} />
         <Route path={ROUTE_LIST.statistic} element={<StatisticPage />} />
+        <Route path={ROUTE_LIST.euro} element={<EuroPage />} />
         <Route path={ROUTE_LIST.top} element={<TopPage />} />
         <Route path={ROUTE_LIST.home} element={<HomePage />} />
         <Route path={ROUTE_LIST.login} element={<LoginPage />} />

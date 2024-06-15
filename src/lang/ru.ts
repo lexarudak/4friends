@@ -14,6 +14,13 @@ const messages: {
     cancel: "Отменить",
     ok: "Принять",
   },
+  euro: {
+    group: "Группы",
+    eight: "1/8",
+    four: "1/4",
+    half: "1/2",
+    final: "Финал",
+  },
   auth: {
     reg: "Регистрация",
     login: "Войти",

@@ -1,0 +1,12 @@
+.tab {
+  width: 20%;
+  text-align: center;
+  padding: 10px;
+
+  &.active {
+    background-color: $clr-tertiary-02;
+  }
+}
+
+
+

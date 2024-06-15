@@ -14,6 +14,13 @@ const messages: {
     cancel: "Cancel",
     ok: "Ok",
   },
+  euro: {
+    group: "Group",
+    eight: "1/8",
+    four: "1/4",
+    half: "1/2",
+    final: "Final",
+  },
   auth: {
     reg: "Register",
     login: "Login",
