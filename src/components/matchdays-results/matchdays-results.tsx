@@ -90,12 +90,12 @@ export const MatchdaysResults = (): JSX.Element => {
 
   const getSortedLive = matches
     .filter(getLiveMatches)
-    .sort((a, b) => a.TIME - b.TIME)
+    .sort((a, b) => b.TIME - a.TIME)
     .map((data) => <OldMatch matchInfo={data} key={data.ID} />);
 
   const getSortedRest = matches
     .filter(getRestMatches)
-    .sort((a, b) => a.TIME - b.TIME)
+    .sort((a, b) => b.TIME - a.TIME)
     .map((data) => <OldMatch matchInfo={data} key={data.ID} />);
 
   return (
