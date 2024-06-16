@@ -2,17 +2,21 @@ import { useState } from "react";
 import styles from "./euro-tabs.module.scss";
 import { useLang } from "../../lang/useLang";
 import { Tab } from "./tab/tab";
-
-const content = [
-  <div>Group</div>,
-  <div>1/8</div>,
-  <div>1/4</div>,
-  <div>1/2</div>,
-  <div>Final</div>,
-];
+import { mockResponse } from "./mock";
+import { Groups } from "./groups/groups";
+import { PlayOff } from "./play-off/play-off";
 
 export const EuroTabs = (): JSX.Element => {
   const [activeTab, setActiveTab] = useState(0);
+  const { groups, eight, final, four, two } = mockResponse;
+
+  const content = [
+    <Groups data={groups} />,
+    <PlayOff data={eight} />,
+    <PlayOff data={four} />,
+    <PlayOff data={two} />,
+    <PlayOff data={final} />,
+  ];
 
   const {
     messages: { euro },
