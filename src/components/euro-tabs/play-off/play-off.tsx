@@ -8,7 +8,7 @@ import { getFlag, getName } from "../../../helpers";
 
 export type PlayOffMatch = {
   team: CountryKey;
-  score: number;
+  score: number | "-";
 };
 
 type Props = {

@@ -25,7 +25,8 @@ export type CountryKey =
   | "TUR"
   | "GEO"
   | "POR"
-  | "CZE";
+  | "CZE"
+  | "EUR";
 
 export type Team = {
   CODE: CountryKey; // код из 3 букв

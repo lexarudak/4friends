@@ -4,6 +4,7 @@ import {
   transformMatchdays,
   transformNM,
   transformNMTime,
+  transformStandings,
 } from "./helpers";
 
 const ORIGIN = "https://api.4friends.live/rest4friends";
@@ -83,6 +84,10 @@ export const apiSlice = createApi({
       }),
       transformResponse: transformMatchdays,
     }),
+    getStandings: query({
+      query: () => "cfc/getStandings.cfc?method=getStandings",
+      transformResponse: transformStandings,
+    }),
   }),
 });
 
@@ -99,4 +104,5 @@ export const {
   useLazyGetNMTimeQuery,
   useLazyGetMatchdaysQuery,
   useGetMatchdaysQuery,
+  useGetStandingsQuery,
 } = apiSlice;

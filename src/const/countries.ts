@@ -1,12 +1,12 @@
 import { CountryKey } from "../store/next-matches/next-matches.slice";
 
-export type CountriesType = {
-  [key in CountryKey]: {
-    code2: string;
-    code3: string;
-    name: string;
-  };
+export type CountryValue = {
+  code2: string;
+  code3: string;
+  name: string;
 };
+
+export type CountriesType = Record<CountryKey, CountryValue>;
 
 export const enCountries: CountriesType = {
   GER: { code2: "de", code3: "GER", name: "Germany" },
@@ -33,6 +33,7 @@ export const enCountries: CountriesType = {
   GEO: { code2: "ge", code3: "GEO", name: "Georgia" },
   POR: { code2: "pt", code3: "POR", name: "Portugal" },
   CZE: { code2: "cz", code3: "CZE", name: "Czech Republic" },
+  EUR: { code2: "eu", code3: "EUR", name: "EURO 2024" },
 };
 
 export const ruCountries: CountriesType = {
@@ -60,4 +61,5 @@ export const ruCountries: CountriesType = {
   GEO: { code2: "ge", code3: "ГРУ", name: "Грузия" },
   POR: { code2: "pt", code3: "ПОР", name: "Португалия" },
   CZE: { code2: "cz", code3: "ЧЕХ", name: "Чехия" },
+  EUR: { code2: "eu", code3: "EUR", name: "ЕВРО 2024" },
 };

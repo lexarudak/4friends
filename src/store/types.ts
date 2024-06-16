@@ -70,3 +70,5 @@ export type NMTimeData = NMTime[];
 
 export type NMTimeResponse = SuccessResponse<NMTimeData> | ErrorResponse;
 export type MatchdaysResponse = SuccessResponse<MatchdaysData> | ErrorResponse;
+
+export type StandingsResponse = SuccessResponse<string> | ErrorResponse;

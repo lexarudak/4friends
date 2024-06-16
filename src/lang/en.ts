@@ -13,6 +13,7 @@ const messages: {
     win: "win",
     cancel: "Cancel",
     ok: "Ok",
+    euro: "EURO 2024",
   },
   euro: {
     group: "Group",
@@ -41,6 +42,7 @@ const messages: {
     rules: "4friends",
     logout: "Log out",
     login: "Login",
+    euro2024: "EURO 2024",
   },
   timer: {
     countdown: "Countdown",

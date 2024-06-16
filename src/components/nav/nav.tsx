@@ -16,6 +16,7 @@ const NAV_LIST = {
   matchdays: ROUTE_LIST.matchdays,
   statistic: ROUTE_LIST.statistic,
   globalTop: ROUTE_LIST.top,
+  euro2024: ROUTE_LIST.euro,
   rules: ROUTE_LIST.rules,
 };
 

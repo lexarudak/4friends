@@ -29,7 +29,7 @@ export const UserCard: FC<Props> = ({
 
   return (
     <div className={classNames(mode, cn)}>
-      {<div className={styles.firstItem} />}
+      <div className={styles.firstItem} />
       {position && <span className={styles.item}>{position}</span>}
       <span className={styles.item}>{name}</span>
       <span className={styles.item}>{points}</span>

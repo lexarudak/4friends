@@ -1,5 +1,5 @@
 import { DATE_AFTER, MIN_DATE } from "./const/const";
-import { CountriesType } from "./const/countries";
+import { CountriesType, CountryValue } from "./const/countries";
 import { BREAKPOINTS } from "./hooks";
 import { OldMatchInfo, STATUS_TYPE } from "./store/matchdays/matchdays.slice";
 import { CountryKey, NextMatch } from "./store/next-matches/next-matches.slice";
@@ -28,6 +28,18 @@ export const validateDate = (from: string, to: string) => {
     new Date(value) >= new Date(MIN_DATE) &&
     new Date(value) <= new Date(DATE_AFTER);
   return isValid(from) && isValid(to);
+};
+
+export const getCodeByName = (
+  countries: CountriesType,
+  longName: string,
+): CountryKey => {
+  const values = Object.entries(countries) as [CountryKey, CountryValue][];
+  return (
+    values.find(
+      ([, { name }]) => name.toUpperCase() === longName.toUpperCase(),
+    )?.[0] ?? (countries.EUR.code3 as CountryKey)
+  );
 };
 
 export const getFlag = (code: CountryKey, countries: CountriesType) =>
@@ -71,3 +83,9 @@ export const getLiveMatches = ({ STATUS: { TYPE } }: OldMatchInfo) =>
 
 export const getRestMatches = ({ STATUS: { TYPE } }: OldMatchInfo) =>
   TYPE !== STATUS_TYPE.inProgress;
+
+export const translateInfo = (info: string) =>
+  info
+    .replace(/Final/g, "Финал")
+    .replace(/Group/g, "Группа")
+    .replace(/Ranking of third-placed teams/g, "Рейтинг третьих команд");

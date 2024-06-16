@@ -7,6 +7,7 @@ type Props = {
   index: number;
   activeTab: number;
   onClickHandler: (index: number) => void;
+  disabled?: boolean;
 };
 
 export const Tab: FC<Props> = ({
@@ -14,9 +15,11 @@ export const Tab: FC<Props> = ({
   name,
   activeTab,
   onClickHandler,
+  disabled,
 }): JSX.Element => {
   return (
     <button
+      disabled={disabled}
       className={classNames(styles.tab, {
         [styles.active]: activeTab === index,
       })}

@@ -13,6 +13,7 @@ const messages: {
     win: "поб",
     cancel: "Отменить",
     ok: "Принять",
+    euro: "ЕВРО 2024",
   },
   euro: {
     group: "Группы",
@@ -42,6 +43,7 @@ const messages: {
     rules: "4friends",
     logout: "Выйти",
     login: "Войти",
+    euro2024: "ЕВРО 2024",
   },
   timer: {
     countdown: "До начала матча",

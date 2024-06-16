@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styles from "./match-info-section.module.scss";
-import { getDate, getTime } from "../../../helpers";
+import { getDate, getTime, translateInfo } from "../../../helpers";
 import classNames from "classnames";
 import { FormikErrors } from "formik";
 import { ValidateErrors } from "../nm-form.tsx/validator";
@@ -57,9 +57,6 @@ export const MatchInfoSection: FC<Props> = ({
       </div>
     );
   }
-
-  const translateInfo = (info: string) =>
-    info.replace(/Final/g, "Финал").replace(/Group/g, "Группа");
 
   return (
     <div className={classNames(cn)}>

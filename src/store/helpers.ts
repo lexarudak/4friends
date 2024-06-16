@@ -1,3 +1,4 @@
+import { StandingsData } from "../components/euro-tabs/mock";
 import { OldMatchInfo } from "./matchdays/matchdays.slice";
 import { NextMatch, Team } from "./next-matches/next-matches.slice";
 import {
@@ -5,6 +6,7 @@ import {
   NMRequest,
   NMResponse,
   NMTimeResponse,
+  StandingsResponse,
 } from "./types";
 
 export const getNumberTime = (dateString: string) => {
@@ -86,6 +88,16 @@ export const transformNMTime = (response: NMTimeResponse) => {
     serverTimeDif,
   };
 
+  return {
+    ...response,
+    DATA,
+  };
+};
+
+export const transformStandings = (response: StandingsResponse) => {
+  if (!response.SUCCESS) return response;
+
+  const DATA: StandingsData = JSON.parse(response.DATA);
   return {
     ...response,
     DATA,
