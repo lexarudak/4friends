@@ -29,7 +29,7 @@ export const enCountries: CountriesType = {
   SVK: { code2: "sk", code3: "SVK", name: "Slovakia" },
   ROU: { code2: "ro", code3: "ROU", name: "Romania" },
   UKR: { code2: "ua", code3: "UKR", name: "Ukraine" },
-  TUR: { code2: "tr", code3: "TUR", name: "Turkey" },
+  TUR: { code2: "tr", code3: "TUR", name: "Türkiye" },
   GEO: { code2: "ge", code3: "GEO", name: "Georgia" },
   POR: { code2: "pt", code3: "POR", name: "Portugal" },
   CZE: { code2: "cz", code3: "CZE", name: "Czech Republic" },
