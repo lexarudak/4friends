@@ -15,7 +15,7 @@ type Props = {
 };
 
 export const OldMatch: FC<Props> = ({
-  matchInfo: { INFO, TIME, TEAM1, TEAM2, WINNER, USERBETS, STATUS },
+  matchInfo: { INFO, TIME, TEAM1, TEAM2, WINNER, USERBETS, STATUS, PERIODS },
 }): JSX.Element => {
   const sortedBets = [...USERBETS].sort((a, b) => {
     if (a.SCORE[0] === "" && a.SCORE[1] === "") return 1;
@@ -36,6 +36,7 @@ export const OldMatch: FC<Props> = ({
           order={0}
           inProgress={STATUS.TYPE === STATUS_TYPE.inProgress}
           matchStatus={STATUS}
+          periods={PERIODS}
         />
         <OldFTSection
           team1={TEAM1}

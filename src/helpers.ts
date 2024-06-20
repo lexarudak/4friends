@@ -1,7 +1,13 @@
 import { DATE_AFTER, MIN_DATE } from "./const/const";
 import { CountriesType, CountryValue } from "./const/countries";
 import { BREAKPOINTS } from "./hooks";
-import { OldMatchInfo, STATUS_TYPE } from "./store/matchdays/matchdays.slice";
+import {
+  MatchStatus,
+  OldMatchInfo,
+  Periods,
+  STATUS_SHORT,
+  STATUS_TYPE,
+} from "./store/matchdays/matchdays.slice";
 import { CountryKey, NextMatch } from "./store/next-matches/next-matches.slice";
 
 export const getTime = (timestamp: number) => {
@@ -89,3 +95,28 @@ export const translateInfo = (info: string) =>
     .replace(/Final/g, "Финал")
     .replace(/Group/g, "Группа")
     .replace(/Ranking of third-placed teams/g, "Рейтинг третьих команд");
+
+const getPeriodMinute = (
+  periodStarted: number,
+  serverTime: number,
+  add = 0,
+) => {
+  const timestamp = serverTime - periodStarted;
+  const minutes = Math.ceil(timestamp / 60000);
+  if (minutes > 45) {
+    return `${minutes + add}' +${minutes - 45}`;
+  }
+  return `${minutes + add}'`;
+};
+
+export const getMatchMinute = (matchStatus: MatchStatus, periods: Periods) => {
+  if (matchStatus.SHORT === STATUS_SHORT.firstHalf && periods.PERIODS_FIRST) {
+    return getPeriodMinute(periods.PERIODS_FIRST, periods.SERVER_TIME);
+  }
+
+  if (matchStatus.SHORT === STATUS_SHORT.secondHalf && periods.PERIODS_SECOND) {
+    return getPeriodMinute(periods.PERIODS_FIRST, periods.SERVER_TIME, 45);
+  }
+
+  return "";
+};

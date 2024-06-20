@@ -24,3 +24,13 @@
   text-align: center;
   text-wrap: nowrap;
 }
+
+@keyframes blinking {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.inProgress {
+  color: red;
+  animation: blinking 2.5s linear infinite;
+}

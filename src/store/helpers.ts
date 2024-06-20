@@ -109,7 +109,16 @@ export const transformMatchdays = (response: MatchdaysResponse) => {
 
   const DATA: OldMatchInfo[] = Object.entries(response.DATA).map(
     ([ID, data]) => {
-      const { EXTRA, WINNER, TEAM1, TEAM2, INFO, TIME, STATUS } = data;
+      const {
+        EXTRA,
+        WINNER,
+        TEAM1,
+        TEAM2,
+        INFO,
+        TIME,
+        STATUS,
+        PERIODS: { SERVER_TIME, PERIODS_FIRST, PERIODS_SECOND },
+      } = data;
       return {
         ID,
         EXTRA,
@@ -127,6 +136,11 @@ export const transformMatchdays = (response: MatchdaysResponse) => {
           }),
         ),
         STATUS,
+        PERIODS: {
+          PERIODS_FIRST: PERIODS_FIRST * 1000,
+          PERIODS_SECOND: PERIODS_SECOND * 1000,
+          SERVER_TIME: getNumberTime(SERVER_TIME),
+        },
       };
     },
   );

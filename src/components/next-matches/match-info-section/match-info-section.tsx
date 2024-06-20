@@ -1,12 +1,18 @@
 import { FC } from "react";
 import styles from "./match-info-section.module.scss";
-import { getDate, getTime, translateInfo } from "../../../helpers";
+import {
+  getDate,
+  getMatchMinute,
+  getTime,
+  translateInfo,
+} from "../../../helpers";
 import classNames from "classnames";
 import { FormikErrors } from "formik";
 import { ValidateErrors } from "../nm-form.tsx/validator";
 import { useLang } from "../../../lang/useLang";
 import {
   MatchStatus,
+  Periods,
   STATUS_TYPE,
 } from "../../../store/matchdays/matchdays.slice";
 import { useStatusText } from "../../../hooks";
@@ -19,6 +25,7 @@ type Props = {
   order: number;
   errors?: FormikErrors<ValidateErrors>;
   matchStatus?: MatchStatus;
+  periods?: Periods;
 };
 
 export const MatchInfoSection: FC<Props> = ({
@@ -29,11 +36,13 @@ export const MatchInfoSection: FC<Props> = ({
   order,
   errors,
   matchStatus,
+  periods,
 }): JSX.Element => {
   const emptyError = errors?.[`[${order}].SCORE`];
   const winnerError = errors?.[`[${order}].WINNER`];
   const { lang } = useLang();
   const statusText = useStatusText(matchStatus);
+  const isInProgress = matchStatus?.TYPE === STATUS_TYPE.inProgress;
 
   const cn = {
     [styles.container]: true,
@@ -64,11 +73,18 @@ export const MatchInfoSection: FC<Props> = ({
         {lang === "ru" ? translateInfo(info) : info}
       </span>
       <span className={styles.item}>
-        {statusText && matchStatus?.TYPE === STATUS_TYPE.inProgress
-          ? statusText
-          : getTime(time)}
+        {statusText && isInProgress ? statusText : getTime(time)}
       </span>
-      <span className={styles.item}>{getDate(time)}</span>
+      <span
+        className={classNames(styles.item, {
+          [styles.inProgress]:
+            periods && matchStatus?.TYPE === STATUS_TYPE.inProgress,
+        })}
+      >
+        {isInProgress && matchStatus && periods
+          ? getMatchMinute(matchStatus, periods)
+          : getDate(time)}
+      </span>
     </div>
   );
 };

@@ -63,6 +63,11 @@ export type MatchdaysData = {
       POINTS: number;
       USERNAME: string;
     }[];
+    PERIODS: {
+      PERIODS_FIRST: number;
+      PERIODS_SECOND: number;
+      SERVER_TIME: string;
+    };
   };
 };
 

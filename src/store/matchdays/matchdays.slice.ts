@@ -9,6 +9,11 @@ export enum STATUS_TYPE {
   finished = "Finished",
 }
 
+export enum STATUS_SHORT {
+  firstHalf = "1H",
+  secondHalf = "2H",
+}
+
 export type MatchStatus = {
   LONG: string;
   SHORT: string;
@@ -22,6 +27,12 @@ export type UserBetInfo = {
   POINTS: number;
 };
 
+export type Periods = {
+  PERIODS_FIRST: number;
+  PERIODS_SECOND: number;
+  SERVER_TIME: number;
+};
+
 export type OldMatchInfo = {
   ID: string;
   EXTRA: boolean;
@@ -32,6 +43,7 @@ export type OldMatchInfo = {
   TEAM2: Team;
   USERBETS: UserBetInfo[];
   STATUS: MatchStatus;
+  PERIODS: Periods;
 };
 
 // const mockedMatches: OldMatchInfo[] = [
