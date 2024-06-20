@@ -115,7 +115,7 @@ export const getMatchMinute = (matchStatus: MatchStatus, periods: Periods) => {
   }
 
   if (matchStatus.SHORT === STATUS_SHORT.secondHalf && periods.PERIODS_SECOND) {
-    return getPeriodMinute(periods.PERIODS_FIRST, periods.SERVER_TIME, 45);
+    return getPeriodMinute(periods.PERIODS_SECOND, periods.SERVER_TIME, 45);
   }
 
   return "";
