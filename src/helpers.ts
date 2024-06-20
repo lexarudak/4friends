@@ -104,7 +104,7 @@ const getPeriodMinute = (
   const timestamp = serverTime - periodStarted;
   const minutes = Math.ceil(timestamp / 60000);
   if (minutes > 45) {
-    return `${minutes + add}' +${minutes - 45}`;
+    return `${45 + add}' +${minutes - 45}`;
   }
   return `${minutes + add}'`;
 };
