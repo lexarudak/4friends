@@ -20,8 +20,17 @@ import {
   resetMatchdays,
 } from "../../store/matchdays/matchdays.slice";
 import { useLang } from "../../lang/useLang";
-import { BUTTON_COLOR, BUTTON_VARIANT } from "../../const/const";
+import {
+  BUTTON_COLOR,
+  BUTTON_VARIANT,
+  LS_COUNTRY_OPEN,
+  LS_SORT_DIR,
+} from "../../const/const";
 import classNames from "classnames";
+
+type GetSortFnType = {
+  (): (a: OldMatchInfo, b: OldMatchInfo) => number;
+};
 
 export const MatchdaysResults = (): JSX.Element => {
   const data = useSelector(matchdaysMatchesSelector);
@@ -32,10 +41,11 @@ export const MatchdaysResults = (): JSX.Element => {
   const pickedCountry = useSelector(countrySelector);
   const isInit = useSelector(initMatchdaysSelector);
   const dispatch = useDispatch();
-  const defaultSortDir = localStorage.getItem("sortMatchdays") ?? "down";
+  const defaultSortDir =
+    localStorage.getItem(LS_SORT_DIR.key) ?? LS_SORT_DIR.down;
   const [sortDir, setSortDir] = useState<string>(defaultSortDir);
   const isCountryOpen = JSON.parse(
-    localStorage.getItem("isCountryOpen") ?? "true",
+    localStorage.getItem(LS_COUNTRY_OPEN.key) ?? LS_COUNTRY_OPEN.true,
   );
   const {
     messages: { md },
@@ -95,22 +105,29 @@ export const MatchdaysResults = (): JSX.Element => {
     [data, getValidMatch, getValidCountry],
   );
 
+  const getSortFn: GetSortFnType = () =>
+    sortDir === LS_SORT_DIR.down
+      ? (a, b) => b.TIME - a.TIME
+      : (a, b) => a.TIME - b.TIME;
+
   const getSortedLive = matches
     .filter(getLiveMatches)
-    .sort((a, b) => b.TIME - a.TIME)
+    .sort(getSortFn())
     .map((data) => <OldMatch matchInfo={data} key={data.ID} />);
 
   const getSortedRest = matches
     .filter(getRestMatches)
-    .sort((a, b) => b.TIME - a.TIME)
+    .sort(getSortFn())
     .map((data) => <OldMatch matchInfo={data} key={data.ID} />);
 
   useEffect(() => {
-    localStorage.setItem("sortMatchdays", sortDir);
+    localStorage.setItem(LS_SORT_DIR.key, sortDir);
   }, [sortDir]);
 
   const toggleSortDir = () => {
-    setSortDir((prev) => (prev === "up" ? "down" : "up"));
+    setSortDir((prev) =>
+      prev === LS_SORT_DIR.up ? LS_SORT_DIR.down : LS_SORT_DIR.up,
+    );
   };
 
   return (
@@ -136,16 +153,18 @@ export const MatchdaysResults = (): JSX.Element => {
           <Loading loading={isFetching} />
         </div>
         <FieldError message={severError.message} className={styles.error} />
+        {matches.length > 1 && (
+          <button onClick={toggleSortDir} className={styles.sorter}>
+            <span
+              className={classNames(styles.sorter, {
+                [styles.up]: sortDir === LS_SORT_DIR.up,
+              })}
+            >
+              &#9660;
+            </span>
+          </button>
+        )}
       </div>
-      <button onClick={toggleSortDir} className={styles.sorter}>
-        <span
-          className={classNames(styles.sorter, {
-            [styles.up]: sortDir === "up",
-          })}
-        >
-          &#9660;
-        </span>
-      </button>
 
       {matches.length && isValid ? (
         <>

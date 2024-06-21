@@ -13,6 +13,11 @@
   background-color: $clr-background;
 }
 
+.p {
+  display: flex;
+  align-items: center;
+}
+
 .btn {
   margin-left: 20px;
   font-weight: 600;
@@ -20,10 +25,21 @@
   height: 20px;
   border: 2px solid white;
   border-radius: 100%;
-  line-height: 4px;
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  justify-content: center;
   
+
   & > span {
     display: block;
-    padding-bottom: 1px;
+    width: 9px;
+    height: 2px;
+    background-color: white;
+    position: absolute;
+
+    &:nth-child(2) {
+      transform: rotate(90deg);
+    }
   }
 }

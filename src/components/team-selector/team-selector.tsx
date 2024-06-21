@@ -4,12 +4,13 @@ import { countrySelector } from "../../store/matchdays/matchdays.selector";
 import { setCountry } from "../../store/matchdays/matchdays.slice";
 import { useLang } from "../../lang/useLang";
 import { useEffect, useState } from "react";
+import { LS_COUNTRY_OPEN } from "../../const/const";
 
 export const TeamSelector = (): JSX.Element => {
   const dispatch = useDispatch();
   const country = useSelector(countrySelector);
   const defaultCountryState = JSON.parse(
-    localStorage.getItem("isCountryOpen") ?? "true",
+    localStorage.getItem(LS_COUNTRY_OPEN.key) ?? LS_COUNTRY_OPEN.true,
   );
   const [isCountryOpen, setIsCountryOpen] =
     useState<boolean>(defaultCountryState);
@@ -22,7 +23,7 @@ export const TeamSelector = (): JSX.Element => {
   };
 
   useEffect(() => {
-    localStorage.setItem("isCountryOpen", JSON.stringify(isCountryOpen));
+    localStorage.setItem(LS_COUNTRY_OPEN.key, JSON.stringify(isCountryOpen));
   }, [isCountryOpen]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,10 +40,11 @@ export const TeamSelector = (): JSX.Element => {
           placeholder={md.all}
         />
       )}
-      <p>
+      <p className={styles.p}>
         {md.filter}
         <button onClick={toggleCountryState} className={styles.btn}>
-          <span>{isCountryOpen ? "-" : "+"}</span>
+          <span />
+          {!isCountryOpen && <span />}
         </button>
       </p>
     </div>

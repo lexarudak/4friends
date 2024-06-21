@@ -19,3 +19,15 @@ export enum BUTTON_COLOR {
   secondary = "secondary",
   active = "active",
 }
+
+export enum LS_SORT_DIR {
+  key = "sortMatchdays",
+  down = "down",
+  up = "up",
+}
+
+export enum LS_COUNTRY_OPEN {
+  key = "isCountryOpen",
+  true = "true",
+  false = "false",
+}

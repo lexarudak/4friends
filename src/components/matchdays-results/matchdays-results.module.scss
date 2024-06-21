@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
+  position: relative;
 }
 .btnContainer {
   display: flex;
@@ -11,18 +12,19 @@
 
 .refreshBlock {
   padding-bottom: 20px;
+  position: relative;
 }
 
 .sorter {
-  margin-right: auto;
+  position: absolute;
+  bottom: 20px;
+  right: 0px;
   font-weight: 600;
   width: 30px;
   height: 30px;
   border-radius: 100%;
   padding-bottom: 1px;
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
+
   
   & > span {
     text-align: center;
