@@ -21,6 +21,7 @@ import {
 } from "../../store/matchdays/matchdays.slice";
 import { useLang } from "../../lang/useLang";
 import { BUTTON_COLOR, BUTTON_VARIANT } from "../../const/const";
+import classNames from "classnames";
 
 export const MatchdaysResults = (): JSX.Element => {
   const data = useSelector(matchdaysMatchesSelector);
@@ -31,6 +32,11 @@ export const MatchdaysResults = (): JSX.Element => {
   const pickedCountry = useSelector(countrySelector);
   const isInit = useSelector(initMatchdaysSelector);
   const dispatch = useDispatch();
+  const defaultSortDir = localStorage.getItem("sortMatchdays") ?? "down";
+  const [sortDir, setSortDir] = useState<string>(defaultSortDir);
+  const isCountryOpen = JSON.parse(
+    localStorage.getItem("isCountryOpen") ?? "true",
+  );
   const {
     messages: { md },
     countries,
@@ -47,6 +53,7 @@ export const MatchdaysResults = (): JSX.Element => {
       const searchValue = pickedCountry.trim().toUpperCase();
       return (
         !searchValue ||
+        !isCountryOpen ||
         [
           countries[TEAM1.CODE]?.code3,
           countries[TEAM2.CODE]?.code3,
@@ -57,7 +64,7 @@ export const MatchdaysResults = (): JSX.Element => {
           .some((value) => value.startsWith(searchValue))
       );
     },
-    [countries, pickedCountry],
+    [countries, isCountryOpen, pickedCountry],
   );
 
   const [fetch, { isFetching }] = useLazyGetMatchdaysQuery();
@@ -98,6 +105,14 @@ export const MatchdaysResults = (): JSX.Element => {
     .sort((a, b) => b.TIME - a.TIME)
     .map((data) => <OldMatch matchInfo={data} key={data.ID} />);
 
+  useEffect(() => {
+    localStorage.setItem("sortMatchdays", sortDir);
+  }, [sortDir]);
+
+  const toggleSortDir = () => {
+    setSortDir((prev) => (prev === "up" ? "down" : "up"));
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.refreshBlock}>
@@ -122,6 +137,15 @@ export const MatchdaysResults = (): JSX.Element => {
         </div>
         <FieldError message={severError.message} className={styles.error} />
       </div>
+      <button onClick={toggleSortDir} className={styles.sorter}>
+        <span
+          className={classNames(styles.sorter, {
+            [styles.up]: sortDir === "up",
+          })}
+        >
+          &#9660;
+        </span>
+      </button>
 
       {matches.length && isValid ? (
         <>

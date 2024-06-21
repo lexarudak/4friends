@@ -12,3 +12,18 @@
   margin-bottom: 20px;
   background-color: $clr-background;
 }
+
+.btn {
+  margin-left: 20px;
+  font-weight: 600;
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  border-radius: 100%;
+  line-height: 4px;
+  
+  & > span {
+    display: block;
+    padding-bottom: 1px;
+  }
+}

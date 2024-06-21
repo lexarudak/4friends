@@ -12,3 +12,32 @@
 .refreshBlock {
   padding-bottom: 20px;
 }
+
+.sorter {
+  margin-right: auto;
+  font-weight: 600;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  padding-bottom: 1px;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  
+  & > span {
+    text-align: center;
+    border: none;
+    display: block;
+    transition: .2s;
+    font-size: 24px;
+    
+    transform: rotate(0deg);
+    transform-origin: center;
+
+
+    &.up {
+      transform: rotate(180deg);
+      transform-origin: center;
+    }
+  }
+}
