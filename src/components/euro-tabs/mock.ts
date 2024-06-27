@@ -1,3 +1,8 @@
+import {
+  MatchStatus,
+  STATUS_TYPE,
+} from "../../store/matchdays/matchdays.slice";
+import { Team } from "../../store/next-matches/next-matches.slice";
 import { PlayOffMatch } from "./play-off/play-off";
 
 type Resp = {
@@ -7,8 +12,33 @@ type Resp = {
   final: PlayOffMatch[][];
 };
 
+export type PlayoffMatchType = {
+  TIME: number;
+  WINNER: 0 | 1 | 2;
+  STATUS: MatchStatus;
+  TEAMS: Team[];
+};
+
+export const mockPlayoffMatch: PlayoffMatchType = {
+  TIME: 0,
+  WINNER: 0,
+  STATUS: {
+    LONG: "Not Started",
+    SHORT: "NS",
+    TYPE: STATUS_TYPE.notStarted,
+  },
+  TEAMS: [
+    { CODE: "EUR", SCORE: "" },
+    { CODE: "EUR", SCORE: "" },
+  ],
+};
+
 export const mockResponse: Resp = {
   eight: [
+    [
+      { team: "EUR", score: "-" },
+      { team: "EUR", score: "-" },
+    ],
     [
       { team: "EUR", score: "-" },
       { team: "EUR", score: "-" },

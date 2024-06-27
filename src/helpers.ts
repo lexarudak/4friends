@@ -118,5 +118,5 @@ export const getMatchMinute = (matchStatus: MatchStatus, periods: Periods) => {
     return getPeriodMinute(periods.PERIODS_SECOND, periods.SERVER_TIME, 45);
   }
 
-  return "";
+  return matchStatus.SHORT;
 };

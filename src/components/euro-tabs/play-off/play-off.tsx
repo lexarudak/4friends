@@ -4,7 +4,9 @@ import { CountryKey } from "../../../store/next-matches/next-matches.slice";
 import { useBreakPoint } from "../../../hooks";
 import { useLang } from "../../../lang/useLang";
 import classNames from "classnames";
-import { getFlag, getName } from "../../../helpers";
+import { getDate, getFlag, getName } from "../../../helpers";
+import { PlayoffMatchType } from "../mock";
+import { STATUS_TYPE } from "../../../store/matchdays/matchdays.slice";
 
 export type PlayOffMatch = {
   team: CountryKey;
@@ -12,28 +14,42 @@ export type PlayOffMatch = {
 };
 
 type Props = {
-  data: PlayOffMatch[][];
+  data: PlayoffMatchType[];
 };
 
 type ItemProps = {
-  data: PlayOffMatch[];
+  data: PlayoffMatchType;
 };
 
-export const PlayOffItem: FC<ItemProps> = ({ data }): JSX.Element => {
+export const PlayOffItem: FC<ItemProps> = ({
+  data: { TIME, WINNER, STATUS, TEAMS },
+}): JSX.Element => {
   const BP = useBreakPoint();
   const { countries } = useLang();
   return (
     <li className={styles.li}>
-      {data.map(({ team, score }) => (
-        <div className={styles.card}>
+      <p>{TIME ? getDate(TIME) : "--/--/--"}</p>
+      {TEAMS.map(({ CODE, SCORE }, ind) => (
+        <div
+          className={classNames(styles.card, {
+            [styles.winner]: WINNER === ind + 1,
+          })}
+          key={ind}
+        >
           <span
             className={classNames(
-              `fi fi-${getFlag(team, countries)}`,
+              `fi fi-${getFlag(CODE, countries)}`,
               styles.item,
             )}
           />
-          <span className={styles.item}>{getName(team, countries, BP)}</span>
-          <span className={styles.score}>{score}</span>
+          <span className={styles.item}>{getName(CODE, countries, BP)}</span>
+          <span
+            className={classNames(styles.score, {
+              [styles.inProgress]: STATUS.TYPE === STATUS_TYPE.inProgress,
+            })}
+          >
+            {STATUS.TYPE === STATUS_TYPE.notStarted ? "-" : SCORE}
+          </span>
         </div>
       ))}
     </li>
@@ -43,8 +59,8 @@ export const PlayOffItem: FC<ItemProps> = ({ data }): JSX.Element => {
 export const PlayOff: FC<Props> = ({ data }): JSX.Element => {
   return (
     <ul className={styles.ul}>
-      {data.map((val) => (
-        <PlayOffItem data={val} />
+      {data.map((val, id) => (
+        <PlayOffItem data={val} key={id} />
       ))}
     </ul>
   );
