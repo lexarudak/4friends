@@ -42,9 +42,9 @@ export const Layout = (): JSX.Element => {
   const showMainLoading = isLoading || isPageLoading;
   const shouldRedirectFromLogin =
     !severError.isError && regPages.includes(pathname) && isLogin;
-  // const shouldRedirectToLogin =
-  //   severError.isError && !freePages.includes(pathname);
-  const shouldRedirectToLogin = false;
+  const shouldRedirectToLogin =
+    severError.isError && !freePages.includes(pathname);
+  // const shouldRedirectToLogin = false;
   const shouldHoldBody = isMenuOpen || isModalOpen || isRoomSelectorOpen;
   const shouldShowRoomSelector = !regPages.includes(pathname) && isLogin;
 

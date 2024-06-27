@@ -4,7 +4,7 @@ import { CountryKey } from "../../../store/next-matches/next-matches.slice";
 import { useBreakPoint } from "../../../hooks";
 import { useLang } from "../../../lang/useLang";
 import classNames from "classnames";
-import { getDate, getFlag, getName } from "../../../helpers";
+import { getDate, getFlag, getName, getTime } from "../../../helpers";
 import { PlayoffMatchType } from "../mock";
 import { STATUS_TYPE } from "../../../store/matchdays/matchdays.slice";
 
@@ -28,7 +28,10 @@ export const PlayOffItem: FC<ItemProps> = ({
   const { countries } = useLang();
   return (
     <li className={styles.li}>
-      <p>{TIME ? getDate(TIME) : "--/--/--"}</p>
+      <p className={styles.time}>
+        <span>{TIME ? getDate(TIME) : "--/--/--"}</span>
+        <span>{TIME ? getTime(TIME) : "--:--"}</span>
+      </p>
       {TEAMS.map(({ CODE, SCORE }, ind) => (
         <div
           className={classNames(styles.card, {

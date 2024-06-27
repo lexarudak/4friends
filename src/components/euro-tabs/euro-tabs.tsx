@@ -79,6 +79,7 @@ export const EuroTabs = () => {
           name={name}
           activeTab={activeTab}
           key={index}
+          disabled={index > 1}
         />
       ))}
       <div className={styles.content}>{content[activeTab]}</div>
