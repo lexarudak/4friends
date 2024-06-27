@@ -3,14 +3,6 @@ import {
   STATUS_TYPE,
 } from "../../store/matchdays/matchdays.slice";
 import { Team } from "../../store/next-matches/next-matches.slice";
-import { PlayOffMatch } from "./play-off/play-off";
-
-type Resp = {
-  eight: PlayOffMatch[][];
-  four: PlayOffMatch[][];
-  two: PlayOffMatch[][];
-  final: PlayOffMatch[][];
-};
 
 export type PlayoffMatchType = {
   TIME: number;
@@ -30,81 +22,6 @@ export const mockPlayoffMatch: PlayoffMatchType = {
   TEAMS: [
     { CODE: "EUR", SCORE: "" },
     { CODE: "EUR", SCORE: "" },
-  ],
-};
-
-export const mockResponse: Resp = {
-  eight: [
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-  ],
-  four: [
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-  ],
-  two: [
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
-  ],
-  final: [
-    [
-      { team: "EUR", score: "-" },
-      { team: "EUR", score: "-" },
-    ],
   ],
 };
 
