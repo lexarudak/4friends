@@ -104,5 +104,4 @@ export const {
   useLazyGetNMTimeQuery,
   useLazyGetMatchdaysQuery,
   useGetMatchdaysQuery,
-  useGetStandingsQuery,
 } = apiSlice;

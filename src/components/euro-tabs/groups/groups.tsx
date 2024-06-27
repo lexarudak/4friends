@@ -44,7 +44,7 @@ export const Group = ({
         <span className={styles.groupItem}>p</span>
       </div>
       {data.map(({ team, all: { goals, played }, points }, ind) => (
-        <div className={styles.card}>
+        <div className={styles.card} key={ind}>
           <div className={styles.firstItem} />
           <span className={styles.item}>{ind + 1}</span>
           <span
@@ -70,8 +70,8 @@ export const Group = ({
 export const Groups = ({ data }: { data: Standings }): JSX.Element => {
   return (
     <ul className={styles.list}>
-      {data.map((val) => (
-        <Group data={val} isGroup={val.length === 4} />
+      {data.map((val, key) => (
+        <Group data={val} isGroup={val.length === 4} key={key} />
       ))}
     </ul>
   );
