@@ -1,0 +1,32 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 40px;
+}
+
+.link {
+  display: block;
+  padding-top: 40px;
+  text-decoration: underline;
+}
+
+.dots {
+  padding: 10px 20px;
+  color: $clr-primary-03;
+  background-color: $clr-background;
+}
+
+.pag {
+  padding-top: 10px;
+  padding-left: 5px;
+  button {
+    color: white;
+  };
+}
+
+.global {
+  h2 {
+    color: $clr-crown;
+  }
+}

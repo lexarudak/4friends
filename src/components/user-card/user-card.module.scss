@@ -1,0 +1,58 @@
+.card {
+  transition: .3s;
+  background-color: $clr-text-01;
+  color: $clr-primary-01;
+  padding: 10px 20px;
+  display: flex;
+  gap: 10px;
+  position: relative;
+  border-radius: 3px;
+  overflow: hidden;
+
+  .firstItem {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    background-color: transparent;
+  }
+
+  &.winner {
+    .firstItem {
+      background-color: $clr-data-03;
+    }
+  }
+
+   &.winner.global {
+    .firstItem {
+      background-color: $clr-crown;
+    }
+  }
+
+  &.myCard {
+    background-color: $clr-data-02;
+    color: $clr-text-01;
+  }
+}
+
+.item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 85%;
+  min-width: 18px;
+
+  &:last-child {
+    margin-left: auto;
+    text-align: end;
+    min-width: 40px;
+  }
+}
+
+.shadowCard {
+  transition: .3s;
+  background-color: rgba(0, 0, 0, 0.08);
+  padding: 10px 20px;
+  color: transparent;
+}

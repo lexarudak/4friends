@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: $clr-ui-02;
+  color: $clr-primary-03;
+  transition: .3s;
+
+  &.saved {
+    background-color: $clr-data-03;
+  }
+
+  &.changed {
+    background-color: $clr-accent-02;
+  }
+
+  &.error {
+    background-color: $clr-data-02;
+  }
+}
+
+.item {
+  width: 120px;
+  text-align: center;
+  text-wrap: nowrap;
+}
+
+@keyframes blinking {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.inProgress {
+  color: red;
+  animation: blinking 2.5s linear infinite;
+}

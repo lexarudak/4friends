@@ -1,0 +1,27 @@
+.input {
+  transition: .3s;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $clr-primary-01;
+  color: $clr-text-01;
+  border: none;
+  text-align: center;
+  outline: $clr-tertiary-02;
+  font-size: $font-size-xl;
+  font-weight: 700;
+  &::placeholder {
+    color: $clr-text-01;
+  }
+
+  &:disabled {
+    background-color: $clr-ui-02;
+    color: $clr-primary-03;
+
+    &::placeholder {
+      color: $clr-primary-03;
+    }
+  }
+}

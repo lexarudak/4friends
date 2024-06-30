@@ -1,0 +1,17 @@
+.tab {
+  width: 20%;
+  text-align: center;
+  padding: 10px;
+
+  &.active {
+    background-color: $clr-tertiary-02;
+  }
+
+  &:disabled {
+    color: rgba($clr-text-01, 0.5);
+    cursor: default;
+  }
+}
+
+
+

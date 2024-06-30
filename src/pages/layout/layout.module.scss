@@ -1,0 +1,47 @@
+.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 535px;
+  min-height: 100%;
+
+  &.login {
+    justify-content: center;
+
+    h2 {
+      padding-top: 0;
+    }
+  }
+
+  @include mediaMax('l') {
+    width: 340px;
+  }
+}
+
+.toggler {
+  z-index: 99;
+  position: fixed;
+  top: -50px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+  &.isOpen {
+    top: 50px;
+  }
+
+  @include mediaMin('l') {
+    top: 30px;
+    right: auto;
+    left: 280px;
+
+    &.isOpen {
+      top: 30px;
+      right: auto;
+      left: 280px;
+    }
+  }
+
+  &.hide {
+    display: none;
+  }
+}
