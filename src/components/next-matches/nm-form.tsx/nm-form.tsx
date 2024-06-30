@@ -35,6 +35,8 @@ export const NMForm = (): JSX.Element | null => {
     messages: { nm, global },
   } = useLang();
 
+  const sortedNM = [...nextMatches].sort((a, b) => a.TIME - b.TIME);
+
   const showBanner = () => {
     setIsSavedBanner(true);
     setTimeout(() => {
@@ -82,25 +84,22 @@ export const NMForm = (): JSX.Element | null => {
     dispatch(setNMIsSetting(isFetching));
   }, [isFetching, dispatch]);
 
-  return nextMatches.length ? (
+  return sortedNM.length ? (
     <Formik
-      key={JSON.stringify(nextMatches)}
-      initialValues={nextMatches}
+      key={JSON.stringify(sortedNM)}
+      initialValues={sortedNM}
       onSubmit={submit}
       validate={validator}
       validateOnBlur={false}
       validateOnChange={firstTry}
     >
       {({ values, isValid, submitForm, setValues }) => {
-        console.log();
         return (
           <Form className={styles.form}>
             <div className={styles.bannerContainer}>
-              {[...values]
-                .sort((a, b) => a.TIME - b.TIME)
-                .map((nm, ind) => (
-                  <OneMatchForm nm={nm} order={ind} key={nm.MATCHID} />
-                ))}
+              {values.map((nm, ind) => (
+                <OneMatchForm nm={nm} order={ind} key={nm.MATCHID} />
+              ))}
               <span>{nm.makeBets}</span>
               <CSSTransition
                 in={isSavedBanner || isFetching}
