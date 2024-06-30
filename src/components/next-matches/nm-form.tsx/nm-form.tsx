@@ -92,12 +92,15 @@ export const NMForm = (): JSX.Element | null => {
       validateOnChange={firstTry}
     >
       {({ values, isValid, submitForm, setValues }) => {
+        console.log();
         return (
           <Form className={styles.form}>
             <div className={styles.bannerContainer}>
-              {values.map((nm, ind) => (
-                <OneMatchForm nm={nm} order={ind} key={nm.MATCHID} />
-              ))}
+              {[...values]
+                .sort((a, b) => a.TIME - b.TIME)
+                .map((nm, ind) => (
+                  <OneMatchForm nm={nm} order={ind} key={nm.MATCHID} />
+                ))}
               <span>{nm.makeBets}</span>
               <CSSTransition
                 in={isSavedBanner || isFetching}
