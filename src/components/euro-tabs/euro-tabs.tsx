@@ -17,8 +17,10 @@ enum Round {
   final = "Final",
 }
 
+const initTab = 2;
+
 export const EuroTabs = () => {
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(initTab);
   const { from, to } = useSelector(matchdaysDateSelector);
   const ACTIVEROOMID = useSelector(activeRoomIdSelector);
   const [fetch, { data }] = useLazyGetMatchdaysQuery();
@@ -79,7 +81,7 @@ export const EuroTabs = () => {
           name={name}
           activeTab={activeTab}
           key={index}
-          disabled={index > 2}
+          disabled={index > initTab}
         />
       ))}
       <div className={styles.content}>{content[activeTab]}</div>
