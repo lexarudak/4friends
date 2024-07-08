@@ -17,7 +17,7 @@ enum Round {
   final = "Final",
 }
 
-const initTab = 2;
+const initTab = 3;
 
 export const EuroTabs = () => {
   const [activeTab, setActiveTab] = useState(initTab);
