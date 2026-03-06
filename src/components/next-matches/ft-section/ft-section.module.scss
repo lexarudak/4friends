@@ -1,0 +1,33 @@
+.ftSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.center {
+  width: 40px;
+  text-align: center;
+}
+
+.half {
+  display: flex;
+  flex-grow: 1;
+  width: calc(100% / 2 - 20px);
+  align-items: center;
+}
+
+.code {
+  padding: 0 23px;
+}
+
+.flag {
+  &:first-child {
+    margin-inline-end: auto;
+  }
+
+  &:last-child {
+     margin-inline-start: auto;
+  }
+}
+

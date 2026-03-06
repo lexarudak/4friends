@@ -1,0 +1,82 @@
+.mobileDeco {
+  position: fixed;
+  height: 101px;
+  top: -100px;
+  z-index: 203;
+  background-color: $clr-data-02;
+  width: 535px;
+
+  @include mediaMax('l') {
+    width: 340px;
+  }
+}
+
+.container {
+  transform: translateY(calc(-100% + 25px));
+  position: fixed;
+  z-index: 202;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 38px 20px 2px;
+  background-color: $clr-data-02;
+  color: $clr-text-01;
+  width: 535px;
+  box-shadow: $shadow-main-1;
+  transition: .3s;
+  flex-grow: 1;
+  gap: 20px;
+  border-radius: 3px;
+  
+  &.active {
+    padding: 20px;
+    transform: translateY(0);
+  }
+
+  @include mediaMax('l') {
+    width: 340px;
+  }
+}
+
+.btn {
+  transition: .3s;
+  color: white;
+  width: 100%;
+  text-align: start;
+  transform: translateX(-26px);
+
+  &.hide {
+    color: transparent;
+  }
+
+  &::before {
+      transition: .3s;
+      content: ">> ";
+      color: transparent;
+      
+    }
+
+  &.active {
+    transform: translateX(0);
+
+    &::before {
+      color: white;
+      transform: translateX(0);
+      
+    }
+  }
+}
+
+.bg {
+  z-index: 200;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($clr-support-02, 0.7);
+}
+
+form.active {
+  opacity: 1;
+}

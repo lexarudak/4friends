@@ -1,0 +1,122 @@
+.title {
+  padding-top: 80px;
+  padding-bottom: 40px;
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.subtitle {
+  padding-left: 10px;
+  color: $clr-secondary-02;
+}
+
+.link {
+  color: $clr-secondary-02;
+  font-weight: 700;
+  text-decoration: underline;
+  padding: 0 20px 0 10px;
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 535px;
+
+   @include mediaMax('l') {
+    width: 340px;
+  }
+}
+
+.block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text {
+  padding-top: 10px;
+}
+
+.error {
+  color: $clr-support-03A;
+}
+
+.placeholder {
+  color: transparent;
+}
+
+
+
+.field {
+  padding: 10px 20px;
+  width: 340px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  font-size: $font-size-m;
+  width: 535px;
+  max-width: 535px;
+
+  @include mediaMax('l') {
+    width: 340px;
+    max-width: 340px;
+  }
+
+}
+
+.button {
+  margin-top: 20px;
+}
+
+.subBlock {
+  .field {
+  width: 257px;
+  max-width: 257px;
+
+  @include mediaMax('l') {
+    width: 160px;
+    max-width: 160px;
+  }
+  }
+
+  &:last-child {
+    margin-left: 20px;
+  }
+}
+
+.policy {
+  padding-top: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  width: 535px;
+  max-width: 535px;
+  height: 63px;
+  margin-bottom: 5px;
+
+  @include mediaMax('l') {
+    width: 340px;
+    max-width: 340px;
+  }
+}
+
+.checkbox {
+  transform: scale(1.5);
+  margin-top: 6px;
+  margin-left: 3px;
+  cursor: pointer;
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.policyText {
+  text-align: start;
+  text-decoration: underline;
+  &:disabled {
+    color: rgba(255, 255, 255, 0.541);
+    cursor: default;
+  }
+}

@@ -1,0 +1,76 @@
+// fade //
+
+.fade-enter {
+  opacity: 0;
+  visibility: hidden;
+  background-color: transparent;
+  color: transparent;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  visibility: visible;
+  transition: 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+  visibility: visible;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  visibility: hidden;
+  transition: 300ms;
+  background-color: transparent;
+  color: transparent;
+}
+
+// popup //
+
+.popup-enter {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+.popup-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: 200ms;
+}
+
+.popup-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.popup-exit-active {
+  opacity: 0;
+  transform: scale(0.7);
+  transition: 200ms;
+}
+
+// fast fade
+
+.fastFade-enter {
+  opacity: 1;
+  visibility: visible;
+}
+
+.fastFade-enter-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.fastFade-exit {
+  opacity: 1;
+  visibility: visible;
+}
+
+.fastFade-exit-active {
+  opacity: 0;
+  visibility: hidden;
+  transition: 300ms;
+  background-color: transparent;
+  color: transparent;
+}

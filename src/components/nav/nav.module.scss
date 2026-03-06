@@ -1,0 +1,41 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding-bottom: 40px;
+  padding-top: 40px;
+  color: $clr-primary-01;
+  font-size: $font-size-xl;
+  width: 130px;
+
+  a {
+    transition: .3s;
+
+    &:hover {
+      color: $clr-primary-03;
+    }
+
+    &.active {
+      color: $clr-text-01;
+      text-decoration: underline;
+      cursor: default;
+        &:hover {
+        color: $clr-text-01;
+      }
+
+       @include mediaMin('l') {
+          text-decoration: none;
+         color: $clr-data-02;
+         &:hover {
+          color: $clr-data-02;
+        }
+       }
+
+    }
+  }
+
+  button {
+    margin-block-start: 20px;
+  }
+}

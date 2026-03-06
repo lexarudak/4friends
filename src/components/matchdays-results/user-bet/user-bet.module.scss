@@ -1,0 +1,39 @@
+.card {
+  display: flex;
+  align-items: flex-start;
+  background-color: $clr-background;
+  color: $clr-primary-03;
+  padding: 10px 20px;
+  transition: .3s;
+  border-radius: 3px;
+  overflow: hidden;
+
+  &.myBet {
+    background-color: $clr-data-02;
+    color: $clr-text-01;
+  }
+}
+
+.score {
+  text-align: center;
+
+  &.num {
+    width: 18px;
+  }
+
+  &.active {
+    text-decoration: underline;
+  }
+}
+
+.points {
+  margin-left: auto;
+}
+
+.name {
+  padding-left: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 10px;
+}

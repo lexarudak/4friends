@@ -1,0 +1,98 @@
+.button {
+  height: 70px;
+  transition: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  font-size: $font-size-xl;
+  transition: .3s;
+   border-radius: 3px;
+}
+
+.primary {
+  &.fill {
+    border: 2px solid $clr-primary-01;
+    background-color: $clr-primary-01;
+    color: $clr-text-01;
+
+    &:hover{
+      border: 2px solid $clr-primary-03;
+       background-color: $clr-primary-03;
+    }
+  }
+
+  &.contour {
+    border: 2px solid $clr-primary-01;
+    background-color: transparent;
+    color: $clr-primary-01;
+
+    &:hover{
+      border: 2px solid $clr-primary-03;
+      color: $clr-primary-03;
+    }
+  }
+}
+
+.active {
+  &.fill {
+    border: 2px solid $clr-secondary-02;
+    background-color: $clr-secondary-02;
+    color: $clr-primary-03;
+
+    &:hover{
+      border: 2px solid $clr-secondary-01;
+       background-color: $clr-secondary-01;
+    }
+    
+    &:disabled {
+      cursor: default;
+      background-color: rgba(239, 239, 239, 0.3);
+      border-color: transparent;
+
+      &:hover{
+        background-color:rgba(239, 239, 239, 0.3);
+        border-color: transparent;
+      }
+    }
+  }
+
+  &.contour {
+    border: 2px solid $clr-secondary-02;
+    background-color: transparent;
+    color: $clr-secondary-02;
+
+    &:hover{
+      border: 2px solid $clr-secondary-01;
+      color: $clr-secondary-01;
+    }
+
+     &:disabled {
+      cursor: default;
+      border-color: rgba(239, 239, 239, 0.3);
+      color: rgba(239, 239, 239, 0.3);
+
+      &:hover{
+        border-color: rgba(239, 239, 239, 0.3);
+        color: rgba(239, 239, 239, 0.3);
+      }
+    }
+  }
+}
+
+.secondary {
+  background-color: $clr-background;
+  color: $clr-primary-03;
+
+  &:hover {
+    background-color: $clr-ui-00;
+    color: $clr-primary-01;
+  }
+}
+
+
+.round {
+  padding: 0;
+  width: 70px;
+  border-radius: 100%;
+}

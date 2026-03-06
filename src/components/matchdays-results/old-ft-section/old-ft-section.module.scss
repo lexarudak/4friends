@@ -1,0 +1,70 @@
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  padding-top: 4px;
+  padding: 10px 20px;
+  background-color: $clr-background;
+  color: $clr-primary-03;
+}
+
+.score, .center {
+  font-size: $font-size-xl;
+  font-weight: 700;
+}
+
+.score {
+  display: block;
+  width: 20px;
+  text-align: center;
+
+  &.active {
+    text-decoration: underline;
+  }
+}
+
+.center {
+  width: 40px;
+  text-align: center;
+}
+
+.half {
+  display: flex;
+  flex-grow: 1;
+  width: calc(100% / 2 - 20px);
+  align-items: center;
+}
+
+.flag {
+  &:first-child {
+    margin-inline-end: auto;
+  }
+
+  &:last-child {
+     margin-inline-start: auto;
+  }
+}
+
+.dot {
+  font-weight: 700;
+}
+
+.rp {
+  padding-right: 20px
+}
+
+.lp {
+  padding-left: 20px;
+}
+
+@keyframes blinking {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.inProgress {
+  color: red;
+  animation: blinking 2.5s linear infinite;
+}

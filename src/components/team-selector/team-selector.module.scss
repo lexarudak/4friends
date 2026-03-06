@@ -1,0 +1,45 @@
+.container {
+  width: 340px;
+}
+
+.field {
+  padding: 10px 20px;
+  width: 340px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  font-size: $font-size-m;
+  margin-bottom: 20px;
+  background-color: $clr-background;
+}
+
+.p {
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  margin-left: 20px;
+  font-weight: 600;
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  border-radius: 100%;
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
+  justify-content: center;
+  
+
+  & > span {
+    display: block;
+    width: 9px;
+    height: 2px;
+    background-color: white;
+    position: absolute;
+
+    &:nth-child(2) {
+      transform: rotate(90deg);
+    }
+  }
+}

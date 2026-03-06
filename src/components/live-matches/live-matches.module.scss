@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+@keyframes blinking {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.inProgress {
+  color: $clr-accent-02;
+  animation: blinking 2.5s linear infinite;
+}

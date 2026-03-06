@@ -1,0 +1,13 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  padding-top: 150px;
+  gap: 80px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: $clr-crown;
+}

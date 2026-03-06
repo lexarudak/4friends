@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+}
+.btnContainer {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.refreshBlock {
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.sorter {
+  position: absolute;
+  bottom: 20px;
+  right: 0px;
+  font-weight: 600;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  padding-bottom: 1px;
+
+  
+  & > span {
+    text-align: center;
+    border: none;
+    display: block;
+    transition: .2s;
+    font-size: 24px;
+    
+    transform: rotate(0deg);
+    transform-origin: center;
+
+
+    &.up {
+      transform: rotate(180deg);
+      transform-origin: center;
+    }
+  }
+}
