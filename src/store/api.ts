@@ -11,8 +11,7 @@ import { mockBaseQuery } from "./mock-api";
 const ORIGIN = "https://api.4friends.live/rest4friends";
 
 const shouldMock =
-  import.meta.env.VITE_MOCK_API === "true" ||
-  (import.meta.env.DEV && import.meta.env.VITE_MOCK_API !== "false");
+  import.meta.env.VITE_MOCK_API !== "false";
 
 const headers = {
   "Content-Type": "application/json",
