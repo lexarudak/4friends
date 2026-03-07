@@ -12,6 +12,7 @@ import type {
   NMRequest,
 } from "./types";
 import { GROUPS } from "../components/euro-tabs/mock";
+import Cookies from "js-cookie";
 
 const ok = <T>(DATA: T, MESSAGE = "") => ({
   SUCCESS: true as const,
@@ -412,6 +413,12 @@ const buildUser = () =>
     "OK",
   );
 
+const mockLogin = () => {
+  Cookies.set("TOKEN", "mock-token-4friends", { path: "/" });
+  Cookies.set("ROOMID", "1", { path: "/" });
+  return ok({});
+};
+
 export const mockBaseQuery: BaseQueryFn<
   string | FetchArgs,
   unknown,
@@ -421,10 +428,13 @@ export const mockBaseQuery: BaseQueryFn<
 
   switch (url) {
     case "/cfc/registerUser.cfc?method=registerUser":
-      return { data: ok({}) };
+      return { data: mockLogin() };
     case "cfc/loginUserMain.cfc?method=loginUser":
-      return { data: ok({}) };
+      return { data: mockLogin() };
     case "/getUserInfo.cfc?method=getUserInfo":
+      if (!Cookies.get("TOKEN")) {
+        return { data: fail("Not authenticated") };
+      }
       return { data: { ...buildUser(), USERID: 1 } };
     case "cfc/suggest.cfc?method=addRoomUser":
       return { data: ok({}) };
