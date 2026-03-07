@@ -1,6 +1,6 @@
-export const MIN_DATE = "05/01/2024";
-export const MAX_DATE = "08/31/2024";
-export const DATE_AFTER = "09/1/2024";
+export const MIN_DATE = "01/01/2020";
+export const MAX_DATE = "12/31/2030";
+export const DATE_AFTER = "01/01/2031";
 
 export enum VIDEO_VARIANT {
   left = "left",

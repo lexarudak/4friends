@@ -77,7 +77,7 @@ const messages: {
   md: {
     title: "Все матчи",
     selectText: "Выберете даты",
-    error: `Pick date in range 01/05/24 - 31/08/24`,
+    error: `Некорректный диапазон дат`,
     all: "Все страны",
     filter: "Фильтр стран",
     refresh: "Обновить",

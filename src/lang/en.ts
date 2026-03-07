@@ -76,7 +76,7 @@ const messages: {
   md: {
     title: "MATCHDAYS",
     selectText: "Select date range to show",
-    error: `Pick date in range 01/05/24 - 31/08/24`,
+    error: `Invalid date range`,
     all: "All countries",
     filter: "Country filter",
     refresh: "Refresh",
